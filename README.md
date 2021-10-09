@@ -1,6 +1,6 @@
 ﻿irie's mod
 ==========
-
+[WikiPages](https://github.com/mikrono/iriesmod/wiki)
 ## Changelog
 ### 0.1
 - Added Bee Pistol.
@@ -11,3 +11,6 @@
 - Added BeeNecklace
 - Added HoneyCloak
 - Added ObsidianBeeBackpack
+### 0.2.1
+- Added Putrid Gauntlet
+- Added Wiki

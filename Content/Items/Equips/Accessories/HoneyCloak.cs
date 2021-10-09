@@ -29,7 +29,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer.beeDamage += 8f;
+			iriesplayer.beeDamage += 0.08f;
 		}
 
 		public override void AddRecipes()
