@@ -16,5 +16,7 @@ namespace iriesmod.Common.ID
         public const short HoneyCloak = 6;
         public const short ObsidianBeeBackpack = 7;
         public const short PutridGauntlet = 8;
+        public const short AdvancedEnchantedSword = 9;
+        public const short ShieldOfWorm = 10;
     }
 }

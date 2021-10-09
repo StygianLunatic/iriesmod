@@ -9,13 +9,16 @@ namespace iriesmod.Common.GlobalProjectiles
 {
     public class GlobalProj : GlobalProjectile
     {
-        public static int orig_damage;
+        static int addedDamage = 0;
+        static float damageMultiplier = 1f;
 
 
         public override void SetDefaults(Projectile projectile)
         {
+            addedDamage = 0;
+            damageMultiplier = 1f;
             int penetration = 0;
-            orig_damage = projectile.damage;
+
 
             if (irieList.friendlyBees.Contains(projectile.type))
             {
@@ -23,32 +26,19 @@ namespace iriesmod.Common.GlobalProjectiles
                 {
                     case irieItemID.ObsidianBeeBackpack:
                         penetration += 1;
+                        addedDamage += Main.rand.Next(2, 9);
                         break;
                 }
-            }
 
+                damageMultiplier = 1f + iriesplayer.beeDamage;
+            }
 
             projectile.penetrate += penetration;
         }
 
-
-        public override void AI(Projectile projectile)
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            int damage = 0;
-            float damageMultiplier = 1f;
-
-            if (irieList.friendlyBees.Contains(projectile.type))
-            {
-                switch (iriesplayer.BeeBackpack)
-                {
-                    case irieItemID.ObsidianBeeBackpack:
-                        damage += Main.rand.Next(2, 9);
-                        break;
-                }
-                damageMultiplier = iriesplayer.beeDamage;
-            }
-
-            projectile.damage = (int)((orig_damage + damage) * damageMultiplier);
+            damage = (int)((projectile.damage + addedDamage) * damageMultiplier);
         }
     }
 }

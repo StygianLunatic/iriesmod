@@ -26,7 +26,7 @@ namespace iriesmod.Common.Players
         {
             // Bee backpack updrades
             BeeBackpack = 0;
-            beeDamage = 1f;
+            beeDamage = 0f;
             HurtBee = false;
         }
 

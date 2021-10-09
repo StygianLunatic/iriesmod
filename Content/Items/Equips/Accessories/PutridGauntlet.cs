@@ -2,7 +2,7 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 
-namespace iriesserver.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories
 {
 	public class PutridGauntlet : ModItem
 	{

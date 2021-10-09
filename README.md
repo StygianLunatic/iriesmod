@@ -14,3 +14,7 @@
 ### 0.2.1
 - Added Putrid Gauntlet
 - Added Wiki
+### 0.2.2
+- Added AdvancedEnchantedSword
+- Added ShieldOfWorm
+- Changed way to control bee damage
