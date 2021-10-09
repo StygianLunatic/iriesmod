@@ -1,14 +1,18 @@
 using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria;
+using iriesmod.Common.List;
 
 namespace iriesmod
 {
 	public class iriesmod : Mod
 	{
+        public override void Load()
+        {
+			irieList.InitList();
+        }
 
-
-		public override void AddRecipes()
+        public override void AddRecipes()
 		{
 			RecipeFinder hornetstaffFinder = new RecipeFinder();
 			hornetstaffFinder.AddIngredient(ItemID.BeeWax, 14);
