@@ -18,3 +18,4 @@
 - Added AdvancedEnchantedSword
 - Added ShieldOfWorm
 - Changed way to control bee damage
+- Added Dash Mechanism

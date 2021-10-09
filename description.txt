@@ -1,4 +1,7 @@
 Add varioius items.
-Accessories - 3
+
+Ver 0.2.2
+
+Accessories - 5
 Armors - Set 1
-Weapons - 1
+Weapons - 2
