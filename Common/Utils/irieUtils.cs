@@ -82,7 +82,7 @@ namespace iriesmod.Common.Utils
             }
             return -1;
         }
-        public static int beeDamage()
+        public static int BeeDamage()
         {
             switch (iriesplayer.BeeBackpack)
             {

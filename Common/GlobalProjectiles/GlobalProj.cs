@@ -39,7 +39,7 @@ namespace iriesmod.Common.GlobalProjectiles
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            damage = (int)((projectile.damage + irieUtils.beeDamage()) * damageMultiplier);
+            damage = (int)((projectile.damage + irieUtils.BeeDamage()) * damageMultiplier);
         }
     }
 }

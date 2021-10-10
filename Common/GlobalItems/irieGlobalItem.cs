@@ -16,7 +16,7 @@ namespace iriesmod.Common.GlobalItems
         {
             if (item.type == ItemID.BeeKeeper)
             {
-                item.damage += irieUtils.beeDamage();
+                item.damage += irieUtils.BeeDamage();
             }
         }
 
