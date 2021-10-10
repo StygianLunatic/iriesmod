@@ -19,6 +19,30 @@ namespace iriesmod.Common.GlobalItems
                 item.damage += irieUtils.beeDamage();
             }
         }
+
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (item.type == ItemID.HoneyBalloon)
+            {
+                foreach (TooltipLine line in tooltips)
+                {
+                    if (line.mod == "Terraria" && line.Name == "Tooltip1")
+                    {
+                        line.text += "\nAllows the holder to do an improved double jump";
+                    }
+                }
+            }
+            else if (item.type == ItemID.BalloonHorseshoeHoney)
+            {
+                foreach (TooltipLine line in tooltips)
+                {
+                    if (line.mod == "Terraria" && line.Name == "Tooltip1")
+                    {
+                        line.text += "\nAllows the holder to do an improved double jump";
+                    }
+                }
+            }
+        }
         public override void UpdateAccessory(Item item, Player player, bool hideVisual)
         {
             if (item.type == ItemID.HoneyBalloon)
