@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Armor
 {
@@ -24,7 +25,9 @@ namespace iriesmod.Content.Items.Equips.Armor
 
         public override void UpdateEquip(Player player)
         {
-            iriesplayer.beeDamage += 0.02f;
+            iriesplayer modPlayer = player.Getiriesplayer();
+
+            modPlayer.beeDamage += 0.02f;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs)
@@ -34,8 +37,10 @@ namespace iriesmod.Content.Items.Equips.Armor
 
         public override void UpdateArmorSet(Player player)
         {
+            iriesplayer modPlayer = player.Getiriesplayer();
+
             player.setBonus = "Releases bees when damaged\nIncreases your max number of minions by 1";
-            iriesplayer.HurtBee = true;
+            modPlayer.HurtBee = true;
             player.maxMinions++;
         }
 

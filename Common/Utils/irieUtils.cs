@@ -12,8 +12,13 @@ using iriesmod.Common.Players;
 
 namespace iriesmod.Common.Utils
 {
-    public class irieUtils
+    public static class irieUtils
     {
+        public static iriesplayer Getiriesplayer(this Player player)
+        {
+            return player.GetModPlayer<iriesplayer>();
+        }
+
         public static void BeeSpawn(Vector2 player_pos, bool strongBees)
         {
             bool makeStrongBee;
@@ -68,32 +73,68 @@ namespace iriesmod.Common.Utils
                 return damage + Main.rand.Next(2);
             }
         }
-
-        public static int BeeDebuff()
+        public static int[] BeeDebuff(Player player)
         {
-            switch (iriesplayer.BeeBackpack)
+            iriesplayer modPlayer = player.Getiriesplayer();
+            switch (modPlayer.BeeBackpack)
             {
                 case irieItemID.ObsidianHivePack:
-                    return BuffID.OnFire;
+                    return new int[]{ 1, BuffID.OnFire };
                 case irieItemID.CursedFlameHivePack:
-                    return BuffID.CursedInferno;
-                case 0:
-                    return 0;
+                    return new int[] { 1, BuffID.CursedInferno };
+                case irieItemID.IchorHivePack:
+                    return new int[] { 1, BuffID.Ichor };
+                case irieItemID.MechaHivePack:
+                    return new int[] { 1, BuffID.CursedInferno, BuffID.Ichor };
+                case irieItemID.VenomHivePack:
+                    return new int[] { 1, BuffID.Venom };
             }
-            return -1;
+            return new int[] { 0 };
         }
-        public static int BeeDamage()
+        public static int BeeDamage(Player player, int damage)
         {
-            switch (iriesplayer.BeeBackpack)
+            iriesplayer modPlayer = player.Getiriesplayer();
+
+            int beePackDamage = 0;
+
+            switch (modPlayer.BeeBackpack)
             {
                 case irieItemID.ObsidianHivePack:
-                    return Main.rand.Next(2, 9);
+                    beePackDamage += Main.rand.Next(2, 9);
+                    break;
                 case irieItemID.CursedFlameHivePack:
-                    return Main.rand.Next(5, 11);
-                case 0:
-                    return 0;
+                    beePackDamage += Main.rand.Next(5, 11);
+                    break;
+                case irieItemID.IchorHivePack:
+                    beePackDamage += Main.rand.Next(5, 11);
+                    break;
+                case irieItemID.MechaHivePack:
+                    beePackDamage += Main.rand.Next(10, 16);
+                    break;
+                case irieItemID.VenomHivePack:
+                    beePackDamage += Main.rand.Next(17, 23);
+                    break;
             }
-            return -1;
+
+            return (int)((damage + beePackDamage) * (1f + modPlayer.beeDamage));
+        }
+        public static int BeePenetrate(short BeeBackpack)
+        {
+            switch (BeeBackpack)
+            {
+                case irieItemID.ObsidianHivePack:
+                    return 1;
+                case irieItemID.CursedFlameHivePack:
+                    return 2;
+                case irieItemID.IchorHivePack:
+                    return 2;
+                case irieItemID.MechaHivePack:
+                    return 3;
+                case irieItemID.VenomHivePack:
+                    return 4;
+            }
+
+            return 0;
         }
 
     }

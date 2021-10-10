@@ -17,9 +17,9 @@ namespace iriesmod.Common.Players
     {
 
         // Bee backpack
-        public static short BeeBackpack;
-        public static float beeDamage;
-        public static bool HurtBee;
+        public short BeeBackpack;
+        public float beeDamage;
+        public bool HurtBee;
 
 
         public override void ResetEffects()
@@ -36,11 +36,14 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int debuff = irieUtils.BeeDebuff();
+                int[] debuffs = irieUtils.BeeDebuff(player);
 
-                if (debuff > 0)
+                if (debuffs[0] > 0)
                 {
-                    target.AddBuff(debuff, 180);
+                    foreach(int debuff in debuffs.Skip(1))
+                    {
+                        target.AddBuff(debuff, 180);
+                    }
                 }
             }
         }
@@ -49,11 +52,14 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int debuff = irieUtils.BeeDebuff();
+                int[] debuffs = irieUtils.BeeDebuff(player);
 
-                if (debuff > 0)
+                if (debuffs[0] > 0)
                 {
-                    target.AddBuff(debuff, 180);
+                    foreach (int debuff in debuffs.Skip(1))
+                    {
+                        target.AddBuff(debuff, 180);
+                    }
                 }
             }
         }

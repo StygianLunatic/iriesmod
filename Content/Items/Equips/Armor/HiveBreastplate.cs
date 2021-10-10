@@ -2,6 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Armor
 {
@@ -25,7 +26,8 @@ namespace iriesmod.Content.Items.Equips.Armor
 
 		public override void UpdateEquip(Player player)
 		{
-			iriesplayer.beeDamage += 0.04f;
+			iriesplayer modPlayer = player.Getiriesplayer();
+			modPlayer.beeDamage += 0.04f;
 			player.maxMinions++;
 		}
 

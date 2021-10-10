@@ -10,28 +10,15 @@ namespace iriesmod.Common.GlobalProjectiles
 {
     public class GlobalProj : GlobalProjectile
     {
-        static float damageMultiplier = 1f;
-
 
         public override void SetDefaults(Projectile projectile)
         {
-            damageMultiplier = 1f;
             int penetration = 0;
 
-
-            if (irieList.friendlyBees.Contains(projectile.type) || irieList.friendlyBeesProj.Contains(projectile.type))
+            if (irieList.friendlyBees.Contains(projectile.type))
             {
-                switch (iriesplayer.BeeBackpack)
-                {
-                    case irieItemID.ObsidianHivePack:
-                        penetration += 1;
-                        break;
-                    case irieItemID.CursedFlameHivePack:
-                        penetration += 2;
-                        break;
-                }
-
-                damageMultiplier = 1f + iriesplayer.beeDamage;
+                iriesplayer modPlayer = Main.player[projectile.owner].GetModPlayer<iriesplayer>();
+                penetration += irieUtils.BeePenetrate(modPlayer.BeeBackpack);
             }
 
             projectile.penetrate += penetration;
@@ -39,7 +26,13 @@ namespace iriesmod.Common.GlobalProjectiles
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-            damage = (int)((projectile.damage + irieUtils.BeeDamage()) * damageMultiplier);
+            Player player = Main.player[projectile.owner];
+
+
+            if (irieList.friendlyBees.Contains(projectile.type) || irieList.friendlyBeesProj.Contains(projectile.type))
+            {
+                damage = irieUtils.BeeDamage(player, damage);
+            }
         }
     }
 }

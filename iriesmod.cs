@@ -14,9 +14,19 @@ namespace iriesmod
 			irieList.InitList();
         }
 
+        public override void AddRecipeGroups()
+        {
+            RecipeGroupHelper.AddRecipeGroup();
+        }
         public override void AddRecipes()
 		{
+			RecipeHelper.AddRecipe(this);
 			RecipeHelper.EditRecipe(this);
 		}
-	}
+
+        public override void Unload()
+        {
+            irieList.UnloadList();
+        }
+    }
 }

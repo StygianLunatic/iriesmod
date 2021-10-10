@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories
 {
@@ -29,7 +30,9 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer.beeDamage += 0.08f;
+			iriesplayer modPlayer = player.Getiriesplayer();
+
+			modPlayer.beeDamage += 0.08f;
 		}
 
 		public override void AddRecipes()

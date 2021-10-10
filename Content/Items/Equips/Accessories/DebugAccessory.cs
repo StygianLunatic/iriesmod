@@ -11,17 +11,16 @@ using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories
 {
-    public class BeeNecklace : ModItem
-    {
+	public class DebugAccessory : ModItem
+	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Bee Necklace");
-			Tooltip.SetDefault("Increases bee damage by 5%\nIncreases your max number of minions by 1");
+			DisplayName.SetDefault("DebugAccessory");
 		}
 
 		public override void SetDefaults()
 		{
-			item.width = 22;
+			item.width = 24;
 			item.height = 30;
 			item.accessory = true;
 			item.value = Item.sellPrice(silver: 30);
@@ -31,20 +30,8 @@ namespace iriesmod.Content.Items.Equips.Accessories
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.05f;
-			player.maxMinions++;
-		}
 
-		public override void AddRecipes()
-		{
-			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Stinger, 12);
-			recipe.AddIngredient(ItemID.Vine, 2);
-			recipe.AddIngredient(ItemID.Hive, 5);
-			recipe.AddIngredient(ItemID.HoneyBlock, 5);
-			recipe.AddTile(TileID.Anvils);
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			modPlayer.beeDamage += 8f;
 		}
 	}
 }

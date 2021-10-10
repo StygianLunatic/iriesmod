@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Content.Items.Weapons.Summon;
 
 namespace iriesmod.Common.RecipeHelper
 {
@@ -18,6 +19,13 @@ namespace iriesmod.Common.RecipeHelper
 
 
 		}
+
+		public static void AddRecipe(Mod mod)
+        {
+			AddBeeKeeperRecipe(mod);
+			AddBeesKneesRecipe(mod);
+			AddBeeGunRecipe(mod);
+        }
 
 		private static void EditHornetStaffRecipe()
         {
@@ -57,8 +65,34 @@ namespace iriesmod.Common.RecipeHelper
 				editor.AddIngredient(ItemID.BottledHoney, 12);
             }
 		}
+		private static void AddBeeKeeperRecipe(Mod mod)
+        {
+			ModRecipe recipe = new ModRecipe(mod);
 
+			recipe.AddRecipeGroup("AnyGoldBroadSword");
+			recipe.AddIngredient(ItemID.BeeWax, 10);
+			recipe.AddIngredient(ItemID.Hive, 5);
+			recipe.AddIngredient(ItemID.HoneyBlock, 5);
 
+			recipe.SetResult(ItemID.BeeKeeper);
+			recipe.AddRecipe();
+		}
+		private static void AddBeesKneesRecipe(Mod mod)
+		{
+			ModRecipe recipe = new ModRecipe(mod);
 
-    }
+			recipe.AddRecipeGroup("AnyGoldBow");
+			recipe.AddIngredient(ItemID.BeeWax, 10);
+			recipe.AddIngredient(ItemID.Hive, 5);
+			recipe.AddIngredient(ItemID.HoneyBlock, 5);
+
+			recipe.SetResult(ItemID.BeesKnees);
+			recipe.AddRecipe();
+		}
+		private static void AddBeeGunRecipe(Mod mod)
+        {
+			// ModRecipe recipe = new ModRecipe(mod);
+			// recipe.AddIngredient(ModContent.ItemType<beePistol>());
+        }
+	}
 }

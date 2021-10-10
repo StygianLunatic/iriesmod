@@ -11,7 +11,7 @@ namespace iriesmod.Common.List
     {
         public static List<int> friendlyBees;
         public static List<int> friendlyBeesProj;
-
+        public static List<int> hornetList;
 
 
         public static void InitList()
@@ -28,6 +28,34 @@ namespace iriesmod.Common.List
                 ProjectileID.Stinger,
                 ProjectileID.HornetStinger
             };
+            hornetList = new List<int>()
+            {
+                NPCID.Hornet,
+                NPCID.LittleStinger,
+                NPCID.BigStinger,
+                NPCID.HornetFatty,
+                NPCID.LittleHornetFatty,
+                NPCID.BigHornetFatty,
+                NPCID.HornetHoney,
+                NPCID.LittleHornetHoney,
+                NPCID.BigHornetHoney,
+                NPCID.HornetLeafy,
+                NPCID.LittleHornetLeafy,
+                NPCID.BigHornetLeafy,
+                NPCID.HornetSpikey,
+                NPCID.LittleHornetSpikey,
+                NPCID.BigHornetSpikey,
+                NPCID.HornetStingy,
+                NPCID.LittleHornetStingy,
+                NPCID.BigHornetStingy,
+            };
+        }
+
+        public static void UnloadList()
+        {
+            friendlyBees = null;
+            friendlyBeesProj = null;
+            hornetList = null;
         }
     }
 }

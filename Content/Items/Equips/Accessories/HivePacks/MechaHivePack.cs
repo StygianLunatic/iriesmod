@@ -3,16 +3,17 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.ID;
+using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 {
-	public class CursedFlameHivePack : ModItem
+	public class MechaHivePack : HivePackTemplate
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Cursed Flame Hive Pack");
+			DisplayName.SetDefault("Mecha Hive Pack");
 			Tooltip.SetDefault("Increases the strength of friendly bees and wasps\n"
-							 + "Friendly bee attacks inflict cursed inferno");
+							 + "Friendly bee attacks inflict Cursed Inferno and Ichor");
 		}
 
 		public override void SetDefaults()
@@ -28,17 +29,21 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
+			iriesplayer modPlayer = player.Getiriesplayer();
+
 			player.strongBees = true;
-			iriesplayer.BeeBackpack = irieItemID.CursedFlameHivePack;
+			modPlayer.BeeBackpack = irieItemID.MechaHivePack;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 
-			recipe.AddIngredient(ModContent.ItemType<ObsidianHivePack>());
-			recipe.AddIngredient(ItemID.SoulofNight, 12);
-			recipe.AddIngredient(ItemID.CursedFlame, 30);
+			recipe.AddRecipeGroup("AnyCursedFlameHivePack");
+			recipe.AddIngredient(ItemID.SoulofMight, 5);
+			recipe.AddIngredient(ItemID.SoulofSight, 5);
+			recipe.AddIngredient(ItemID.SoulofFright, 5);
+
 			recipe.AddTile(TileID.TinkerersWorkbench);
 
 			recipe.SetResult(this);

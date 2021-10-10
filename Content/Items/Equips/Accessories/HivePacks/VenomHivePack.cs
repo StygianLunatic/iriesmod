@@ -3,16 +3,17 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.ID;
+using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 {
-	public class ObsidianHivePack : ModItem
+	public class VenomHivePack : HivePackTemplate
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Obsidian Hive Pack");
+			DisplayName.SetDefault("Venom Flame Hive Pack");
 			Tooltip.SetDefault("Increases the strength of friendly bees and wasps\n"
-							 + "Friendly bee attacks inflict fire damage");
+							 + "Friendly bee attacks Venom");
 		}
 
 		public override void SetDefaults()
@@ -26,20 +27,21 @@ namespace iriesmod.Content.Items.Equips.Accessories
 			item.expert = true;
 		}
 
-        public override void UpdateAccessory(Player player, bool hideVisual)
-        {
+		public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+			iriesplayer modPlayer = player.Getiriesplayer();
+
 			player.strongBees = true;
-			iriesplayer.BeeBackpack = irieItemID.ObsidianHivePack;
-        }
+			modPlayer.BeeBackpack = irieItemID.VenomHivePack;
+		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 
-			recipe.AddIngredient(ItemID.HiveBackpack);
-			recipe.AddIngredient(ItemID.Bone, 25);
-			recipe.AddIngredient(ItemID.Obsidian, 20);
-			recipe.AddIngredient(ItemID.MagmaStone);
+			recipe.AddIngredient(ModContent.ItemType<MechaHivePack>());
+			recipe.AddIngredient(ItemID.VialofVenom, 12);
+			recipe.AddIngredient(ItemID.ChlorophyteBar, 15);
 			recipe.AddTile(TileID.TinkerersWorkbench);
 
 			recipe.SetResult(this);

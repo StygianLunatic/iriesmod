@@ -19,5 +19,9 @@ namespace iriesmod.Common.ID
         public const short AdvancedEnchantedSword = 9;
         public const short ShieldOfWorm = 10;
         public const short CursedFlameHivePack = 11;
+        public const short IchorHivePack = 12;
+        public const short MechaHivePack = 13;
+        public const short VenomHivePack = 14;
+        public const short BeetleHivePack = 15;
     }
 }
