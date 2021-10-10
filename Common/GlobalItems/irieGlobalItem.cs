@@ -17,6 +17,10 @@ namespace iriesmod.Common.GlobalItems
             {
                 player.doubleJumpSandstorm = true;
             }
+            else if(item.type == ItemID.BalloonHorseshoeHoney)
+            {
+                player.doubleJumpSandstorm = true;
+            }
         }
     }
 }

@@ -22,4 +22,4 @@
 - Added CursedFlameHivePack
 - Made hornet and bee stingers affected by bee damage
 - Changed recipe for honey balloon
-- Now honey balloon allows you to do a double jump(sandstorm)
+- Now honey balloon and successor allows you to do a double jump(sandstorm)
