@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using iriesmod.Common.List;
 using iriesmod.Common.ID;
 using Terraria.ID;
+using iriesmod.Common.Players;
 
 namespace iriesmod.Common.Utils
 {
@@ -68,9 +69,9 @@ namespace iriesmod.Common.Utils
             }
         }
 
-        public static int BeeDebuff(short BeeBackpack)
+        public static int BeeDebuff()
         {
-            switch (BeeBackpack)
+            switch (iriesplayer.BeeBackpack)
             {
                 case irieItemID.ObsidianHivePack:
                     return BuffID.OnFire;
@@ -81,5 +82,19 @@ namespace iriesmod.Common.Utils
             }
             return -1;
         }
+        public static int beeDamage()
+        {
+            switch (iriesplayer.BeeBackpack)
+            {
+                case irieItemID.ObsidianHivePack:
+                    return Main.rand.Next(2, 9);
+                case irieItemID.CursedFlameHivePack:
+                    return Main.rand.Next(5, 11);
+                case 0:
+                    return 0;
+            }
+            return -1;
+        }
+
     }
 }

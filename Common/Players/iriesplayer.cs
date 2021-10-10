@@ -36,7 +36,7 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int debuff = irieUtils.BeeDebuff(BeeBackpack);
+                int debuff = irieUtils.BeeDebuff();
 
                 if (debuff > 0)
                 {
@@ -49,7 +49,7 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int debuff = irieUtils.BeeDebuff(BeeBackpack);
+                int debuff = irieUtils.BeeDebuff();
 
                 if (debuff > 0)
                 {
