@@ -19,6 +19,7 @@ namespace iriesmod.Content.Items.Equips.Armor
             item.height = 16;
             item.value = Item.sellPrice(silver: 50);
             item.rare = ItemRarityID.Green;
+            item.defense = 2;
         }
 
         public override void UpdateEquip(Player player)
@@ -33,6 +34,7 @@ namespace iriesmod.Content.Items.Equips.Armor
 
         public override void UpdateArmorSet(Player player)
         {
+            player.setBonus = "Releases bees when damaged\nIncreases your max number of minions by 1";
             iriesplayer.HurtBee = true;
             player.maxMinions++;
         }

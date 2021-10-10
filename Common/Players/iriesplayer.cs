@@ -34,27 +34,26 @@ namespace iriesmod.Common.Players
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         {
-            if (irieList.friendlyBees.Contains(proj.type))
+            if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                switch (BeeBackpack)
+                int debuff = irieUtils.BeeDebuff(BeeBackpack);
+
+                if (debuff > 0)
                 {
-                    case irieItemID.ObsidianBeeBackpack:
-                        target.AddBuff(BuffID.OnFire, 180);
-                        break;
+                    target.AddBuff(debuff, 180);
                 }
             }
-
         }
 
         public override void OnHitPvpWithProj(Projectile proj, Player target, int damage, bool crit)
         {
-            if (irieList.friendlyBees.Contains(proj.type))
+            if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                switch (BeeBackpack)
+                int debuff = irieUtils.BeeDebuff(BeeBackpack);
+
+                if (debuff > 0)
                 {
-                    case irieItemID.ObsidianBeeBackpack:
-                        target.AddBuff(BuffID.OnFire, 180);
-                        break;
+                    target.AddBuff(debuff, 180);
                 }
             }
         }

@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Microsoft.Xna.Framework;
-
+using iriesmod.Common.List;
+using iriesmod.Common.ID;
+using Terraria.ID;
 
 namespace iriesmod.Common.Utils
 {
@@ -66,5 +68,18 @@ namespace iriesmod.Common.Utils
             }
         }
 
+        public static int BeeDebuff(short BeeBackpack)
+        {
+            switch (BeeBackpack)
+            {
+                case irieItemID.ObsidianHivePack:
+                    return BuffID.OnFire;
+                case irieItemID.CursedFlameHivePack:
+                    return BuffID.CursedInferno;
+                case 0:
+                    return 0;
+            }
+            return -1;
+        }
     }
 }

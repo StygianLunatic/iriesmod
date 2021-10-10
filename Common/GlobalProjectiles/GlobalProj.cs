@@ -20,13 +20,17 @@ namespace iriesmod.Common.GlobalProjectiles
             int penetration = 0;
 
 
-            if (irieList.friendlyBees.Contains(projectile.type))
+            if (irieList.friendlyBees.Contains(projectile.type) || irieList.friendlyBeesProj.Contains(projectile.type))
             {
                 switch (iriesplayer.BeeBackpack)
                 {
-                    case irieItemID.ObsidianBeeBackpack:
+                    case irieItemID.ObsidianHivePack:
                         penetration += 1;
                         addedDamage += Main.rand.Next(2, 9);
+                        break;
+                    case irieItemID.CursedFlameHivePack:
+                        penetration += 2;
+                        addedDamage += Main.rand.Next(5, 11);
                         break;
                 }
 

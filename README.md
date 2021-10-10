@@ -10,7 +10,7 @@
 - Added HiveGreaves
 - Added BeeNecklace
 - Added HoneyCloak
-- Added ObsidianBeeBackpack
+- Added ObsidianHivePack
 ### 0.2.1
 - Added Putrid Gauntlet
 - Added Wiki
@@ -19,3 +19,7 @@
 - Added ShieldOfWorm
 - Changed way to control bee damage
 - Added Dash Mechanism
+- Added CursedFlameHivePack
+- Made hornet and bee stingers affected by bee damage
+- Changed recipe for honey balloon
+- Now honey balloon allows you to do a double jump(sandstorm)

@@ -58,7 +58,9 @@ namespace iriesmod.Content.Items.Weapons.Summon
 				Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(10));
 				float scale = 1f - (Main.rand.NextFloat() * .3f);
 				perturbedSpeed = perturbedSpeed * scale; 
-				Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
+				int proj = Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
+
+				Main.projectile[proj].usesLocalNPCImmunity = true;
 			}
 			return false;
 		}

@@ -20,6 +20,7 @@ namespace iriesmod.Content.Items.Equips.Armor
 			item.height = 18;
 			item.value = Item.sellPrice(silver: 50);
 			item.rare = ItemRarityID.Green;
+			item.defense = 3;
 		}
 
 		public override void UpdateEquip(Player player)

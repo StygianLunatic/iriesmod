@@ -6,7 +6,7 @@ using iriesmod.Common.ID;
 
 namespace iriesmod.Content.Items.Equips.Accessories
 {
-	public class ObsidianHiveBackPack : ModItem
+	public class ObsidianHivePack : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
@@ -29,7 +29,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
 			player.strongBees = true;
-			iriesplayer.BeeBackpack = irieItemID.ObsidianBeeBackpack;
+			iriesplayer.BeeBackpack = irieItemID.ObsidianHivePack;
         }
 
 		public override void AddRecipes()
