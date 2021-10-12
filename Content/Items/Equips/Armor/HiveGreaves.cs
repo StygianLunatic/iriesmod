@@ -33,7 +33,7 @@ namespace iriesmod.Content.Items.Equips.Armor
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Stinger, 6);
+			recipe.AddIngredient(ItemID.Stinger, 2);
 			recipe.AddIngredient(ItemID.Hive, 16);
 			recipe.AddIngredient(ItemID.HoneyBlock, 10);
 			recipe.AddTile(TileID.Anvils);

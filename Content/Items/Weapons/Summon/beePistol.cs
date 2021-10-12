@@ -36,7 +36,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 			recipe.AddIngredient(ItemID.FlintlockPistol);
-			recipe.AddIngredient(ItemID.Stinger, 15);
+			recipe.AddIngredient(ItemID.Stinger, 6);
 			recipe.AddIngredient(ItemID.Hive, 8);
 			recipe.AddIngredient(ItemID.HoneyBlock, 8);
 			recipe.AddTile(TileID.Anvils);
@@ -57,7 +57,8 @@ namespace iriesmod.Content.Items.Weapons.Summon
 				}
 				Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(10));
 				float scale = 1f - (Main.rand.NextFloat() * .3f);
-				perturbedSpeed = perturbedSpeed * scale; 
+				perturbedSpeed = perturbedSpeed * scale;
+				type = player.beeType();
 				int proj = Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
 
 				Main.projectile[proj].usesLocalNPCImmunity = true;

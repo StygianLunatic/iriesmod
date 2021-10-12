@@ -5,23 +5,27 @@ using iriesmod.Common.List;
 using iriesmod.Common.Players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
+using iriesmod.Content.Projectiles;
 
 namespace iriesmod.Common.GlobalProjectiles
 {
     public class GlobalProj : GlobalProjectile
     {
-
         public override void SetDefaults(Projectile projectile)
         {
-            int penetration = 0;
-
-            if (irieList.friendlyBees.Contains(projectile.type))
+            if (projectile.owner == Main.myPlayer)
             {
-                iriesplayer modPlayer = Main.player[projectile.owner].GetModPlayer<iriesplayer>();
-                penetration += irieUtils.BeePenetrate(modPlayer.BeeBackpack);
-            }
+                int penetration = 0;
+                Player player = Main.player[projectile.owner];
 
-            projectile.penetrate += penetration;
+                if (irieList.friendlyBees.Contains(projectile.type))
+                {
+                    iriesplayer modPlayer = player.Getiriesplayer();
+                    penetration += irieUtils.BeePenetrate(modPlayer.BeeBackpack);
+                }
+
+                projectile.penetrate += penetration;
+            }
         }
 
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)

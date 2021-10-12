@@ -26,6 +26,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 			item.accessory = true;
 			item.value = Item.sellPrice(silver: 30);
 			item.rare = ItemRarityID.Blue;
+			item.defense = 4;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
@@ -38,7 +39,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Stinger, 8);
+			recipe.AddIngredient(ItemID.Stinger, 4);
 			recipe.AddIngredient(ItemID.HoneyBlock, 18);
 			recipe.AddIngredient(ItemID.Silk, 20);
 			recipe.AddTile(TileID.Anvils);

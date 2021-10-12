@@ -23,5 +23,13 @@ namespace iriesmod.Common.ID
         public const short MechaHivePack = 13;
         public const short VenomHivePack = 14;
         public const short BeetleHivePack = 15;
+        public const short StardustHivePack = 16;
+        public const short QueenBeeStinger = 17;
+        public const short QueenBeeScroll = 18;
+        public const short WaspNecklace = 19;
+        public const short SweetheartKnuckles = 20;
+        public const short RoyalJelly = 21;
+        public const short BeeGunSummon = 22;
+        public const short AttackHoneyPotion = 23;
     }
 }

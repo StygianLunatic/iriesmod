@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
+using Terraria.ModLoader;
+using iriesmod.Content.Projectiles.Weapons.Bees;
 
 namespace iriesmod.Common.List
 {
@@ -20,7 +22,9 @@ namespace iriesmod.Common.List
             {
                 ProjectileID.Bee,
                 ProjectileID.Wasp,
-                ProjectileID.GiantBee
+                ProjectileID.GiantBee,
+                ModContent.ProjectileType<beeBeetle>(),
+                ModContent.ProjectileType<beeStardust>()
             };
 
             friendlyBeesProj = new List<int>()

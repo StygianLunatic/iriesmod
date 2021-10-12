@@ -8,6 +8,8 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using iriesmod.Common.Utils;
 using iriesmod.Common.Players;
+using Microsoft.Xna.Framework;
+using iriesmod.Content.Projectiles.Weapons.Ranged;
 
 namespace iriesmod.Common.GlobalItems
 {
@@ -64,18 +66,36 @@ namespace iriesmod.Common.GlobalItems
             }
         }
 
+        public override string IsArmorSet(Item head, Item body, Item legs)
+        {
+            if (head.type == ItemID.BeeHeadgear && body.type == ItemID.BeeBreastplate && legs.type == ItemID.BeeGreaves)
+            {
+                return "Bee";
+            }
+
+            return "";
+        }
         public override void UpdateArmorSet(Player player, string set)
         {
-            /*
+            iriesplayer modPlayer = player.GetModPlayer<iriesplayer>();
             switch (set)
             {
                 case "Bee":
                     player.setBonus = "Increases minion damage by 5%\nIncreases bee damage by 5%";
                     player.minionDamage -= 0.05f;
-                    iriesplayer.beeDamage += 0.05f;
+                    modPlayer.beeDamage += 0.05f;
                     break;
             }
-            */
+        }
+
+        public override bool Shoot(Item item, Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        {
+            if (item.type == ItemID.Beenade)
+            {
+                type = ModContent.ProjectileType<BeenadeFix>();
+            }
+
+            return true;
         }
     }
 }

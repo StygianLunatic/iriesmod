@@ -6,17 +6,16 @@ using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 
 
-
 namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 {
-	public class BeetleHivePack : HivePackTemplate
+	public class StardustHivePack : HivePackTemplate
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Beetle Hive Pack");
+			DisplayName.SetDefault("Stardust Hive Pack");
 			Tooltip.SetDefault("Increases the strength of friendly bees and wasps\n"
-							 + "Friendly bee attacks inflict Venom\n"
-							 + "Strong bees are replaced with beetle");
+							 + "Friendly bee attacks inflict On fire, Cursed Inferno, Ichor, Venom\n"
+							 + "Strong bees are replaced with Stardust Bees");
 		}
 
 		public override void SetDefaults()
@@ -35,18 +34,17 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 			iriesplayer modPlayer = player.Getiriesplayer();
 
 			player.strongBees = true;
-			modPlayer.BeeBackpack = irieItemID.BeetleHivePack;
+			modPlayer.BeeBackpack = irieItemID.StardustHivePack;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 
-			recipe.AddIngredient(ModContent.ItemType<VenomHivePack>());
-			recipe.AddIngredient(ItemID.LunarTabletFragment, 12);
-			recipe.AddIngredient(ItemID.BeetleHusk, 20);
+			recipe.AddIngredient(ModContent.ItemType<BeetleHivePack>());
+			recipe.AddIngredient(ItemID.FragmentStardust, 18);
 
-			recipe.AddTile(TileID.TinkerersWorkbench);
+			recipe.AddTile(TileID.LunarCraftingStation);
 
 			recipe.SetResult(this);
 			recipe.AddRecipe();

@@ -40,14 +40,14 @@ namespace iriesmod.Content.Items.Equips.Armor
             iriesplayer modPlayer = player.Getiriesplayer();
 
             player.setBonus = "Releases bees when damaged\nIncreases your max number of minions by 1";
-            modPlayer.HurtBee = true;
+            modPlayer.HiveSetHurtBonus = true;
             player.maxMinions++;
         }
 
         public override void AddRecipes()
         {
             ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(ItemID.Stinger, 4);
+            recipe.AddIngredient(ItemID.Stinger, 2);
             recipe.AddIngredient(ItemID.Hive, 12);
             recipe.AddIngredient(ItemID.HoneyBlock, 8);
             recipe.AddTile(TileID.Anvils);

@@ -19,12 +19,11 @@ namespace iriesmod.Common.Utils
             return player.GetModPlayer<iriesplayer>();
         }
 
-        public static void BeeSpawn(Vector2 player_pos, bool strongBees)
+        public static void BeeSpawn(Vector2 player_pos, bool strongBees, int minBeeDamage, int maxBeeDamage)
         {
             bool makeStrongBee;
             int HurtNumberBee = 1 + Main.rand.Next(3);
-            float HurtBeeDamage = 10f;
-
+            float HurtBeeDamage = (float)Main.rand.Next(minBeeDamage, maxBeeDamage + 1);
 
 
             if (strongBees && Main.rand.Next(3) == 0)
@@ -35,7 +34,7 @@ namespace iriesmod.Common.Utils
 
             if (strongBees)
             {
-                HurtBeeDamage = 15f;
+                HurtBeeDamage += 5f;
             }
             if (Main.expertMode)
             {
@@ -88,6 +87,10 @@ namespace iriesmod.Common.Utils
                     return new int[] { 1, BuffID.CursedInferno, BuffID.Ichor };
                 case irieItemID.VenomHivePack:
                     return new int[] { 1, BuffID.Venom };
+                case irieItemID.BeetleHivePack:
+                    return new int[] { 1, BuffID.Venom };
+                case irieItemID.StardustHivePack:
+                    return new int[] { 1, BuffID.OnFire, BuffID.CursedInferno, BuffID.Ichor, BuffID.Venom };
             }
             return new int[] { 0 };
         }
@@ -114,6 +117,12 @@ namespace iriesmod.Common.Utils
                 case irieItemID.VenomHivePack:
                     beePackDamage += Main.rand.Next(17, 23);
                     break;
+                case irieItemID.BeetleHivePack:
+                    beePackDamage += Main.rand.Next(26, 32);
+                    break;
+                case irieItemID.StardustHivePack:
+                    beePackDamage += Main.rand.Next(36, 42);
+                    break;
             }
 
             return (int)((damage + beePackDamage) * (1f + modPlayer.beeDamage));
@@ -125,12 +134,13 @@ namespace iriesmod.Common.Utils
                 case irieItemID.ObsidianHivePack:
                     return 1;
                 case irieItemID.CursedFlameHivePack:
-                    return 2;
                 case irieItemID.IchorHivePack:
                     return 2;
                 case irieItemID.MechaHivePack:
                     return 3;
                 case irieItemID.VenomHivePack:
+                case irieItemID.BeetleHivePack:
+                case irieItemID.StardustHivePack:
                     return 4;
             }
 

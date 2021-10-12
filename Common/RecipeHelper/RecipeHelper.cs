@@ -25,7 +25,9 @@ namespace iriesmod.Common.RecipeHelper
 			AddBeeKeeperRecipe(mod);
 			AddBeesKneesRecipe(mod);
 			AddBeeGunRecipe(mod);
-        }
+			AddHoneyDispenserRecipe(mod);
+
+		}
 
 		private static void EditHornetStaffRecipe()
         {
@@ -40,7 +42,7 @@ namespace iriesmod.Common.RecipeHelper
 			{
 				RecipeEditor editor = new RecipeEditor(hornetstaffRecipe);
 				editor.DeleteIngredient(ItemID.BeeWax);
-				editor.AddIngredient(ItemID.Stinger, 12);
+				editor.AddIngredient(ItemID.Stinger, 8);
 				editor.AddIngredient(ItemID.Hive, 15);
 				editor.AddIngredient(ItemID.HoneyBlock, 8);
 			}
@@ -74,6 +76,8 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.AddIngredient(ItemID.Hive, 5);
 			recipe.AddIngredient(ItemID.HoneyBlock, 5);
 
+			recipe.AddTile(TileID.HoneyDispenser);
+
 			recipe.SetResult(ItemID.BeeKeeper);
 			recipe.AddRecipe();
 		}
@@ -86,13 +90,34 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.AddIngredient(ItemID.Hive, 5);
 			recipe.AddIngredient(ItemID.HoneyBlock, 5);
 
+			recipe.AddTile(TileID.HoneyDispenser);
+
 			recipe.SetResult(ItemID.BeesKnees);
 			recipe.AddRecipe();
 		}
 		private static void AddBeeGunRecipe(Mod mod)
         {
-			// ModRecipe recipe = new ModRecipe(mod);
-			// recipe.AddIngredient(ModContent.ItemType<beePistol>());
+			ModRecipe recipe = new ModRecipe(mod);
+			recipe.AddIngredient(ModContent.ItemType<beePistol>());
+			recipe.AddIngredient(ItemID.BeeWax, 10);
+			recipe.AddIngredient(ItemID.Hive, 5);
+			recipe.AddIngredient(ItemID.HoneyBlock, 5);
+
+			recipe.AddTile(TileID.HoneyDispenser);
+
+			recipe.SetResult(ItemID.BeeGun);
+			recipe.AddRecipe();
+        }
+		private static void AddHoneyDispenserRecipe(Mod mod)
+        {
+			ModRecipe recipe = new ModRecipe(mod);
+
+			recipe.AddIngredient(ItemID.Hive, 25);
+			recipe.AddIngredient(ItemID.HoneyBlock, 25);
+			recipe.AddIngredient(ItemID.BeeWax, 4);
+
+			recipe.SetResult(ItemID.HoneyDispenser);
+			recipe.AddRecipe();
         }
 	}
 }
