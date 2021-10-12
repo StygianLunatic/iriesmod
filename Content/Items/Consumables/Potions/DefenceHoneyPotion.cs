@@ -4,12 +4,12 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Items.Consumables.Potions
 {
-    public class AttackHoneyPotion : ModItem
+    public class DefenceHoneyPotion : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Attack Honey Potion");
-            Tooltip.SetDefault("Increases damage by 10% while you have Honey buff");
+            DisplayName.SetDefault("Defence Honey Potion");
+            Tooltip.SetDefault("Grants +12 defence while you have Honey buff");
         }
 
 		public override void SetDefaults()
@@ -25,7 +25,7 @@ namespace iriesmod.Content.Items.Consumables.Potions
 			item.consumable = true;
 			item.rare = ItemRarityID.Green;
 			item.value = Item.sellPrice(silver: 40);
-			item.buffType = ModContent.BuffType<Buffs.SweetAttack>();
+			item.buffType = ModContent.BuffType<Buffs.SweetDefence>();
 			item.buffTime = 36000;
 		}
 	}

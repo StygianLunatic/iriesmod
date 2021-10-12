@@ -4,12 +4,12 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Buffs
 {
-    public class StickyAttackBuff : ModBuff
+    public class SweetAttack : ModBuff
     {
         public override void SetDefaults()
         {
-            DisplayName.SetDefault("Sticky Attack!");
-            // Description.SetDefault("Grants 10% damage when doused in honey");
+            DisplayName.SetDefault("Sweet Attack");
+            // Description.SetDefault("Grants 10% damage while doused in honey");
             Description.SetDefault("Your attack is imbued with stickiness");
             Main.buffNoTimeDisplay[Type] = false;
             Main.debuff[Type] = false;
@@ -19,7 +19,7 @@ namespace iriesmod.Content.Buffs
         {
             if (player.HasBuff(BuffID.Honey))
             {
-                player.allDamage += 10;
+                player.allDamage += 0.1f;
             }
         }
     }
