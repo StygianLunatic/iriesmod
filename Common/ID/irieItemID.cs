@@ -32,5 +32,6 @@ namespace iriesmod.Common.ID
         public const short BeeGunSummon = 22;
         public const short AttackHoneyPotion = 23;
         public const short DefenceHoneyPotion = 24;
+        public const short AngryHornetStaff = 25;
     }
 }

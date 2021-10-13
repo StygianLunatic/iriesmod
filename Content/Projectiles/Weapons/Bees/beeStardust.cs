@@ -13,12 +13,13 @@ namespace iriesmod.Content.Projectiles.Weapons.Bees
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.GiantBee);
+			projectile.CloneDefaults(ProjectileID.Bee);
 			projectile.scale = 1f;
 			projectile.minion = true;
 			projectile.ignoreWater = true;
-			aiType = ProjectileID.GiantBee;
+			aiType = ProjectileID.Bee;
 			Main.projFrames[projectile.type] = 4;
+			projectile.penetrate = 4;
 
 		}
 	}
