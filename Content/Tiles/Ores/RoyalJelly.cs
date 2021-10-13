@@ -23,5 +23,10 @@ namespace iriesmod.Content.Tiles.Ores
 			drop = ModContent.ItemType<Items.Materials.RoyalJelly>();
 			soundType = SoundID.Splash;
 		}
-	}
+
+        public override void FloorVisuals(Player player)
+        {
+			player.sticky = true;
+        }
+    }
 }
