@@ -7,6 +7,8 @@ using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 using iriesmod.Common.Worlds;
+using Terraria.Localization;
+using Microsoft.Xna.Framework;
 
 namespace iriesmod.Common.GlobalNPCs
 {
@@ -24,10 +26,26 @@ namespace iriesmod.Common.GlobalNPCs
             if (npc.type == NPCID.QueenBee)
             {
                 npc.DropItemInstanced(npc.position, npc.Size, ModContent.ItemType<QueenBeeStinger>(), Main.rand.Next(15, 23));
-                if (!DownedBosses.downedQueenBee)
+                if (DownedBosses.QueenBeeKills < 3)
                 {
-                    DownedBosses.downedQueenBee = true;
                     OreGen.RoyalJellyGen();
+                    if (Main.netMode == NetmodeID.SinglePlayer)
+                    {
+                        Main.NewText("Royal Jelly Spawned", Color.Beige);
+                    }
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.BroadcastChatMessage(NetworkText.FromLiteral("Royal Jelly Spawned"), Color.Beige);
+                    }
+                }
+
+                DownedBosses.downedQueenBee = true;
+                DownedBosses.QueenBeeKills++;
+
+
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.WorldData);
                 }
             }
         }
