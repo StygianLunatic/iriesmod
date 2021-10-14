@@ -62,7 +62,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Ranged
 				{
 					float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
 					float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
-					Projectile.NewProjectile(new Vector2(projectile.position.X, projectile.position.Y), new Vector2(speedX, speedY), Main.player[projectile.owner].beeType(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), Main.myPlayer);
+					Projectile.NewProjectile(new Vector2(projectile.position.X, projectile.position.Y), new Vector2(speedX, speedY), Main.player[projectile.owner].beeType(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), projectile.owner);
 				}
 			}
         }

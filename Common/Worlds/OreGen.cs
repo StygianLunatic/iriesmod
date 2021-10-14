@@ -18,7 +18,7 @@ namespace iriesmod.Common.Worlds
 				Tile tile = Framing.GetTileSafely(x, y);
 				if (tile.active() && tile.type == TileID.Hive)
 				{
-				    WorldGen.TileRunner(x, y, WorldGen.genRand.Next(4, 9), WorldGen.genRand.Next(2, 6), ModContent.TileType<RoyalJelly>());
+				    WorldGen.TileRunner(x, y, WorldGen.genRand.Next(4, 7), WorldGen.genRand.Next(2, 6), ModContent.TileType<RoyalJelly>());
 				}
 			}
 			Main.NewText("Royal Jelly Generated.");

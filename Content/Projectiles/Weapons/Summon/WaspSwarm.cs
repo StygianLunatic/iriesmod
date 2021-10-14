@@ -1,52 +1,46 @@
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
-	public class AngryHornet : ModProjectile
+	public class WaspSwarm : ModProjectile
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Angry Hornet");
+			DisplayName.SetDefault("Wasp Swarm");
 
 			Main.projFrames[projectile.type] = 3;
 			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-
-			Main.projPet[projectile.type] = true;
 			ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
 			ProjectileID.Sets.Homing[projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.Hornet);
-			aiType = ProjectileID.Hornet;
-			// projectile.aiStyle = 62;
+			projectile.CloneDefaults(ProjectileID.GiantBee);
+			aiType = ProjectileID.GiantBee;
+			projectile.scale = 0.6f;
 			projectile.friendly = true;
 			projectile.minion = true;
-			projectile.minionSlots = 1f;
-			projectile.penetrate = -1;
+			projectile.minionSlots = 0f;
+			projectile.penetrate = 3;
 			projectile.netImportant = true;
+			projectile.timeLeft = 600;
 		}
 
 		public override bool? CanCutTiles()
 		{
 			return false;
 		}
+		public override bool OnTileCollide(Vector2 oldVelocity)
+		{
+			return false;
+		}
 
 		public override void AI()
 		{
-			Player player = Main.player[projectile.owner];
-			if (player.dead || !(player.active))
-			{
-				player.ClearBuff(ModContent.BuffType<Buffs.Minions.AngryHornet>());
-			}
-			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.AngryHornet>()))
-			{
-				projectile.timeLeft = 2;
-			}
-
 			int frameSpeed = 5;
 			projectile.frameCounter++;
 			if (projectile.frameCounter >= frameSpeed)

@@ -11,7 +11,6 @@ namespace iriesmod
 	public class iriesmod : Mod
 	{
         public const string iriesmodName = "iriesmod";
-        public static int mySelf;
         internal static iriesmod Instance;
 
 
