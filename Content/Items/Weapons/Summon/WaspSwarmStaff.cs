@@ -33,9 +33,9 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			for (int i = 0; i <= Main.rand.Next(1, 4); i++)
+			for (int i = 0; i < 2; i++)
 			{
-				Projectile.NewProjectile(Main.MouseWorld, new Vector2(0f, Main.rand.Next(i, i * 2) * 0.02f), type, damage, knockBack, player.whoAmI);
+				Projectile.NewProjectile(Main.MouseWorld, new Vector2(Main.rand.Next(i * 2, i) * 0.02f, Main.rand.Next(i, i * 2) * 0.02f), type, damage, knockBack, player.whoAmI);
 			}
 			return false;
 		}
