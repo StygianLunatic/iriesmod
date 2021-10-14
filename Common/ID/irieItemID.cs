@@ -35,5 +35,9 @@ namespace iriesmod.Common.ID
         public const short AngryHornetStaff = 25;
         public const short BeeHiveStaff = 26;
         public const short WaspSwarmStaff = 26;
+        public const short royalHive_headgear = 27;
+        public const short royalHive_helm = 28;
+        public const short royalHive_breastplate = 29;
+        public const short royalHive_greaves = 30;
     }
 }
