@@ -7,7 +7,7 @@ using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyRose
 {
-	public class HoneyRose : ModItem
+    public class HoneyRose : HoneyRose_Template
 	{
 		public override void SetStaticDefaults()
 		{

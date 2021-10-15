@@ -35,7 +35,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				Projectile.NewProjectile(Main.MouseWorld, new Vector2(Main.rand.Next(i * 2, i) * 0.02f, Main.rand.Next(i, i * 2) * 0.02f), type, damage, knockBack, player.whoAmI);
+				Projectile.NewProjectile(Main.MouseWorld, new Vector2(speedX * i, speedY * i * 2), type, damage, knockBack, player.whoAmI);
 			}
 			return false;
 		}
