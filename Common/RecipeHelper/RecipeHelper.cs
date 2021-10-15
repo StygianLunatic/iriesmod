@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Content.Items.Weapons.Summon;
+using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Common.RecipeHelper
 {
@@ -19,17 +20,20 @@ namespace iriesmod.Common.RecipeHelper
 
 
 		}
-
 		public static void AddRecipe(Mod mod)
         {
 			AddBeeKeeperRecipe(mod);
 			AddBeesKneesRecipe(mod);
 			AddBeeGunRecipe(mod);
 			AddHoneyDispenserRecipe(mod);
+			AddHoneyCombRecipe(mod);
 
 		}
 
-		private static void EditHornetStaffRecipe()
+
+
+        #region EditRecipes
+        private static void EditHornetStaffRecipe()
         {
 			RecipeFinder hornetstaffFinder = new RecipeFinder();
 
@@ -67,7 +71,9 @@ namespace iriesmod.Common.RecipeHelper
 				editor.AddIngredient(ItemID.BottledHoney, 12);
             }
 		}
-		private static void AddBeeKeeperRecipe(Mod mod)
+        #endregion
+        #region AddRecipes
+        private static void AddBeeKeeperRecipe(Mod mod)
         {
 			ModRecipe recipe = new ModRecipe(mod);
 
@@ -119,5 +125,17 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.SetResult(ItemID.HoneyDispenser);
 			recipe.AddRecipe();
         }
-	}
+		private static void AddHoneyCombRecipe(Mod mod)
+        {
+			ModRecipe recipe = new ModRecipe(mod);
+
+			recipe.AddIngredient(ItemID.BeeWax, 8);
+			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 4);
+
+			recipe.SetResult(ItemID.HoneyComb);
+			recipe.AddRecipe();
+        }
+        #endregion
+
+    }
 }
