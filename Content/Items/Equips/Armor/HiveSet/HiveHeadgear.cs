@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items.Equips.Armor
+namespace iriesmod.Content.Items.Equips.Armor.HiveSet
 {
     [AutoloadEquip(EquipType.Head)]
     public class HiveHeadgear :ModItem

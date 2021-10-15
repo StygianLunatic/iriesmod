@@ -5,7 +5,7 @@ using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 {
 	public class WaspNecklace : ModItem
 	{

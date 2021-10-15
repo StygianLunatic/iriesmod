@@ -9,39 +9,39 @@ using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 {
-	public class HoneyCloak : ModItem
-	{
+    public class BeeNecklace : ModItem
+    {
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Honey Cloak");
-			Tooltip.SetDefault("Increases bee damage by 8%");
+			DisplayName.SetDefault("Bee Necklace");
+			Tooltip.SetDefault("Increases bee damage by 5%\nIncreases your max number of minions by 1");
 		}
 
 		public override void SetDefaults()
 		{
-			item.width = 24;
+			item.width = 22;
 			item.height = 30;
 			item.accessory = true;
 			item.value = Item.sellPrice(silver: 30);
 			item.rare = ItemRarityID.Blue;
-			item.defense = 4;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			iriesplayer modPlayer = player.Getiriesplayer();
-
-			modPlayer.beeDamage += 0.08f;
+			modPlayer.beeDamage += 0.05f;
+			player.maxMinions++;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Stinger, 4);
-			recipe.AddIngredient(ItemID.HoneyBlock, 18);
-			recipe.AddIngredient(ItemID.Silk, 20);
+			recipe.AddIngredient(ItemID.Stinger, 6);
+			recipe.AddIngredient(ItemID.Vine, 2);
+			recipe.AddIngredient(ItemID.Hive, 5);
+			recipe.AddIngredient(ItemID.HoneyBlock, 5);
 			recipe.AddTile(TileID.Anvils);
 			recipe.SetResult(this);
 			recipe.AddRecipe();

@@ -1,47 +1,48 @@
-﻿using Terraria;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
-using iriesmod.Content.Items.Materials;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 {
-	public class HoneyRose : ModItem
+	public class HoneyCloak : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Honey Rose");
-			Tooltip.SetDefault("Increases life by 20\nIncreases life regen by 3 when you have Honey buff");
+			DisplayName.SetDefault("Honey Cloak");
+			Tooltip.SetDefault("Increases bee damage by 8%");
 		}
 
 		public override void SetDefaults()
 		{
-			item.width = 34;
+			item.width = 24;
 			item.height = 30;
 			item.accessory = true;
 			item.value = Item.sellPrice(silver: 30);
 			item.rare = ItemRarityID.Blue;
+			item.defense = 4;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.HoneyRose = true;
 
-			player.statLifeMax2 += 20;
+			modPlayer.beeDamage += 0.08f;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
-
-			recipe.AddIngredient(ItemID.JungleRose);
-			recipe.AddIngredient(ItemID.HoneyBlock, 25);
-			recipe.AddIngredient(ItemID.HoneyBucket, 5);
-
+			recipe.AddIngredient(ItemID.Stinger, 4);
+			recipe.AddIngredient(ItemID.HoneyBlock, 18);
+			recipe.AddIngredient(ItemID.Silk, 20);
 			recipe.AddTile(TileID.Anvils);
-
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}
