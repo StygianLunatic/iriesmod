@@ -15,27 +15,33 @@ namespace iriesmod.Common.GlobalItems
 {
     public class irieGlobalItem : GlobalItem
     {
+        public override void SetDefaults(Item item)
+        {
+            if (item.type == ItemID.BeeCloak)
+            {
+                item.defense = 5;
+            }
+        }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
             if (item.type == ItemID.HoneyBalloon)
             {
-                foreach (TooltipLine line in tooltips)
-                {
-                    if (line.mod == "Terraria" && line.Name == "Tooltip1")
-                    {
-                        line.text += "\nAllows the holder to do an improved double jump";
-                    }
-                }
+                tooltips.Add(new TooltipLine(mod, "Tooltip2", "Allows the holder to do an improved double jump"));
             }
             else if (item.type == ItemID.BalloonHorseshoeHoney)
             {
+                tooltips.Add(new TooltipLine(mod, "Tooltip2", "Allows the holder to do an improved double jump"));
+            }
+            else if (item.type == ItemID.BeeCloak)
+            {
                 foreach (TooltipLine line in tooltips)
                 {
-                    if (line.mod == "Terraria" && line.Name == "Tooltip1")
+                    if (line.mod == "Terraria" && line.Name == "Tooltip0")
                     {
-                        line.text += "\nAllows the holder to do an improved double jump";
+                        line.text = "Increases bee damage by 8%";
                     }
                 }
+                tooltips.Add(new TooltipLine(mod, "Toolip2", "Releases bees when damaged"));
             }
         }
 

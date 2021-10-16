@@ -19,13 +19,15 @@ namespace iriesmod.Common.ILchanges
         public static void Load()
         {
 			// IL.Terraria.Player.beeType += HookBeeType;
-			On.Terraria.Player.beeType += HookBeeType;
-			IL.Terraria.Player.Hurt += HookHurt;
+			On.Terraria.Player.beeType += HookBeeType; // Bee alt type insert
+			
+			IL.Terraria.Player.VanillaUpdateAccessory += HookVanillaUpdateAccessory; // Bee Cloak Star falling, bee releasing remove.
         }
 		public static void Unload()
         {
 			// IL.Terraria.Player.beeType -= HookBeeType;
 			On.Terraria.Player.beeType -= HookBeeType;
+			IL.Terraria.Player.VanillaUpdateAccessory -= HookVanillaUpdateAccessory;
 
 		}
 
@@ -75,24 +77,22 @@ namespace iriesmod.Common.ILchanges
 			return ret;
 		}
 
-		private static void HookHurt(ILContext il)
+		private static void HookVanillaUpdateAccessory(ILContext il)
         {
 			var c = new ILCursor(il);
 
-			if (!c.TryGotoNext(i => i.MatchLdcI4(723)))
+			if (!c.TryGotoNext(i => i.MatchLdcI4(1247)))
             {
 				return;
             }
-			c.Index -= 5;
-			var label = c.DefineLabel();
-
-			if (!c.TryGotoNext(i => i.MatchLdcI4(724)))
+			c.Index += 2;
+			c.RemoveRange(6);
+			c.Emit(OpCodes.Ldarg_0);
+			// https://stackoverflow.com/questions/917551/func-delegate-with-no-return-type
+			c.EmitDelegate<Action<Terraria.Player>>((player) =>
 			{
-				return;
-			}
-
-			c.Index -= 5;
-			c.Emit(OpCodes.Br, label);
+				player.GetModPlayer<iriesplayer>().beeCloak = true;
+			});
 		} 
 
 	}
