@@ -20,11 +20,14 @@ namespace iriesmod.Common.ILchanges
         {
 			// IL.Terraria.Player.beeType += HookBeeType;
 			On.Terraria.Player.beeType += HookBeeType;
+			IL.Terraria.Player.Hurt += HookHurt;
         }
 		public static void Unload()
         {
 			// IL.Terraria.Player.beeType -= HookBeeType;
-        }
+			On.Terraria.Player.beeType -= HookBeeType;
+
+		}
 
 
 		/*
@@ -71,6 +74,26 @@ namespace iriesmod.Common.ILchanges
 
 			return ret;
 		}
+
+		private static void HookHurt(ILContext il)
+        {
+			var c = new ILCursor(il);
+
+			if (!c.TryGotoNext(i => i.MatchLdcI4(723)))
+            {
+				return;
+            }
+			c.Index -= 5;
+			var label = c.DefineLabel();
+
+			if (!c.TryGotoNext(i => i.MatchLdcI4(724)))
+			{
+				return;
+			}
+
+			c.Index -= 5;
+			c.Emit(OpCodes.Br, label);
+		} 
 
 	}
 }

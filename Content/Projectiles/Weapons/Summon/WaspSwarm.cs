@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -28,6 +29,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			projectile.penetrate = 3;
 			projectile.netImportant = true;
 			projectile.timeLeft = 600;
+			projectile.tileCollide = false;
+			projectile.ignoreWater = true;
 		}
 
 		public override bool? CanCutTiles()

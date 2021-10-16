@@ -7,20 +7,24 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-    public class BeeHiveStaff : ModItem
+    public class RoyalHornetStaff : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Bee Hive Staff");
-			Tooltip.SetDefault("Place a bee hive don't want to be annoyed");
+			DisplayName.SetDefault("Royal Hornet Staff");
+			Tooltip.SetDefault("Summons an royal hornet to fight for you");
+
+			ItemID.Sets.GamepadWholeScreenUseRange[item.type] = true;
+			ItemID.Sets.LockOnIgnoresCollision[item.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			item.damage = 6;
+			item.damage = 16;
 			item.knockBack = 3f;
 			item.mana = 10;
 			item.width = 34;
@@ -34,25 +38,25 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 			item.noMelee = true;
 			item.summon = true;
-			item.sentry = true;
-			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.BeeHiveStaffProj>();
+			item.buffType = ModContent.BuffType<Buffs.Minions.RoyalHornet>();
+			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.RoyalHornet>();
 		}
 
 		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
 		{
-			Projectile.NewProjectile(Main.MouseWorld, Vector2.Zero, type, damage, knockBack, player.whoAmI);
-			player.UpdateMaxTurrets();
+			player.AddBuff(item.buffType, 2);
 
-			return false;
+			position = Main.MouseWorld;
+			return true;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 
-			recipe.AddIngredient(ItemID.BeeWax, 18);
-			recipe.AddIngredient(ItemID.Hive, 8);
-			recipe.AddIngredient(ItemID.HoneyBlock, 8);
+			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 12);
+			recipe.AddIngredient(ItemID.BeeWax, 8);
+			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 8);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 

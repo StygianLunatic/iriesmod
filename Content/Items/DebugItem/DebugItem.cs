@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items
+namespace iriesmod.Content.Items.DebugItem
 {
 	public class DebugItem : ModItem
 	{

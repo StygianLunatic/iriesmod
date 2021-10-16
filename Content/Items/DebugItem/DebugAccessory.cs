@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 
-namespace iriesmod.Content.Items.Equips.Accessories
+namespace iriesmod.Content.Items.DebugItem
 {
 	public class DebugAccessory : ModItem
 	{

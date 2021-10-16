@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Content.Items.Weapons.Summon;
 using iriesmod.Content.Items.Materials;
+using iriesmod.Content.Items.Equips.Accessories.HoneyCloaks;
 
 namespace iriesmod.Common.RecipeHelper
 {
@@ -17,7 +18,7 @@ namespace iriesmod.Common.RecipeHelper
         {
 			EditHornetStaffRecipe();
 			EditHoneyBalloonRecipe();
-
+			EditBeeCloakRecipe();
 
 		}
 		public static void AddRecipe(Mod mod)
@@ -71,6 +72,26 @@ namespace iriesmod.Common.RecipeHelper
 				editor.AddIngredient(ItemID.BottledHoney, 12);
             }
 		}
+		private static void EditBeeCloakRecipe()
+        {
+			RecipeFinder recipeFinder = new RecipeFinder();
+
+			recipeFinder.AddIngredient(ItemID.HoneyComb);
+			recipeFinder.AddIngredient(ItemID.StarCloak);
+			recipeFinder.AddTile(TileID.TinkerersWorkbench);
+			recipeFinder.SetResult(ItemID.BeeCloak);
+
+			Recipe exactRecipe = recipeFinder.FindExactRecipe();
+
+			if (exactRecipe != null)
+            {
+				RecipeEditor editor = new RecipeEditor(exactRecipe);
+				editor.DeleteIngredient(ItemID.HoneyComb);
+				editor.DeleteIngredient(ItemID.StarCloak);
+				editor.AddIngredient(ModContent.ItemType<HoneyCloak>());
+				editor.AddIngredient(ItemID.BeeWax, 9);
+            }
+        }
         #endregion
         #region AddRecipes
         private static void AddBeeKeeperRecipe(Mod mod)

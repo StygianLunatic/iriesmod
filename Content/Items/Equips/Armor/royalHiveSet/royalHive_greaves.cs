@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
+using iriesmod.Content.Items.Equips.Armor.HiveSet;
 
 namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
 {

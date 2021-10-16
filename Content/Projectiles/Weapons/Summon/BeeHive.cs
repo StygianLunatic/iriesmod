@@ -1,77 +1,49 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.Audio;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
 	public class BeeHive : ModProjectile
 	{
+		public override string Texture => "Terraria/Tiles_" + 444;
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("BeeHive");
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.netImportant = true;
-			projectile.width = 40;
-			projectile.height = 58;
-			projectile.tileCollide = true;
-			projectile.sentry = true;
-			projectile.timeLeft = Projectile.SentryLifeTime;
-			projectile.penetrate = -1;
+			projectile.CloneDefaults(ProjectileID.Beenade);
+			aiType = ProjectileID.Beenade;
 		}
 
-		public override void AI()
+		public override void Kill(int timeLeft)
 		{
-			NPC target = null;
+			Main.PlaySound(SoundID.Item14, projectile.position);
 
-			float distance = 800f;
-			Vector2 ProjCenter = projectile.Center;
-
-			for (int index = 0; index < Main.npc.Length; index++)
+			if (projectile.owner != Main.myPlayer)
 			{
-				if (Main.npc[index].CanBeChasedBy())
+				return;
+			}
+			for (int i = 0; i < 20; i++)
+			{
+				int SmokeID = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 1.5f);
+				Dust dust = Main.dust[SmokeID];
+				dust.velocity *= 1f;
+			}
+			if (projectile.owner == Main.myPlayer)
+			{
+				int numberOfBees = Main.rand.Next(15, 25);
+				for (int beeIndex = 0; beeIndex < numberOfBees; beeIndex++)
 				{
-					if (Vector2.Distance(ProjCenter, Main.npc[index].Center) < distance)
-					{
-						distance = Vector2.Distance(ProjCenter, Main.npc[index].Center);
-						target = Main.npc[index];
-					}
+					float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
+					float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
+					Projectile.NewProjectile(new Vector2(projectile.position.X, projectile.position.Y), new Vector2(speedX, speedY), Main.player[projectile.owner].beeType(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), projectile.owner);
 				}
 			}
-
-			if (target != null)
-			{
-				projectile.ai[0] += 1f;
-
-
-				if (Main.netMode != NetmodeID.Server && Main.myPlayer == projectile.owner && projectile.ai[0] % 160f == 0f)
-				{
-
-					int numberOfBees = Main.rand.Next(2, 7);
-					for (int beeIndex = 0; beeIndex < numberOfBees; beeIndex++)
-					{
-						float speedX = Main.rand.Next(-35, 36) * 0.02f;
-						float speedY = Main.rand.Next(-35, 36) * 0.02f;
-						Projectile.NewProjectile(new Vector2(projectile.position.X, projectile.position.Y), new Vector2(speedX, speedY), Main.player[projectile.owner].beeType(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), projectile.owner);
-					}
-				}
-			}
-			projectile.velocity.Y += 0.4f;
-		}
-
-		public override bool CanDamage()
-		{
-			return false;
-		}
-
-		public override bool OnTileCollide(Vector2 oldVelocity)
-		{
-			return false;
 		}
 	}
 }

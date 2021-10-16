@@ -28,6 +28,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			projectile.minionSlots = 1f;
 			projectile.penetrate = -1;
 			projectile.netImportant = true;
+			projectile.tileCollide = false;
+			projectile.ignoreWater = true;
 		}
 
 		public override bool? CanCutTiles()

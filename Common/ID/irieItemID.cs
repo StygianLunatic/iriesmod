@@ -41,5 +41,6 @@ namespace iriesmod.Common.ID
         public const short royalHive_greaves = 30;
         public const short HornetNecklace = 31;
         public const short QueenBeeNecklace = 32;
+        public const short HornetDefenderStaff = 33;
     }
 }

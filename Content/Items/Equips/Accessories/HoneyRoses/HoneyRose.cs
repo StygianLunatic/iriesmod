@@ -5,7 +5,7 @@ using iriesmod.Common.Players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
-namespace iriesmod.Content.Items.Equips.Accessories.HoneyRose
+namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 {
     public class HoneyRose : HoneyRose_Template
 	{
