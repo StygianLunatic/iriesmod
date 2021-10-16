@@ -233,11 +233,15 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				projectile.ai[1] += 1f;
 				if (Main.myPlayer == projectile.owner)
 				{
-					newProjectileSpeed.Normalize();
-					newProjectileSpeed *= newProjSpeedMult;
-					int newProjRet = Projectile.NewProjectile(projectile.Center, newProjectileSpeed, new_projectile_type, projectile.damage, projectile.knockBack, Main.myPlayer);
-					Main.projectile[newProjRet].timeLeft = 300;
-					Main.projectile[newProjRet].netUpdate = true;
+					for (int i = 0; i < 3; i++)
+					{
+						newProjectileSpeed.Normalize();
+						newProjectileSpeed *= newProjSpeedMult;
+						int newProjRet = Projectile.NewProjectile(projectile.Center, newProjectileSpeed.RotatedBy((i - 1) * 0.0872), new_projectile_type, projectile.damage, projectile.knockBack, Main.myPlayer);
+						Main.projectile[newProjRet].timeLeft = 300;
+						Main.projectile[newProjRet].netUpdate = true;
+
+					}
 					projectile.netUpdate = true;
 				}
 			}
