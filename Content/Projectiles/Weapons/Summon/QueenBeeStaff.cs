@@ -1,20 +1,20 @@
-using Microsoft.Xna.Framework;
-using System;
+﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
-	public class RoyalHornet : ModProjectile
+	public class QueenBeeStaff : ModProjectile
 	{
-		public override void SetStaticDefaults()
+        public override string Texture => "Terraria/NPC_" + 222;
+        public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Royal Hornet");
+			DisplayName.SetDefault("Queen Bee summon");
 
-			Main.projFrames[projectile.type] = 3;
+			Main.projFrames[projectile.type] = 12;
+
 			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-
 			Main.projPet[projectile.type] = true;
 			ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
 			ProjectileID.Sets.Homing[projectile.type] = true;
@@ -22,14 +22,14 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.Hornet);
 			projectile.friendly = true;
 			projectile.minion = true;
-			projectile.minionSlots = 1f;
-			projectile.penetrate = 1;
+			projectile.minionSlots = 2f;
+			projectile.penetrate = -1;
 			projectile.netImportant = true;
-			projectile.tileCollide = false;
+			projectile.tileCollide = true;
 			projectile.ignoreWater = true;
+			projectile.scale = 0.5f;
 		}
 
 		public override bool? CanCutTiles()
@@ -40,35 +40,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void AI()
 		{
 			Player player = Main.player[projectile.owner];
-			if (player.dead || !(player.active))
-			{
-				player.ClearBuff(ModContent.BuffType<Buffs.Minions.RoyalHornet>());
-			}
-			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.RoyalHornet>()))
-			{
-				projectile.timeLeft = 2;
-			}
-
-
-			float velocityOperand = 0.03f;
-			float projWidth = projectile.width;
-
-			for (int projectileIndex = 0; projectileIndex < 1000; projectileIndex++)
-			{
-				if (projectileIndex != projectile.whoAmI && Main.projectile[projectileIndex].active && Main.projectile[projectileIndex].owner == projectile.owner && Main.projectile[projectileIndex].type == projectile.type && Math.Abs(projectile.position.X - Main.projectile[projectileIndex].position.X) + Math.Abs(projectile.position.Y - Main.projectile[projectileIndex].position.Y) < projWidth)
-				{
-					if (projectile.position.X < Main.projectile[projectileIndex].position.X)
-						projectile.velocity.X -= velocityOperand;
-					else
-						projectile.velocity.X += velocityOperand;
-
-					if (projectile.position.Y < Main.projectile[projectileIndex].position.Y)
-						projectile.velocity.Y -= velocityOperand;
-					else
-						projectile.velocity.Y += velocityOperand;
-				}
-			}
-
 			Vector2 vector = projectile.position;
 			float distance;
 
@@ -76,7 +47,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			bool is_target = false;
 			projectile.tileCollide = true;
 
-			NPC ownerMinionAttackTargetNPC2 = projectile.OwnerMinionAttackTargetNPC;
+
+            #region 타겟 결정부분
+            NPC ownerMinionAttackTargetNPC2 = projectile.OwnerMinionAttackTargetNPC;
 			if (ownerMinionAttackTargetNPC2 != null && ownerMinionAttackTargetNPC2.CanBeChasedBy(this))
 			{
 				float distanceCompare = Vector2.Distance(ownerMinionAttackTargetNPC2.Center, projectile.Center);
@@ -107,23 +80,25 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				}
 			}
 
+            #endregion
 
 
 
-			int limitDistanceBetweenPlayerProj = 500;
+            #region 미니언 위치 유지 부분
+            int limitDistanceBetweenPlayerProj = 500;
 			if (is_target)
 				limitDistanceBetweenPlayerProj = 1000;
 
-			if (Vector2.Distance(player.Center, projectile.Center) > limitDistanceBetweenPlayerProj)
+			if (Vector2.Distance(player.Center, projectile.Center) > limitDistanceBetweenPlayerProj) // 플레이어와 미니언 간의 거리가 최대 간격 초과일 때
 			{
-				projectile.ai[0] = 1f;
-				projectile.netUpdate = true;
+				projectile.ai[0] = 1f; // ai[0]을 1f로 설정하고
+				projectile.netUpdate = true;  // 동기화한다.
 			}
 
-			if (projectile.ai[0] == 1f)
-				projectile.tileCollide = false;
+			if (projectile.ai[0] == 1f) // 플레이어와 미니언 간의 거리가 최대 간격 초과일 때
+				projectile.tileCollide = false; // 미니언은 타일과 부딪히지 않는다.
 
-			if (is_target && projectile.ai[0] == 0f)
+			if (is_target && projectile.ai[0] == 0f) // 타겟이 있고 플레이어와 미니언 간의 거리가 최대 간격 이하일 때
 			{
 				Vector2 ToTarget = vector - projectile.Center;
 				float distanceProj2Target = ToTarget.Length();
@@ -131,7 +106,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 				if (distanceProj2Target > 200f)
 				{
-					float ToTargetVelocity = 6f;
+					float ToTargetVelocity = 20f;
 					ToTarget *= ToTargetVelocity;
 					projectile.velocity.X = (projectile.velocity.X * 40f + ToTarget.X) / 41f;
 					projectile.velocity.Y = (projectile.velocity.Y * 40f + ToTarget.Y) / 41f;
@@ -141,10 +116,11 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					projectile.velocity.Y -= 0.1f;
 				}
 			}
-			else
+			else // 타겟이 없거나 플레이어와 미니언 간의 거리가 최대 간격 초과일 때
 			{
 				if (!Collision.CanHitLine(projectile.Center, 1, 1, Main.player[projectile.owner].Center, 1, 1))
 					projectile.ai[0] = 1f;
+
 
 				float projPlaceSpeed = 6f;
 				if (projectile.ai[0] == 1f)
@@ -152,7 +128,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 
 				Vector2 center2 = projectile.Center;
-				Vector2 abovePlayerHead = player.Center - center2 + new Vector2(0f, -60f);
+				Vector2 abovePlayerHead = player.Center - center2 + new Vector2(-20f, -60f);
 
 				float AboveplayerHeadLength = abovePlayerHead.Length();
 				if (AboveplayerHeadLength > 200f && projPlaceSpeed < 9f)
@@ -188,10 +164,15 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					projectile.velocity *= 1.01f;
 				}
 			}
+            #endregion
 
-			projectile.rotation = projectile.velocity.X * 0.05f;
 
 
+            // 미니언의 X속도에 따라 기울게 한다.
+            projectile.rotation = projectile.velocity.X * 0.05f;
+
+
+			// 애니메이션 재생
 			int frameSpeed = 5;
 			projectile.frameCounter++;
 			if (projectile.frameCounter >= frameSpeed)
@@ -205,10 +186,13 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			}
 
 
+			// 미니언의 진행 방향에 따라 스프라이트를 좌우반전 시킨다.
 			if (projectile.velocity.X > 0f)
 				projectile.spriteDirection = projectile.direction = -1;
 			else if (projectile.velocity.X < 0f)
 				projectile.spriteDirection = projectile.direction = 1;
+
+
 
 			if (projectile.ai[1] > 0f)
 				projectile.ai[1] += Main.rand.Next(1, 4);
@@ -233,18 +217,20 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				projectile.ai[1] += 1f;
 				if (Main.myPlayer == projectile.owner)
 				{
-					for (int i = 0; i < 3; i++)
-					{
-						newProjectileSpeed.Normalize();
-						newProjectileSpeed *= newProjSpeedMult;
-						int newProjRet = Projectile.NewProjectile(projectile.Center, newProjectileSpeed.RotatedBy((i - 1) * 0.0872), new_projectile_type, projectile.damage, projectile.knockBack, Main.myPlayer);
-						Main.projectile[newProjRet].timeLeft = 300;
-						Main.projectile[newProjRet].netUpdate = true;
+					newProjectileSpeed.Normalize();
+					newProjectileSpeed *= newProjSpeedMult;
+					int newProjRet = Projectile.NewProjectile(projectile.Center, newProjectileSpeed, new_projectile_type, projectile.damage, projectile.knockBack, Main.myPlayer);
+					Main.projectile[newProjRet].timeLeft = 300;
+					Main.projectile[newProjRet].netUpdate = true;
 
-					}
 					projectile.netUpdate = true;
 				}
 			}
+
+
+
+
+
 		}
 	}
 }
