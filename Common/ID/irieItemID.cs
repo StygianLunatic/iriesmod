@@ -49,5 +49,6 @@
         public const short BurningRoyalCloak = 44;
         public const short flameWaspSwarmStaff = 45;
         public const short flameHornetStaff = 46;
+        public const short BoneHornetStaff = 47;
     }
 }
