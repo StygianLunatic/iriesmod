@@ -46,5 +46,6 @@
         public const short QueenStingerNecklace = 41;
         public const short RoyalCloak = 42;
         public const short ObsidianHoneyRose = 43;
+        public const short BurningRoyalCloak = 44;
     }
 }

@@ -19,11 +19,12 @@ namespace iriesmod.Common.Utils
             return player.GetModPlayer<iriesplayer>();
         }
 
-        public static void BeeSpawn(Vector2 player_pos, bool strongBees, int minBeeDamage, int maxBeeDamage)
+        public static void BeeSpawn(Player player, int minBeeDamage, int maxBeeDamage, int typeofbee = -1)
         {
-            bool makeStrongBee;
+            // bool makeStrongBee;
+            bool strongBees = player.strongBees;
             int HurtNumberBee = 1 + Main.rand.Next(3);
-            float HurtBeeDamage = (float)Main.rand.Next(minBeeDamage, maxBeeDamage + 1);
+            float HurtBeeDamage = Main.rand.Next(minBeeDamage, maxBeeDamage + 1);
 
 
             if (strongBees && Main.rand.Next(3) == 0)
@@ -40,17 +41,20 @@ namespace iriesmod.Common.Utils
             {
                 HurtBeeDamage *= 1.5f;
             }
-
+            if (typeofbee < 0)
+            {
+                typeofbee = player.beeType();
+            }
             for (int i = 0; i < HurtNumberBee; i++)
             {
-                float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
-                float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
+                float speedX = Main.rand.Next(-35, 36) * 0.02f;
+                float speedY = Main.rand.Next(-35, 36) * 0.02f;
                 Vector2 velocity = new Vector2(speedX, speedY);
-                Projectile.NewProjectile(player_pos, velocity, beeType(), beeDamage((int)HurtBeeDamage), 0f, Main.myPlayer);
+                Projectile.NewProjectile(player.position, velocity, typeofbee, BeeDamage(player, (int)HurtBeeDamage), 0f, Main.myPlayer);
             }
 
 
-
+            /*
             int beeType()
             {
                 if (strongBees && Main.rand.Next(2) == 0)
@@ -71,6 +75,9 @@ namespace iriesmod.Common.Utils
                 
                 return damage + Main.rand.Next(2);
             }
+            */
+
+
         }
         public static int[] BeeDebuff(Player player)
         {

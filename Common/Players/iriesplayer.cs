@@ -10,6 +10,7 @@ using Terraria.ModLoader;
 using iriesmod.Common.ID;
 using iriesmod.Common.List;
 using iriesmod.Common.Utils;
+using iriesmod.Content.Projectiles.Weapons.Bees;
 
 namespace iriesmod.Common.Players
 {
@@ -26,6 +27,7 @@ namespace iriesmod.Common.Players
         public bool beeCloak;
         public bool QueenStingerNecklace;
         public bool RoyalCloak;
+        public bool BurningRoyalCloak;
 
         public override void ResetEffects()
         {
@@ -39,6 +41,7 @@ namespace iriesmod.Common.Players
             beeCloak = false;
             QueenStingerNecklace = false;
             RoyalCloak = false;
+            BurningRoyalCloak = false;
         }
 
         public override void UpdateLifeRegen()
@@ -82,36 +85,40 @@ namespace iriesmod.Common.Players
             {
                 if (HiveSetHurtBonus)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
+                    irieUtils.BeeSpawn(player, 6, 8);
                 }
                 if (QueenBeeScroll)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 42, 52);
+                    irieUtils.BeeSpawn(player, 42, 52);
                     player.AddBuff(BuffID.Honey, 720);
                 }
                 if (WaspNecklace)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
+                    irieUtils.BeeSpawn(player, 6, 8);
                     player.AddBuff(BuffID.Honey, 300);
                 }
                 if (SweetheartKnuckles)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 26, 38);
+                    irieUtils.BeeSpawn(player, 26, 38);
                     player.AddBuff(BuffID.Honey, 720);
                 }
                 if (beeCloak)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 10, 12);
+                    irieUtils.BeeSpawn(player, 10, 12);
                 }
                 if (QueenStingerNecklace)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 8, 14);
+                    irieUtils.BeeSpawn(player, 8, 14);
                     player.AddBuff(BuffID.Honey, 240);
                 }
                 if (RoyalCloak)
                 {
-                    irieUtils.BeeSpawn(player.position, player.strongBees, 14, 18);
+                    irieUtils.BeeSpawn(player, 14, 18);
                     player.AddBuff(BuffID.Honey, 360);
+                }
+                if (BurningRoyalCloak)
+                {
+                    irieUtils.BeeSpawn(player, 32, 32, ModContent.ProjectileType<beeLava>());
                 }
             }
         }
