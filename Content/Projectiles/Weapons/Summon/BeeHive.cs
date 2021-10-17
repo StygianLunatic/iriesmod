@@ -8,7 +8,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
 	public class BeeHive : ModProjectile
 	{
-		public override string Texture => "Terraria/Tiles_" + 444;
+		public override string Texture => "Terraria/Projectile_" + 655;
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("BeeHive");

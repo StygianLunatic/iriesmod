@@ -40,5 +40,6 @@
         public const short RoyalHornetStaff = 35;
         public const short QueenBeeStaff = 36;
         public const short HornetHiveStaff = 37;
+        public const short RoyalHornetDefenderStaff = 38;
     }
 }
