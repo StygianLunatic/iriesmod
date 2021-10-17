@@ -1,6 +1,6 @@
 displayName = irie's mod
 author = irie
-version = 0.3
+version = 0.4
 hideCode = true
 hideResources = true
 includeSource = false
