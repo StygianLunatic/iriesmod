@@ -312,6 +312,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
 			damage = (int)(damage * 1.5f);
+			target.AddBuff(BuffID.Poisoned, 480);
         }
 
     }
