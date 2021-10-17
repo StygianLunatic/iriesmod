@@ -11,12 +11,12 @@ using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 {
-	public class HoneyCloak : HoneyCloakTemplate
+	public class RoyalCloak : HoneyCloakTemplate
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Honey Cloak");
-			Tooltip.SetDefault("Increases bee damage by 8%");
+			DisplayName.SetDefault("Royal Cloak");
+			Tooltip.SetDefault("Increases bee damage by 10%\nReleases bees and douses the user in honey when damaged");
 		}
 
 		public override void SetDefaults()
@@ -24,16 +24,17 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 			item.width = 24;
 			item.height = 30;
 			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Blue;
-			item.defense = 4;
+			item.value = Item.sellPrice(gold: 4);
+			item.rare = ItemRarityID.Orange;
+			item.defense = 5;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			iriesplayer modPlayer = player.Getiriesplayer();
 
-			modPlayer.beeDamage += 0.08f;
+			modPlayer.beeDamage += 0.10f;
+			modPlayer.RoyalCloak = true;
 		}
 
 		public override void AddRecipes()

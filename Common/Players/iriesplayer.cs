@@ -25,6 +25,7 @@ namespace iriesmod.Common.Players
         public bool SweetheartKnuckles;
         public bool beeCloak;
         public bool QueenStingerNecklace;
+        public bool RoyalCloak;
 
         public override void ResetEffects()
         {
@@ -37,6 +38,7 @@ namespace iriesmod.Common.Players
             SweetheartKnuckles = false;
             beeCloak = false;
             QueenStingerNecklace = false;
+            RoyalCloak = false;
         }
 
         public override void UpdateLifeRegen()
@@ -105,6 +107,11 @@ namespace iriesmod.Common.Players
                 {
                     irieUtils.BeeSpawn(player.position, player.strongBees, 8, 14);
                     player.AddBuff(BuffID.Honey, 240);
+                }
+                if (RoyalCloak)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 14, 18);
+                    player.AddBuff(BuffID.Honey, 360);
                 }
             }
         }
