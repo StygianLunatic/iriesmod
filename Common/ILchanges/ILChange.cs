@@ -73,6 +73,15 @@ namespace iriesmod.Common.ILchanges
 						break;
 				}
             }
+			if (ret == 181)
+            {
+				switch (player.GetModPlayer<iriesplayer>().BeeBackpack)
+                {
+					case irieItemID.ObsidianHivePack:
+						ret = ModContent.ProjectileType<beeObsidian>();
+						break;
+                }
+            }
 
 			return ret;
 		}
