@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 
 namespace iriesmod.Content.Items.Equips.Accessories
 {
@@ -16,42 +16,41 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void SetDefaults()
 		{
-			item.width = 30;
-			item.height = 28;
-			item.value = Item.buyPrice(gold:5);
-			item.rare = ItemRarityID.Green;
-			item.accessory = true;
-			item.melee = true;
-			item.damage = 35;
-			item.knockBack = 9f;
-			item.expert = true;
+			Item.width = 30;
+			Item.height = 28;
+			Item.value = Item.buyPrice(gold:5);
+			Item.rare = ItemRarityID.Green;
+			Item.accessory = true;
+			Item.DamageType = DamageClass.Melee;
+			Item.damage = 35;
+			Item.knockBack = 9f;
+			Item.expert = true;
 			
-			item.defense = 4;
+			Item.defense = 4;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			DashPlayer dashPlayer = player.GetModPlayer<DashPlayer>();
+			Dashplayer dashplayer = player.GetModPlayer<Dashplayer>();
 
-			dashPlayer.DashAccessoryEquipped = true;
-			dashPlayer.DashVelocity = 10f;
-			dashPlayer.collisionDamage = 35f;
-			dashPlayer.collisionKnockback = 9f;
+			dashplayer.DashAccessoryEquipped = true;
+			dashplayer.DashVelocity = 10f;
+			dashplayer.collisionDamage = 35f;
+			dashplayer.collisionKnockback = 9f;
 
 			player.endurance += 0.12f;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.EoCShield);
 			recipe.AddIngredient(ItemID.WormScarf);
 			recipe.AddIngredient(ItemID.DemoniteBar, 5);
 			recipe.AddTile(TileID.TinkerersWorkbench);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

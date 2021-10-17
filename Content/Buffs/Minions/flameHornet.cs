@@ -5,7 +5,7 @@ namespace iriesmod.Content.Buffs.Minions
 {
 	internal class flameHornet : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("flame Hornet");
 			Description.SetDefault("It burns");

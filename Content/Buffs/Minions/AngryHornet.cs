@@ -5,7 +5,7 @@ namespace iriesmod.Content.Buffs.Minions
 {
 	internal class AngryHornet : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Angry Hornets");
 			Description.SetDefault("Hornets seems angry");

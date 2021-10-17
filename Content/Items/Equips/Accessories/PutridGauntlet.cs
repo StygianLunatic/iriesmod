@@ -17,34 +17,30 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void SetDefaults()
 		{
-			item.width = 26;
-			item.height = 30;
-			item.accessory = true;
-			item.value = Item.sellPrice(gold: 20);
+			Item.width = 26;
+			Item.height = 30;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 20);
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.aggro -= 400;
-			player.allDamage += 0.05f;
-			player.magicCrit += 5;
-			player.meleeCrit += 5;
-			player.rangedCrit += 5;
-			player.thrownCrit += 5;
+			player.GetDamage(DamageClass.Generic) += 0.05f;
+			player.GetCritChance(DamageClass.Generic) += 5;
 			player.kbGlove = true;
 			player.meleeSpeed += 0.12f;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.PowerGlove);
 			recipe.AddIngredient(ItemID.PutridScent);
 			recipe.AddTile(TileID.TinkerersWorkbench);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

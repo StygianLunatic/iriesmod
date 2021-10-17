@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,27 +21,27 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			item.damage = 23;
-			item.knockBack = 3f;
-			item.mana = 10;
-			item.width = 56;
-			item.height = 52;
-			item.useTime = 30;
-			item.useAnimation = 30;
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.value = Item.sellPrice(gold: 1, silver: 30);
-			item.rare = ItemRarityID.Orange;
-			item.UseSound = SoundID.Item44;
+			Item.damage = 23;
+			Item.knockBack = 3f;
+			Item.mana = 10;
+			Item.width = 56;
+			Item.height = 52;
+			Item.useTime = 30;
+			Item.useAnimation = 30;
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.value = Item.sellPrice(gold: 1, silver: 30);
+			Item.rare = ItemRarityID.Orange;
+			Item.UseSound = SoundID.Item44;
 
-			item.noMelee = true;
-			item.summon = true;
-			item.sentry = true;
-			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.HornetDefender>();
+			Item.noMelee = true;
+			Item.DamageType = DamageClass.Summon;
+			Item.sentry = true;
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.HornetDefender>();
 		}
 
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			Projectile.NewProjectile(Main.MouseWorld, Vector2.Zero, type, damage, knockBack, player.whoAmI);
+			Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI);
 			player.UpdateMaxTurrets();
 
 			return false;
@@ -48,15 +49,14 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.BeeWax, 18);
 			recipe.AddIngredient(ItemID.Stinger, 6);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

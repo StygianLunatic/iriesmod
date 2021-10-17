@@ -13,18 +13,18 @@ namespace iriesmod.Content.Items.Materials
 
 		public override void SetDefaults()
 		{
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.useTurn = true;
-			item.width = 16;
-			item.height = 16;
-			item.maxStack = 99;
-			item.value = Item.sellPrice(silver: 40);
-			item.rare = ItemRarityID.Green;
-			item.autoReuse = true;
-			item.consumable = true;
-			item.useAnimation = 15;
-			item.useTime = 10;
-			item.createTile = ModContent.TileType<Tiles.Ores.RoyalJelly>();
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.useTurn = true;
+			Item.width = 16;
+			Item.height = 16;
+			Item.maxStack = 99;
+			Item.value = Item.sellPrice(silver: 40);
+			Item.rare = ItemRarityID.Green;
+			Item.autoReuse = true;
+			Item.consumable = true;
+			Item.useAnimation = 15;
+			Item.useTime = 10;
+			Item.createTile = ModContent.TileType<Tiles.Ores.RoyalJelly>();
 
 		}
 	}

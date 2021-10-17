@@ -1,4 +1,4 @@
-displayName = irie's mod
+displayName = irie's Mod
 author = irie
 version = 0.4
 hideCode = true

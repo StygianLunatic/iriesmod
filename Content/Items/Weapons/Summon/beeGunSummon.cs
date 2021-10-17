@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -12,7 +13,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 {
     public class beeGunSummon : ModItem
     {
-        public override string Texture => $"Terraria/Item_{ItemID.BeeGun}";
+        public override string Texture => $"Terraria/Images/Item_{ItemID.BeeGun}";
 
         public override void SetStaticDefaults()
         {
@@ -21,12 +22,11 @@ namespace iriesmod.Content.Items.Weapons.Summon
         }
         public override void SetDefaults()
         {
-            item.CloneDefaults(ItemID.BeeGun);
-            item.magic = false;
-            item.summon = true;
+            Item.CloneDefaults(ItemID.BeeGun);
+            Item.DamageType = DamageClass.Summon;
         }
 
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             int beeNumber = Main.rand.Next(1, 4);
 
@@ -40,11 +40,10 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
             for (int i = 0; i < beeNumber; i++)
             {
-                speedX += (float)Main.rand.Next(-35, 36) * 0.02f;
-                speedY += (float)Main.rand.Next(-35, 36) * 0.02f;
-                int projectileIndex = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, player.beeType(), player.beeDamage(damage), player.beeKB(knockBack), player.whoAmI);
-                Main.projectile[projectileIndex].magic = false;
-                Main.projectile[projectileIndex].minion = true;
+                float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
+                float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
+                int projectileIndex = Projectile.NewProjectile(source, position.X, position.Y, speedX, speedY, player.beeType(), player.beeDamage(damage), player.beeKB(knockback), player.whoAmI);
+                Main.projectile[projectileIndex].DamageType = DamageClass.Summon;
             }
 
             return false;
@@ -52,7 +51,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
 
             recipe.AddIngredient(ModContent.ItemType<beePistol>());
             recipe.AddIngredient(ItemID.BeeWax, 10);
@@ -61,8 +60,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
             recipe.AddTile(TileID.HoneyDispenser);
 
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

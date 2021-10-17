@@ -7,9 +7,10 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using iriesmod.Common.Utils;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using Microsoft.Xna.Framework;
 using iriesmod.Content.Projectiles.Weapons.Ranged;
+using Terraria.DataStructures;
 
 namespace iriesmod.Common.GlobalItems
 {
@@ -26,11 +27,11 @@ namespace iriesmod.Common.GlobalItems
         {
             if (item.type == ItemID.HoneyBalloon)
             {
-                tooltips.Add(new TooltipLine(mod, "Tooltip2", "Allows the holder to do an improved double jump"));
+                tooltips.Add(new TooltipLine(Mod, "Tooltip2", "Allows the holder to do an improved double jump"));
             }
             else if (item.type == ItemID.BalloonHorseshoeHoney)
             {
-                tooltips.Add(new TooltipLine(mod, "Tooltip2", "Allows the holder to do an improved double jump"));
+                tooltips.Add(new TooltipLine(Mod, "Tooltip2", "Allows the holder to do an improved double jump"));
             }
             else if (item.type == ItemID.BeeCloak)
             {
@@ -41,7 +42,7 @@ namespace iriesmod.Common.GlobalItems
                         line.text = "Increases bee damage by 8%";
                     }
                 }
-                tooltips.Add(new TooltipLine(mod, "Toolip2", "Releases bees when damaged"));
+                tooltips.Add(new TooltipLine(Mod, "Toolip2", "Releases bees when damaged"));
             }
         }
 
@@ -64,11 +65,11 @@ namespace iriesmod.Common.GlobalItems
         {
             if (item.type == ItemID.HoneyBalloon)
             {
-                player.doubleJumpSandstorm = true;
+                player.hasJumpOption_Sandstorm = true;
             }
             else if (item.type == ItemID.BalloonHorseshoeHoney)
             {
-                player.doubleJumpSandstorm = true;
+                player.hasJumpOption_Sandstorm = true;
             }
         }
 
@@ -83,25 +84,23 @@ namespace iriesmod.Common.GlobalItems
         }
         public override void UpdateArmorSet(Player player, string set)
         {
-            iriesplayer modPlayer = player.GetModPlayer<iriesplayer>();
+            iriesplayer modplayer = player.GetModPlayer<iriesplayer>();
             switch (set)
             {
                 case "Bee":
                     player.setBonus = "Increases minion damage by 5%\nIncreases bee damage by 5%";
-                    player.minionDamage -= 0.05f;
-                    modPlayer.beeDamage += 0.05f;
+                    player.GetDamage(DamageClass.Summon) -= 0.05f;
+                    modplayer.beeDamage += 0.05f;
                     break;
             }
         }
 
-        public override bool Shoot(Item item, Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override void ModifyShootStats(Item item, Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
         {
             if (item.type == ItemID.Beenade)
             {
                 type = ModContent.ProjectileType<BeenadeFix>();
             }
-
-            return true;
         }
     }
 }

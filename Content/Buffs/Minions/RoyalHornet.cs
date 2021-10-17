@@ -5,7 +5,7 @@ namespace iriesmod.Content.Buffs.Minions
 {
 	internal class RoyalHornet : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Royal Hornet");
 			Description.SetDefault("Royal to you");

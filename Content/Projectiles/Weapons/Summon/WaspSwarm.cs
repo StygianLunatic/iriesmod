@@ -12,25 +12,25 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		{
 			DisplayName.SetDefault("Wasp Swarm");
 
-			Main.projFrames[projectile.type] = 3;
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-			ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
-			ProjectileID.Sets.Homing[projectile.type] = true;
+			Main.projFrames[Projectile.type] = 3;
+			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
+			ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.GiantBee);
-			aiType = ProjectileID.GiantBee;
-			projectile.scale = 0.6f;
-			projectile.friendly = true;
-			projectile.minion = true;
-			projectile.minionSlots = 0f;
-			projectile.penetrate = 3;
-			projectile.netImportant = true;
-			projectile.timeLeft = 600;
-			projectile.tileCollide = false;
-			projectile.ignoreWater = true;
+			Projectile.CloneDefaults(ProjectileID.GiantBee);
+			AIType = ProjectileID.GiantBee;
+			Projectile.scale = 0.6f;
+			Projectile.friendly = true;
+			Projectile.minion = true;
+			Projectile.minionSlots = 0f;
+			Projectile.penetrate = 3;
+			Projectile.netImportant = true;
+			Projectile.timeLeft = 600;
+			Projectile.tileCollide = false;
+			Projectile.ignoreWater = true;
 		}
 
 		public override bool? CanCutTiles()
@@ -45,14 +45,14 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void AI()
 		{
 			int frameSpeed = 5;
-			projectile.frameCounter++;
-			if (projectile.frameCounter >= frameSpeed)
+			Projectile.frameCounter++;
+			if (Projectile.frameCounter >= frameSpeed)
 			{
-				projectile.frameCounter = 0;
-				projectile.frame++;
-				if (projectile.frame >= Main.projFrames[projectile.type])
+				Projectile.frameCounter = 0;
+				Projectile.frame++;
+				if (Projectile.frame >= Main.projFrames[Projectile.type])
 				{
-					projectile.frame = 0;
+					Projectile.frame = 0;
 				}
 			}
 		}

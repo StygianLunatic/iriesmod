@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -20,27 +21,27 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			item.damage = 6;
-			item.knockBack = 3f;
-			item.mana = 10;
-			item.width = 34;
-			item.height = 34;
-			item.useTime = 36;
-			item.useAnimation = 36;
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.value = Item.sellPrice(gold: 1, silver: 30);
-			item.rare = ItemRarityID.Orange;
-			item.UseSound = SoundID.Item44;
+			Item.damage = 6;
+			Item.knockBack = 3f;
+			Item.mana = 10;
+			Item.width = 34;
+			Item.height = 34;
+			Item.useTime = 36;
+			Item.useAnimation = 36;
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.value = Item.sellPrice(gold: 1, silver: 30);
+			Item.rare = ItemRarityID.Orange;
+			Item.UseSound = SoundID.Item44;
 
-			item.noMelee = true;
-			item.summon = true;
-			item.sentry = true;
-			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.BeeHiveStaffProj>();
+			Item.noMelee = true;
+			Item.DamageType = DamageClass.Summon;
+			Item.sentry = true;
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.BeeHiveStaffProj>();
 		}
 
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			Projectile.NewProjectile(Main.MouseWorld, Vector2.Zero, type, damage, knockBack, player.whoAmI);
+			Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI);
 			player.UpdateMaxTurrets();
 
 			return false;
@@ -48,7 +49,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.BeeWax, 18);
 			recipe.AddIngredient(ItemID.Hive, 8);
@@ -56,8 +57,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

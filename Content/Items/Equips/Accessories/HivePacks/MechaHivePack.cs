@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 
@@ -18,36 +18,34 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 
 		public override void SetDefaults()
 		{
-			item.width = 30;
-			item.height = 30;
-			item.maxStack = 1;
-			item.value = Item.sellPrice(gold: 2);
-			item.rare = ItemRarityID.LightRed;
-			item.accessory = true;
-			item.expert = true;
+			Item.width = 30;
+			Item.height = 30;
+			Item.maxStack = 1;
+			Item.value = Item.sellPrice(gold: 2);
+			Item.rare = ItemRarityID.LightRed;
+			Item.accessory = true;
+			Item.expert = true;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
+			iriesplayer modplayer = player.Getiriesplayer();
 
 			player.strongBees = true;
-			modPlayer.BeeBackpack = irieItemID.MechaHivePack;
+			modplayer.BeeBackpack = irieItemID.MechaHivePack;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			CreateRecipe()
+				.AddRecipeGroup("AnyCursedFlameHivePack")
+				.AddIngredient(ItemID.SoulofMight, 5)
+				.AddIngredient(ItemID.SoulofSight, 5)
+				.AddIngredient(ItemID.SoulofFright, 5)
 
-			recipe.AddRecipeGroup("AnyCursedFlameHivePack");
-			recipe.AddIngredient(ItemID.SoulofMight, 5);
-			recipe.AddIngredient(ItemID.SoulofSight, 5);
-			recipe.AddIngredient(ItemID.SoulofFright, 5);
+				.AddTile(TileID.TinkerersWorkbench)
 
-			recipe.AddTile(TileID.TinkerersWorkbench);
-
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+				.Register();
 		}
 	}
 }

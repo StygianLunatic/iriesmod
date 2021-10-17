@@ -1,4 +1,4 @@
-﻿irie's mod
+﻿irie's Mod
 ==========
 [WikiPages](https://github.com/mikrono/iriesmod/wiki)
 ## Changelog

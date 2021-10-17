@@ -2,19 +2,20 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.List;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 using iriesmod.Common.Worlds;
 using Terraria.Localization;
 using Microsoft.Xna.Framework;
+using Terraria.Chat;
 
 namespace iriesmod.Common.GlobalNPCs
 {
     public class GlobalNPCLoot : GlobalNPC
     {
-        public override void NPCLoot(NPC npc)
+        public override void OnKill(NPC npc)
         {
             if (irieList.hornetList.Contains(npc.type))
             {
@@ -35,7 +36,7 @@ namespace iriesmod.Common.GlobalNPCs
                     }
                     if (Main.netMode == NetmodeID.Server)
                     {
-                        NetMessage.BroadcastChatMessage(NetworkText.FromLiteral("Royal Jelly Spawned"), Color.Beige);
+                        ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral("Royal Jelly Spawned"), Color.Beige);
                     }
                 }
 

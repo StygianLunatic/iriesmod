@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using iriesmod.Common.List;
 using iriesmod.Common.ID;
 using Terraria.ID;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 
 namespace iriesmod.Common.Utils
 {
@@ -19,7 +19,7 @@ namespace iriesmod.Common.Utils
             return player.GetModPlayer<iriesplayer>();
         }
 
-        public static void BeeSpawn(Player player, int minBeeDamage, int maxBeeDamage, int typeofbee = -1)
+        public static void BeeSpawn(Player player, int minBeeDamage, int maxBeeDamage, Item item, int typeofbee = -1)
         {
             // bool makeStrongBee;
             bool strongBees = player.strongBees;
@@ -50,7 +50,7 @@ namespace iriesmod.Common.Utils
                 float speedX = Main.rand.Next(-35, 36) * 0.02f;
                 float speedY = Main.rand.Next(-35, 36) * 0.02f;
                 Vector2 velocity = new Vector2(speedX, speedY);
-                Projectile.NewProjectile(player.position, velocity, typeofbee, BeeDamage(player, (int)HurtBeeDamage), 0f, Main.myPlayer);
+                Projectile.NewProjectile(player.GetProjectileSource_Item(item), player.position, velocity, typeofbee, BeeDamage(player, (int)HurtBeeDamage), 0f, Main.myPlayer);
             }
 
 
@@ -81,8 +81,8 @@ namespace iriesmod.Common.Utils
         }
         public static int[] BeeDebuff(Player player)
         {
-            iriesplayer modPlayer = player.Getiriesplayer();
-            switch (modPlayer.BeeBackpack)
+            iriesplayer modplayer = player.Getiriesplayer();
+            switch (modplayer.BeeBackpack)
             {
                 case irieItemID.ObsidianHivePack:
                     return new int[]{ 1, BuffID.OnFire };
@@ -103,11 +103,11 @@ namespace iriesmod.Common.Utils
         }
         public static int BeeDamage(Player player, int damage)
         {
-            iriesplayer modPlayer = player.Getiriesplayer();
+            iriesplayer modplayer = player.Getiriesplayer();
 
             int beePackDamage = 0;
 
-            switch (modPlayer.BeeBackpack)
+            switch (modplayer.BeeBackpack)
             {
                 case irieItemID.ObsidianHivePack:
                     beePackDamage += Main.rand.Next(2, 9);
@@ -132,7 +132,7 @@ namespace iriesmod.Common.Utils
                     break;
             }
 
-            return (int)((damage + beePackDamage) * (1f + modPlayer.beeDamage));
+            return (int)((damage + beePackDamage) * (1f + modplayer.beeDamage));
         }
         public static int BeePenetrate(short BeeBackpack)
         {

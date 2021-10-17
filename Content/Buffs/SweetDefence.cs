@@ -6,7 +6,7 @@ namespace iriesmod.Content.Buffs
 {
     public class SweetDefence : ModBuff
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sweet Defence");
             Description.SetDefault("Grants +12 defence while doused in honey");

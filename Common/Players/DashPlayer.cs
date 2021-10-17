@@ -8,9 +8,9 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace iriesmod.Common.Players
+namespace iriesmod.Common.players
 {
-    public class DashPlayer : ModPlayer
+    public class Dashplayer : ModPlayer
     {
 		public const int DashRight = 2;
 		public const int DashLeft = 3;
@@ -39,11 +39,11 @@ namespace iriesmod.Common.Players
 			collisionKnockback = 0;
 			CanDashAttack = false;
 
-			if (player.controlRight && player.releaseRight && player.doubleTapCardinalTimer[DashRight] < 15)
+			if (Player.controlRight && Player.releaseRight && Player.doubleTapCardinalTimer[DashRight] < 15)
 			{
 				DashDir = DashRight;
 			}
-			else if (player.controlLeft && player.releaseLeft && player.doubleTapCardinalTimer[DashLeft] < 15)
+			else if (Player.controlLeft && Player.releaseLeft && Player.doubleTapCardinalTimer[DashLeft] < 15)
 			{
 				DashDir = DashLeft;
 			}
@@ -57,12 +57,12 @@ namespace iriesmod.Common.Players
 		{
 			if (CanUseDash() && DashDir != -1 && DashDelay == 0)
 			{
-				Vector2 newVelocity = player.velocity;
+				Vector2 newVelocity = Player.velocity;
 
 				switch (DashDir)
 				{
-					case DashLeft when player.velocity.X > -DashVelocity:
-					case DashRight when player.velocity.X < DashVelocity:
+					case DashLeft when Player.velocity.X > -DashVelocity:
+					case DashRight when Player.velocity.X < DashVelocity:
 						{
 							float dashDirection = DashDir == DashRight ? 1 : -1;
 							newVelocity.X = dashDirection * DashVelocity;
@@ -74,7 +74,7 @@ namespace iriesmod.Common.Players
 
 				DashDelay = DashCooldown;
 				DashTimer = DashDuration;
-				player.velocity = newVelocity;
+				Player.velocity = newVelocity;
 				CanDashAttack = true;
 			}
 
@@ -91,8 +91,8 @@ namespace iriesmod.Common.Players
 				}
 
 
-				player.eocDash = DashTimer;
-				player.armorEffectDrawShadowEOCShield = true;
+				Player.eocDash = DashTimer;
+				Player.armorEffectDrawShadowEOCShield = true;
 
 
 				DashTimer--;
@@ -102,16 +102,16 @@ namespace iriesmod.Common.Players
 		private bool CanUseDash()
 		{
 				return DashAccessoryEquipped
-				&& player.dash == 0 // player doesn't have Tabi or EoCShield equipped (give priority to those dashes)
-				&& !player.setSolar // player isn't wearing solar armor
-				&& !player.mount.Active; // player isn't mounted, since dashes on a mount look weird
+				&& Player.dash == 0 // Player doesn't have Tabi or EoCShield equipped (give priority to those dashes)
+				&& !Player.setSolar // Player isn't wearing solar armor
+				&& !Player.mount.Active; // Player isn't mounted, since dashes on a mount look weird
 		}
 
 		private void DoCollisionAttack(float damage, float knockback)
         {
-			if (player.whoAmI == Main.myPlayer)
+			if (Player.whoAmI == Main.myPlayer)
             {
-				Rectangle rectangle = new Rectangle((int)((double)player.position.X + (double)player.velocity.X * 0.5 - 4.0), (int)((double)player.position.Y + (double)player.velocity.Y * 0.5 - 4.0), player.width + 8, player.height + 8);
+				Rectangle rectangle = new Rectangle((int)((double)Player.position.X + (double)Player.velocity.X * 0.5 - 4.0), (int)((double)Player.position.Y + (double)Player.velocity.Y * 0.5 - 4.0), Player.width + 8, Player.height + 8);
 				for (int i = 0; i < Main.npc.Length; i++)
 				{
 					NPC nPC = Main.npc[i];
@@ -119,37 +119,37 @@ namespace iriesmod.Common.Players
 						continue;
 
 					Rectangle rect = nPC.getRect();
-					if (rectangle.Intersects(rect) && (nPC.noTileCollide || player.CanHit(nPC)))
+					if (rectangle.Intersects(rect) && (nPC.noTileCollide || Player.CanHit(nPC)))
 					{
-						float shield_damage = damage * player.meleeDamage * player.allDamage;
+						float shield_damage = damage * Player.GetDamage(DamageClass.Melee).CombineWith(Player.GetDamage(DamageClass.Generic));
 						float shield_knockback = knockback;
 
-						if (player.kbBuff)
+						if (Player.kbBuff)
 						{
 							shield_knockback *= 1.5f;
 						}
-						if (player.kbGlove)
+						if (Player.kbGlove)
 						{
 							shield_knockback *= 2f;
 						}
 						bool crit = false;
 
-						if (Main.rand.Next(100) < player.meleeCrit)
+						if (Main.rand.Next(100) < Player.GetCritChance(DamageClass.Melee))
 							crit = true;
 
-						int Direc = player.direction;
-						if (player.velocity.X < 0f)
+						int Direc = Player.direction;
+						if (Player.velocity.X < 0f)
 							Direc = -1;
 
-						if (player.velocity.X > 0f)
+						if (Player.velocity.X > 0f)
 							Direc = 1;
 
-						if (player.whoAmI == Main.myPlayer)
-							player.ApplyDamageToNPC(nPC, (int)shield_damage, shield_knockback, Direc, crit);
+						if (Player.whoAmI == Main.myPlayer)
+							Player.ApplyDamageToNPC(nPC, (int)shield_damage, shield_knockback, Direc, crit);
 
-						player.velocity.X = -Direc * 5;
-						player.velocity.Y = -2f;
-						player.immuneTime += 4;
+						Player.velocity.X = -Direc * 5;
+						Player.velocity.Y = -2f;
+						Player.immuneTime += 4;
 					}
 				}
 			}

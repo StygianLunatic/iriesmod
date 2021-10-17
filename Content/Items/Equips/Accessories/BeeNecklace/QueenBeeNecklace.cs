@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
@@ -22,24 +22,24 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 
 		public override void SetDefaults()
 		{
-			item.width = 32;
-			item.height = 32;
-			item.accessory = true;
-			item.value = Item.sellPrice(gold: 2, silver: 60);
-			item.rare = ItemRarityID.Orange;
+			Item.width = 32;
+			Item.height = 32;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 2, silver: 60);
+			Item.rare = ItemRarityID.Orange;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.12f;
+			iriesplayer modplayer = player.Getiriesplayer();
+			modplayer.beeDamage += 0.12f;
 			player.maxMinions++;
 			player.maxTurrets++;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ModContent.ItemType<HornetNecklace>());
 			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 12);
@@ -47,8 +47,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

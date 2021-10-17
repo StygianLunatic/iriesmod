@@ -14,19 +14,19 @@ namespace iriesmod.Content.Items.Consumables.Potions
 
 		public override void SetDefaults()
 		{
-			item.width = 20;
-			item.height = 26;
-			item.useStyle = ItemUseStyleID.EatingUsing;
-			item.useAnimation = 15;
-			item.useTime = 15;
-			item.useTurn = true;
-			item.UseSound = SoundID.Item3;
-			item.maxStack = 30;
-			item.consumable = true;
-			item.rare = ItemRarityID.Green;
-			item.value = Item.sellPrice(silver: 40);
-			item.buffType = ModContent.BuffType<Buffs.SweetDefence>();
-			item.buffTime = 36000;
+			Item.width = 20;
+			Item.height = 26;
+			Item.useStyle = ItemUseStyleID.EatFood;
+			Item.useAnimation = 15;
+			Item.useTime = 15;
+			Item.useTurn = true;
+			Item.UseSound = SoundID.Item3;
+			Item.maxStack = 30;
+			Item.consumable = true;
+			Item.rare = ItemRarityID.Green;
+			Item.value = Item.sellPrice(silver: 40);
+			Item.buffType = ModContent.BuffType<Buffs.SweetDefence>();
+			Item.buffTime = 36000;
 		}
 	}
 }

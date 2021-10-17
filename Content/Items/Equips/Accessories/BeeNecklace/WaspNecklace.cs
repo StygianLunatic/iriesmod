@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
@@ -17,18 +17,18 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 
 		public override void SetDefaults()
 		{
-			item.width = 34;
-			item.height = 30;
-			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Blue;
+			Item.width = 34;
+			Item.height = 30;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(silver: 30);
+			Item.rare = ItemRarityID.Blue;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.10f;
-			modPlayer.WaspNecklace = true;
+			iriesplayer modplayer = player.Getiriesplayer();
+			modplayer.beeDamage += 0.10f;
+			modplayer.WaspNecklace = Item;
 
 			player.armorPenetration += 10;
 			player.maxMinions += 1;

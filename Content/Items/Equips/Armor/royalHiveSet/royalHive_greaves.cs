@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Equips.Armor.HiveSet;
 
@@ -18,22 +18,22 @@ namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
 
 		public override void SetDefaults()
 		{
-			item.width = 22;
-			item.height = 18;
-			item.value = Item.sellPrice(gold: 5);
-			item.rare = ItemRarityID.LightRed;
-			item.defense = 5;
+			Item.width = 22;
+			Item.height = 18;
+			Item.value = Item.sellPrice(gold: 5);
+			Item.rare = ItemRarityID.LightRed;
+			Item.defense = 5;
 		}
 
 		public override void UpdateEquip(Player player)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.05f;
+			iriesplayer modplayer = player.Getiriesplayer();
+			modplayer.beeDamage += 0.05f;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ModContent.ItemType<HiveGreaves>());
 			recipe.AddIngredient(ModContent.ItemType<Materials.QueenBeeStinger>(), 6);
@@ -42,8 +42,7 @@ namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

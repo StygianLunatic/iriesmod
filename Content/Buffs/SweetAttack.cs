@@ -6,7 +6,7 @@ namespace iriesmod.Content.Buffs
 {
     public class SweetAttack : ModBuff
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sweet Attack");
             // Description.SetDefault("Grants 10% damage while doused in honey");
@@ -19,7 +19,7 @@ namespace iriesmod.Content.Buffs
         {
             if (player.HasBuff(BuffID.Honey))
             {
-                player.allDamage += 0.1f;
+                player.GetDamage(DamageClass.Generic) += 0.1f;
             }
         }
     }

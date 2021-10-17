@@ -2,7 +2,7 @@
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.List;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Projectiles;
@@ -20,8 +20,8 @@ namespace iriesmod.Common.GlobalProjectiles
 
                 if (irieList.friendlyBees.Contains(projectile.type))
                 {
-                    iriesplayer modPlayer = player.Getiriesplayer();
-                    penetration += irieUtils.BeePenetrate(modPlayer.BeeBackpack);
+                    iriesplayer modplayer = player.Getiriesplayer();
+                    penetration += irieUtils.BeePenetrate(modplayer.BeeBackpack);
                 }
 
                 projectile.penetrate += penetration;

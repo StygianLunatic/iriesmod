@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Content.Items.Materials;
+using Terraria.DataStructures;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
@@ -17,40 +18,39 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			item.width = 32;
-			item.height = 32;
-			item.value = Item.sellPrice(gold: 2);
-			item.mana = 6;
-			item.damage = 18;
-			item.knockBack = 3;
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.useTime = 30;
-			item.useAnimation = 30;
-			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.WaspSwarm>();
-			item.summon = true;
-			item.noMelee = true;
-			item.UseSound = SoundID.Item44;
-			item.rare = ItemRarityID.Orange;
+			Item.width = 32;
+			Item.height = 32;
+			Item.value = Item.sellPrice(gold: 2);
+			Item.mana = 6;
+			Item.damage = 18;
+			Item.knockBack = 3;
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.useTime = 30;
+			Item.useAnimation = 30;
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.WaspSwarm>();
+			Item.DamageType = DamageClass.Summon;
+			Item.noMelee = true;
+			Item.UseSound = SoundID.Item44;
+			Item.rare = ItemRarityID.Orange;
 		}
 
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			Projectile.NewProjectile(Main.MouseWorld, new Vector2(speedX, speedY), type, damage, knockBack, player.whoAmI);
+			Projectile.NewProjectile(source, Main.MouseWorld, new Vector2(velocity.X, velocity.Y), type, damage, knockback, player.whoAmI);
 
 			return false;
 		}
 
         public override void AddRecipes()
         {
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 16);
 			recipe.AddIngredient(ItemID.BeeWax, 5);
 			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 5);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
         }
     }
 }
