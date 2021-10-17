@@ -47,5 +47,7 @@
         public const short RoyalCloak = 42;
         public const short ObsidianHoneyRose = 43;
         public const short BurningRoyalCloak = 44;
+        public const short flameWaspSwarmStaff = 45;
+        public const short flameHornetStaff = 46;
     }
 }

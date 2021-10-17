@@ -52,7 +52,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 				Item otherAccessory = Main.LocalPlayer.armor[i];
 				if (!otherAccessory.IsAir &&
 					!item.IsTheSameAs(otherAccessory) &&
-					otherAccessory.modItem is HoenyCloakTemplate)
+					otherAccessory.modItem is HoneyCloakTemplate)
 				{
 					return (i, otherAccessory);
 				}
