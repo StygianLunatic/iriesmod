@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -14,6 +16,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 			Main.projFrames[projectile.type] = 12;
 
+			// drawOffsetX = -40;
+
 			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
 			Main.projPet[projectile.type] = true;
 			ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
@@ -22,6 +26,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 		public override void SetDefaults()
 		{
+			projectile.width = 172;
+			projectile.height = 152;
 			projectile.friendly = true;
 			projectile.minion = true;
 			projectile.minionSlots = 2f;
@@ -29,7 +35,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			projectile.netImportant = true;
 			projectile.tileCollide = true;
 			projectile.ignoreWater = true;
-			projectile.scale = 0.5f;
+			projectile.scale = 0.7f;
 		}
 
 		public override bool? CanCutTiles()
@@ -40,6 +46,16 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void AI()
 		{
 			Player player = Main.player[projectile.owner];
+			if (player.dead || !(player.active))
+			{
+				player.ClearBuff(ModContent.BuffType<Buffs.Minions.QueenBeeStaff>());
+			}
+			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.QueenBeeStaff>()))
+			{
+				projectile.timeLeft = 2;
+			}
+
+
 			Vector2 vector = projectile.position;
 			float distance;
 
@@ -47,6 +63,11 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			bool is_target = false;
 			projectile.tileCollide = true;
 
+			float velocityPower = (float)Math.Sqrt(projectile.velocity.X * projectile.velocity.X + projectile.velocity.Y * projectile.velocity.Y);
+			if (velocityPower < 15f)
+            {
+				projectile.localAI[0] = 0f;
+            }
 
             #region 타겟 결정부분
             NPC ownerMinionAttackTargetNPC2 = projectile.OwnerMinionAttackTargetNPC;
@@ -81,7 +102,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			}
 
             #endregion
-
 
 
             #region 미니언 위치 유지 부분
@@ -128,7 +148,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 
 				Vector2 center2 = projectile.Center;
-				Vector2 abovePlayerHead = player.Center - center2 + new Vector2(-20f, -60f);
+				Vector2 abovePlayerHead = player.Center - center2 + new Vector2(0f, -40f);
 
 				float AboveplayerHeadLength = abovePlayerHead.Length();
 				if (AboveplayerHeadLength > 200f && projPlaceSpeed < 9f)
@@ -167,7 +187,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
             #endregion
 
 
-
+            #region 미니언 애니메이션 부분
             // 미니언의 X속도에 따라 기울게 한다.
             projectile.rotation = projectile.velocity.X * 0.05f;
 
@@ -181,7 +201,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				projectile.frame++;
 				if (projectile.frame >= Main.projFrames[projectile.type])
 				{
-					projectile.frame = 0;
+					projectile.frame = 4;
 				}
 			}
 
@@ -192,22 +212,30 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			else if (projectile.velocity.X < 0f)
 				projectile.spriteDirection = projectile.direction = 1;
 
+            #endregion
 
 
-			if (projectile.ai[1] > 0f)
+            #region 미니언 투사체 부분
+            if (projectile.ai[1] > 0f)
 				projectile.ai[1] += Main.rand.Next(1, 4);
 
 			if (projectile.ai[1] > 90f)
 			{
 				projectile.ai[1] = 0f;
+				if (Main.rand.NextBool(5))
+                {
+					projectile.ai[1] = 100f;
+                }
 				projectile.netUpdate = true;
 			}
 
 			if (projectile.ai[0] != 0f)
 				return;
 
-			float newProjSpeedMult = 10f;
-			int new_projectile_type = ProjectileID.HornetStinger;
+
+
+			float newProjSpeedMult = 10f; // 생성할 투사체의 속도
+			int new_projectile_type = ProjectileID.HornetStinger; // 생성할 투사체의 종류
 
 			if (!is_target)
 				return;
@@ -215,7 +243,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			{
 				Vector2 newProjectileSpeed = vector - projectile.Center;
 				projectile.ai[1] += 1f;
-				if (Main.myPlayer == projectile.owner)
+				if (Main.myPlayer == projectile.owner && false)
 				{
 					newProjectileSpeed.Normalize();
 					newProjectileSpeed *= newProjSpeedMult;
@@ -227,10 +255,64 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				}
 			}
 
+            #endregion
 
 
+            #region 미니언 돌진 부분
+            if (projectile.ai[1] == 100f)
+            {
+				projectile.localAI[0] = 1f;
+				float proj2targetX = vector.X - projectile.Center.X;
+				float proj2targetY = vector.Y - projectile.Center.Y;
+				float proj2targetDistance = (float)Math.Sqrt(proj2targetX * proj2targetX + proj2targetY * proj2targetY);
+				proj2targetDistance = 20f / proj2targetDistance;
+				projectile.velocity.X = proj2targetX * proj2targetDistance;
+				projectile.velocity.Y = proj2targetY * proj2targetDistance;
+
+				projectile.frame = 0;
+				projectile.spriteDirection = projectile.direction;
+
+				Main.PlaySound(SoundID.Roar, (int)projectile.position.X, (int)projectile.position.Y, 0);
+            }
+            #endregion
+        }
+
+        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		{
+			SpriteEffects spriteEffects = SpriteEffects.None;
+			if (projectile.spriteDirection == -1)
+			{
+				spriteEffects = SpriteEffects.FlipHorizontally;
+			}
+			Texture2D texture = Main.projectileTexture[projectile.type];
+			int frameHeight = Main.projectileTexture[projectile.type].Height / Main.projFrames[projectile.type];
+			int startY = frameHeight * projectile.frame;
+			Rectangle sourceRectangle = new Rectangle(0, startY, texture.Width, frameHeight);
+			Vector2 origin = sourceRectangle.Size() / 2f;
+			origin.X = (float)(projectile.spriteDirection == 1 ? sourceRectangle.Width - 90 : 90);
+
+			Color drawColor = projectile.GetAlpha(lightColor);
+			Main.spriteBatch.Draw(texture,
+			 	projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY),
+			 	sourceRectangle, drawColor, projectile.rotation, origin, projectile.scale, spriteEffects, 0f);
+			// spriteBatch.Draw(texture, projectile.Center - Main.screenPosition, null, projectile.GetAlpha(lightColor), projectile.rotation, Utils.Size(texture) / 2f, projectile.scale, SpriteEffects.None, 0f);
 
 
+			return false;
 		}
-	}
+
+        public override bool MinionContactDamage()
+        {
+			if (projectile.localAI[0] == 1f)
+            {
+				return true;
+            }
+			return false;
+        }
+        public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        {
+			damage = (int)(damage * 1.5f);
+        }
+
+    }
 }
