@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iriesmod.Common.ID
+﻿namespace iriesmod.Common.ID
 {
     internal class irieItemID
     {
+        // beeGunSummon, 2 debug items
         public const short BeePistol = 1;
         public const short HiveHeadgear = 2;
         public const short HiveBreastplate = 3;
@@ -34,15 +29,16 @@ namespace iriesmod.Common.ID
         public const short DefenceHoneyPotion = 24;
         public const short AngryHornetStaff = 25;
         public const short BeeHiveStaff = 26;
-        public const short WaspSwarmStaff = 26;
-        public const short royalHive_headgear = 27;
-        public const short royalHive_helm = 28;
-        public const short royalHive_breastplate = 29;
-        public const short royalHive_greaves = 30;
-        public const short HornetNecklace = 31;
-        public const short QueenBeeNecklace = 32;
-        public const short HornetDefenderStaff = 33;
-        public const short RoyalHornetStaff = 34;
-        public const short QueenBeeStaff = 35;
+        public const short WaspSwarmStaff = 27;
+        public const short royalHive_headgear = 28;
+        public const short royalHive_helm = 29;
+        public const short royalHive_breastplate = 30;
+        public const short royalHive_greaves = 31;
+        public const short HornetNecklace = 32;
+        public const short QueenBeeNecklace = 33;
+        public const short HornetDefenderStaff = 34;
+        public const short RoyalHornetStaff = 35;
+        public const short QueenBeeStaff = 36;
+        public const short HornetHiveStaff = 37;
     }
 }
