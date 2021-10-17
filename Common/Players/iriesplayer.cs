@@ -23,8 +23,8 @@ namespace iriesmod.Common.Players
         public bool QueenBeeScroll;
         public bool WaspNecklace;
         public bool SweetheartKnuckles;
-        public bool HoneyRose;
         public bool beeCloak;
+        public bool QueenStingerNecklace;
 
         public override void ResetEffects()
         {
@@ -35,19 +35,12 @@ namespace iriesmod.Common.Players
             QueenBeeScroll = false;
             WaspNecklace = false;
             SweetheartKnuckles = false;
-            HoneyRose = false;
             beeCloak = false;
+            QueenStingerNecklace = false;
         }
 
         public override void UpdateLifeRegen()
         {
-            if (HoneyRose)
-            {
-                if (player.HasBuff(BuffID.Honey))
-                {
-                    player.lifeRegen += 3;
-                }
-            }
         }
 
         public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
@@ -83,28 +76,36 @@ namespace iriesmod.Common.Players
         }
         public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {
-            if (HiveSetHurtBonus)
+            if (player.whoAmI == Main.myPlayer)
             {
-                irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
-            }
-            if (QueenBeeScroll)
-            {
-                irieUtils.BeeSpawn(player.position, player.strongBees, 42, 52);
-                player.AddBuff(BuffID.Honey, 720);
-            }
-            if (WaspNecklace)
-            {
-                irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
-                player.AddBuff(BuffID.Honey, 300);
-            }
-            if (SweetheartKnuckles)
-            {
-                irieUtils.BeeSpawn(player.position, player.strongBees, 26, 38);
-                player.AddBuff(BuffID.Honey, 720);
-            }
-            if (beeCloak)
-            {
-                irieUtils.BeeSpawn(player.position, player.strongBees, 10, 12);
+                if (HiveSetHurtBonus)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
+                }
+                if (QueenBeeScroll)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 42, 52);
+                    player.AddBuff(BuffID.Honey, 720);
+                }
+                if (WaspNecklace)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 6, 8);
+                    player.AddBuff(BuffID.Honey, 300);
+                }
+                if (SweetheartKnuckles)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 26, 38);
+                    player.AddBuff(BuffID.Honey, 720);
+                }
+                if (beeCloak)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 10, 12);
+                }
+                if (QueenStingerNecklace)
+                {
+                    irieUtils.BeeSpawn(player.position, player.strongBees, 8, 14);
+                    player.AddBuff(BuffID.Honey, 240);
+                }
             }
         }
     }

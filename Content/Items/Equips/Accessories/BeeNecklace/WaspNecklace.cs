@@ -34,20 +34,5 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 			player.maxMinions += 1;
 			player.panic = true;
 		}
-
-		public override void AddRecipes()
-		{
-			ModRecipe recipe = new ModRecipe(mod);
-
-			recipe.AddIngredient(ItemID.SharkToothNecklace);
-			recipe.AddIngredient(ItemID.HoneyComb);
-			recipe.AddIngredient(ModContent.ItemType<BeeNecklace>());
-			recipe.AddIngredient(ItemID.SweetheartNecklace);
-			recipe.AddIngredient(ItemID.Bone, 25);
-			recipe.AddTile(TileID.MythrilAnvil);
-
-			recipe.SetResult(this);
-			recipe.AddRecipe();
-		}
 	}
 }

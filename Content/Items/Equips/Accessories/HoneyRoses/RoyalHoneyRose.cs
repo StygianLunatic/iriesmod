@@ -7,12 +7,12 @@ using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 {
-    public class HoneyRose : HoneyRose_Template
+    public class RoyalHoneyRose : HoneyRose_Template
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Honey Rose");
-			Tooltip.SetDefault("Increases life by 20\nIncreases life regen by 3 when you have Honey buff");
+			DisplayName.SetDefault("Royal Honey Rose");
+			Tooltip.SetDefault("Increases life regen by 6 and reduce damage taken by 10% when you have Honey buff");
 		}
 
 		public override void SetDefaults()
@@ -20,28 +20,30 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 			item.width = 34;
 			item.height = 30;
 			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Blue;
+			item.value = Item.sellPrice(gold: 2);
+			item.rare = ItemRarityID.Orange;
+			item.defense = 7;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			if (player.HasBuff(BuffID.Honey))
 			{
-				player.lifeRegen += 3;
+				player.lifeRegen += 6;
+				player.endurance += 0.1f;
 			}
-			player.statLifeMax2 += 20;
 		}
 
 		public override void AddRecipes()
 		{
 			ModRecipe recipe = new ModRecipe(mod);
 
-			recipe.AddIngredient(ItemID.JungleRose);
+			recipe.AddIngredient(ModContent.ItemType<HoneyRose>());
+			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 12);
 			recipe.AddIngredient(ItemID.HoneyBlock, 25);
 			recipe.AddIngredient(ItemID.HoneyBucket, 5);
 
-			recipe.AddTile(TileID.Anvils);
+			recipe.AddTile(TileID.HoneyDispenser);
 
 			recipe.SetResult(this);
 			recipe.AddRecipe();

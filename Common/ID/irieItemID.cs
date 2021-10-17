@@ -41,5 +41,8 @@
         public const short QueenBeeStaff = 36;
         public const short HornetHiveStaff = 37;
         public const short RoyalHornetDefenderStaff = 38;
+        public const short HiveDefendersScarf = 39;
+        public const short RoyalHoneyRose = 40;
+        public const short QueenStingerNecklace = 41;
     }
 }
