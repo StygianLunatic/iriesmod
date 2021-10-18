@@ -25,6 +25,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			// Projectile.aiStyle = 62;
 			Projectile.friendly = true;
 			Projectile.minion = true;
+			Projectile.DamageType = DamageClass.Summon;
 			Projectile.minionSlots = 1f;
 			Projectile.penetrate = -1;
 			Projectile.netImportant = true;

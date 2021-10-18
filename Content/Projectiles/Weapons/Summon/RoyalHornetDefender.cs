@@ -12,7 +12,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		{
 			DisplayName.SetDefault("Royal Hornet Defender");
 
-			Main.projFrames[Projectile.type] = 4;
+			Main.projFrames[Projectile.type] = 3;
 
 			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;

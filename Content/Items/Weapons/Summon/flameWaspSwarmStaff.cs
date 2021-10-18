@@ -31,13 +31,20 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.UseSound = SoundID.Item44;
 			Item.rare = ItemRarityID.Orange;
 		}
-
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
+			position = Main.MouseWorld;
+		}
+
+		public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		{
+			player.AddBuff(Item.buffType, 2);
 			for (int i = 0; i < 2; i++)
-			{
-				Projectile.NewProjectile(source, Main.MouseWorld, new Vector2(velocity.X * i, velocity.Y * i * 2), type, damage, knockback, player.whoAmI);
-			}
+            {
+			var projectile = Projectile.NewProjectileDirect(source, new Vector2(velocity.X * i, velocity.Y * i), velocity, type, damage, knockback, Main.myPlayer);
+			projectile.originalDamage = Item.damage;
+            }
+
 			return false;
 		}
 

@@ -31,6 +31,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			Projectile.height = 152;
 			Projectile.friendly = true;
 			Projectile.minion = true;
+			Projectile.DamageType = DamageClass.Summon;
 			Projectile.minionSlots = 2f;
 			Projectile.penetrate = -1;
 			Projectile.netImportant = true;

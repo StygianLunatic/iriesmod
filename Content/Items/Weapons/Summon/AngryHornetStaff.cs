@@ -41,14 +41,19 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.AngryHornet>();
 		}
 
-        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
-			player.AddBuff(Item.buffType, 2);
-
 			position = Main.MouseWorld;
-			return true;
 		}
 
+		public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		{
+			player.AddBuff(Item.buffType, 2);
+			var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
+			projectile.originalDamage = Item.damage;
+
+			return false;
+		}
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();

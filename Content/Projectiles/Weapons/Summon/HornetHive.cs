@@ -58,7 +58,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					{
 						float speedX = Main.rand.Next(-12, 13) * 0.02f;
 						float speedY = Main.rand.Next(-35, -12) * 0.02f;
-						Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
+						int proj = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
+						Main.projectile[proj].DamageType = DamageClass.Summon;
 					}
 				}
 			}

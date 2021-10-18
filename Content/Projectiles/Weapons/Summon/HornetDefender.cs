@@ -59,7 +59,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					Projectile.ai[1]++;
                 }
 
-				if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner)
+				if (Main.myPlayer == Projectile.owner)
 				{
 					if (Projectile.ai[1] > 0f && Projectile.ai[0] % 150 == 0f)
                     {
@@ -69,6 +69,10 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 				Projectile.ai[0]++;
 			}
+            else
+            {
+				Projectile.velocity = new Vector2(0, 0);
+            }
 		}
 
 		public override bool? CanDamage()
