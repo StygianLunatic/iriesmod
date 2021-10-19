@@ -15,8 +15,8 @@ namespace iriesmod.Content.Items.Weapons.Summon
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Flame Hornet Staff");
-			Tooltip.SetDefault("Summons a flame hornet to fight for you");
+			DisplayName.SetDefault("Imp Hornet Staff");
+			Tooltip.SetDefault("Summons a imp hornet to fight for you");
 
 			ItemID.Sets.GamepadWholeScreenUseRange[item.type] = true;
 			ItemID.Sets.LockOnIgnoresCollision[item.type] = true;
