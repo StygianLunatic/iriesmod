@@ -84,6 +84,11 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					Projectile.frame = 0;
 				}
 			}
+			// 미니언의 진행 방향에 따라 스프라이트를 좌우반전 시킨다.
+			if (Projectile.velocity.X > 0f)
+				Projectile.spriteDirection = Projectile.direction = -1;
+			else if (Projectile.velocity.X < 0f)
+				Projectile.spriteDirection = Projectile.direction = 1;
 		}
 
 		public override bool? CanDamage()

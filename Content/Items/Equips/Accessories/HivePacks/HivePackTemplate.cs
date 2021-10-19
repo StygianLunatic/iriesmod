@@ -11,7 +11,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 	{
 		public override bool CanEquipAccessory(Player player, int slot, bool modded)
 		{
-			if (slot < 10)
+			if (slot < 11)
 			{
 				int index = FindDifferentEquippedExclusiveAccessory().index;
 				if (index != -1)

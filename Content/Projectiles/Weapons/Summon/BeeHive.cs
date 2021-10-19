@@ -16,27 +16,12 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-
-			Projectile.width = 18;
-			Projectile.height = 28;
-			// Projectile.tileCollide = false;
-
-			Projectile.friendly = true;
-			Projectile.minion = true;
-			Projectile.DamageType = DamageClass.Summon;
-			Projectile.minionSlots = 0f;
-			Projectile.penetrate = 1;
+			Projectile.CloneDefaults(ProjectileID.Beenade);
 			AIType = ProjectileID.Beenade;
 		}
-
-		public override void Kill(int timeLeft)
+        public override void Kill(int timeLeft)
 		{
 			SoundEngine.PlaySound(SoundID.Item14, Projectile.position);
-
-			if (Projectile.owner != Main.myPlayer)
-			{
-				return;
-			}
 			for (int i = 0; i < 10; i++)
 			{
 				int SmokeID = Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), Projectile.width, Projectile.height, DustID.Smoke, 0f, 0f, 100, default(Color), 1.5f);
@@ -45,15 +30,16 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			}
 			if (Projectile.owner == Main.myPlayer)
 			{
-				int numberOfBees = Main.rand.Next(3, 7);
+				int numberOfBees = Main.rand.Next(1, 4);
 				for (int beeIndex = 0; beeIndex < numberOfBees; beeIndex++)
 				{
-					float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
-					float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
+					float speedX = Main.rand.Next(-35, 36) * 0.02f;
+					float speedY = Main.rand.Next(-35, 36) * 0.02f;
 					int proj = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.position.X, Projectile.position.Y), new Vector2(speedX, speedY), Main.player[Projectile.owner].beeType(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
 					Main.projectile[proj].DamageType = DamageClass.Summon;
+					Main.projectile[proj].usesLocalNPCImmunity = true;
 				}
 			}
 		}
-	}
+    }
 }

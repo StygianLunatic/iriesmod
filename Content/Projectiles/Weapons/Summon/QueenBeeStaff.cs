@@ -5,6 +5,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
@@ -47,6 +48,12 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 		public override void AI()
 		{
+			// localAI[1] = 돌진활성여부
+			if (Projectile.ai[1] == 100f)
+            {
+				Projectile.localAI[1]++;
+            }
+
 			Player player = Main.player[Projectile.owner];
 			if (player.dead || !(player.active))
 			{
@@ -66,42 +73,13 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			Projectile.tileCollide = true;
 
 			float velocityPower = (float)Math.Sqrt(Projectile.velocity.X * Projectile.velocity.X + Projectile.velocity.Y * Projectile.velocity.Y);
-			if (velocityPower < 15f)
+			if (velocityPower < 15f) // 속도가 낮을 때 충돌 데미지 입히는 걸 멈춤
             {
 				Projectile.localAI[0] = 0f;
             }
 
             #region 타겟 결정부분
-            NPC ownerMinionAttackTargetNPC2 = Projectile.OwnerMinionAttackTargetNPC;
-			if (ownerMinionAttackTargetNPC2 != null && ownerMinionAttackTargetNPC2.CanBeChasedBy(this))
-			{
-				float distanceCompare = Vector2.Distance(ownerMinionAttackTargetNPC2.Center, Projectile.Center);
-				float tiledistance = distance * 3f;
-				if (distanceCompare < tiledistance && !is_target && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, ownerMinionAttackTargetNPC2.position, ownerMinionAttackTargetNPC2.width, ownerMinionAttackTargetNPC2.height))
-				{
-					distance = distanceCompare;
-					vector = ownerMinionAttackTargetNPC2.Center;
-					is_target = true;
-				}
-			}
-
-			if (!is_target)
-			{
-				for (int nPCindex = 0; nPCindex < 200; nPCindex++)
-				{
-					NPC nPC2 = Main.npc[nPCindex];
-					if (nPC2.CanBeChasedBy(this))
-					{
-						float distanceCompare2 = Vector2.Distance(nPC2.Center, Projectile.Center);
-						if (!(distanceCompare2 >= distance) && Collision.CanHitLine(Projectile.position, Projectile.width, Projectile.height, nPC2.position, nPC2.width, nPC2.height))
-						{
-							distance = distanceCompare2;
-							vector = nPC2.Center;
-							is_target = true;
-						}
-					}
-				}
-			}
+			irieUtils.GetTarget(Projectile, distance, out distance, out vector, out is_target);
 
             #endregion
 
@@ -224,7 +202,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			if (Projectile.ai[1] > 90f)
 			{
 				Projectile.ai[1] = 0f;
-				if (Main.rand.NextBool(5))
+				if (Main.rand.NextBool(3))
                 {
 					Projectile.ai[1] = 100f;
                 }
@@ -261,9 +239,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 
             #region 미니언 돌진 부분
-            if (Projectile.ai[1] == 100f)
+            if (Projectile.localAI[1] > 1f) // 돌진이 활성화되어 있을 때
             {
-				Projectile.localAI[0] = 1f;
+				Projectile.localAI[0] = 1f; // 충돌 데미지 활성화
 				float proj2targetX = vector.X - Projectile.Center.X;
 				float proj2targetY = vector.Y - Projectile.Center.Y;
 				float proj2targetDistance = (float)Math.Sqrt(proj2targetX * proj2targetX + proj2targetY * proj2targetY);
@@ -313,7 +291,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
         }
         public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
-			damage = (int)(damage * 1.5f);
+			damage = (int)(damage * 2f);
 			target.AddBuff(BuffID.Poisoned, 480);
         }
 

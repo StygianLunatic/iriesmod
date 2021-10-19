@@ -75,7 +75,12 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		{
 			return false;
 		}
-		public override bool OnTileCollide(Vector2 oldVelocity)
+
+        public override bool? CanDamage()
+        {
+			return true;
+        }
+        public override bool OnTileCollide(Vector2 oldVelocity)
 		{
 			return false;
 		}
