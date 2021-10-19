@@ -41,7 +41,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 			recipe.AddIngredient(ModContent.ItemType<HoneyRose>());
 			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 12);
 			recipe.AddIngredient(ItemID.HoneyBlock, 25);
-			recipe.AddIngredient(ItemID.HoneyBucket, 5);
+			recipe.AddIngredient(ItemID.BottledHoney, 5);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
