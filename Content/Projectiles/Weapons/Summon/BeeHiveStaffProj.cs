@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
@@ -67,6 +68,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				Projectile.velocity.Y += 0.4f;
 			}
 
+			Projectile.ProjectileStickToPlatform();
 		}
 
 		public override bool? CanDamage()

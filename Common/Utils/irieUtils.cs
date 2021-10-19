@@ -18,6 +18,15 @@ namespace iriesmod.Common.Utils
         {
             return player.GetModPlayer<iriesplayer>();
         }
+        public static void ProjectileStickToPlatform(this Projectile proj)
+        {
+            Tile tile = Framing.GetTileSafely((int)proj.position.X, (int)proj.position.Y);
+            if (TileID.Sets.Platforms[tile.type])
+            {
+                proj.velocity = new(0, 0);
+            }
+        }
+
         public static NPC GetTarget(Projectile proj, float maxDistance, out float distance, out Vector2 TargetCenter, out bool is_target)
         {
 
