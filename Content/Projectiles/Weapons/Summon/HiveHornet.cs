@@ -76,11 +76,12 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			return false;
 		}
 
-        public override bool? CanDamage()
-        {
+		public override bool MinionContactDamage()
+		{
 			return true;
-        }
-        public override bool OnTileCollide(Vector2 oldVelocity)
+		}
+
+		public override bool OnTileCollide(Vector2 oldVelocity)
 		{
 			return false;
 		}

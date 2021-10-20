@@ -40,9 +40,9 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
             for (int i = 0; i < beeNumber; i++)
             {
-                float speedX = (float)Main.rand.Next(-35, 36) * 0.02f;
-                float speedY = (float)Main.rand.Next(-35, 36) * 0.02f;
-                int projectileIndex = Projectile.NewProjectile(source, position.X, position.Y, speedX, speedY, player.beeType(), player.beeDamage(damage), player.beeKB(knockback), player.whoAmI);
+                Vector2 perturbedSpeed = new Vector2(velocity.X, velocity.Y).RotatedByRandom(MathHelper.ToRadians(10));
+
+                int projectileIndex = Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, player.beeType(), player.beeDamage(damage), player.beeKB(knockback), player.whoAmI);
                 Main.projectile[projectileIndex].DamageType = DamageClass.Summon;
             }
 

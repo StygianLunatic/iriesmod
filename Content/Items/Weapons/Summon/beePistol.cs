@@ -61,6 +61,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 				type = player.beeType();
 				int proj = Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockback, player.whoAmI);
 
+				Main.projectile[proj].DamageType = DamageClass.Summon;
 				Main.projectile[proj].usesLocalNPCImmunity = true;
 			}
 			return false;

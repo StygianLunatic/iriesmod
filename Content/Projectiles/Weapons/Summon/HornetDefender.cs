@@ -67,7 +67,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				{
 					if (Projectile.ai[1] > 0f && Projectile.ai[0] % 150 == 0f)
                     {
-						Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+						var projectile = Projectile.NewProjectileDirect(Projectile.GetProjectileSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+						projectile.originalDamage = Projectile.originalDamage;
                     }
 				}
 

@@ -41,7 +41,9 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
         public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI);
+			var projectile = Projectile.NewProjectileDirect(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI);
+			projectile.originalDamage = Item.damage;
+
 			player.UpdateMaxTurrets();
 
 			return false;

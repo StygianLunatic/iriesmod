@@ -13,7 +13,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Hornet Hive");
-			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 		}
 
 		public override void SetDefaults()
@@ -49,7 +48,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			if (target != null)
 			{
 				Projectile.ai[0] += 1f;
-
+				Projectile.netUpdate = true;
 
 				if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner && Projectile.ai[0] % 160f == 0f)
 				{
@@ -59,8 +58,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					{
 						float speedX = Main.rand.Next(-12, 13) * 0.02f;
 						float speedY = Main.rand.Next(-35, -12) * 0.02f;
-						int proj = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
-						Main.projectile[proj].DamageType = DamageClass.Summon;
+						int childProjectile = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
+						Main.projectile[childProjectile].originalDamage = Projectile.originalDamage;
 					}
 				}
 			}
