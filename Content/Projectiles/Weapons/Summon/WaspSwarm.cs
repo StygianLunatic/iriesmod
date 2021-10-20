@@ -13,8 +13,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			DisplayName.SetDefault("Wasp Swarm");
 
 			Main.projFrames[Projectile.type] = 3;
-			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
-			ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
 			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
 		}
 
@@ -30,7 +28,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			Projectile.penetrate = 3;
 			Projectile.netImportant = true;
 			Projectile.timeLeft = 600;
-			Projectile.tileCollide = false;
 			Projectile.ignoreWater = true;
 		}
 

@@ -6,11 +6,11 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
-	public class flameHornet : ModProjectile
+	public class ImpHornet : ModProjectile
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Flame Hornet");
+			DisplayName.SetDefault("Imp Hornet");
 
 			Main.projFrames[Projectile.type] = 3;
 			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
@@ -43,9 +43,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			Player player = Main.player[Projectile.owner];
 			if (player.dead || !(player.active))
 			{
-				player.ClearBuff(ModContent.BuffType<Buffs.Minions.RoyalHornet>());
+				player.ClearBuff(ModContent.BuffType<Buffs.Minions.ImpHornet>());
 			}
-			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.RoyalHornet>()))
+			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.ImpHornet>()))
 			{
 				Projectile.timeLeft = 2;
 			}

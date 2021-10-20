@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-	public class flameWaspSwarmStaff : ModItem
+	public class flameWaspSwarmWand : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
@@ -31,17 +31,15 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.UseSound = SoundID.Item44;
 			Item.rare = ItemRarityID.Orange;
 		}
-		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
-		{
+        public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
+        {
 			position = Main.MouseWorld;
 		}
-
-		public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			player.AddBuff(Item.buffType, 2);
 			for (int i = 0; i < 2; i++)
             {
-			var projectile = Projectile.NewProjectileDirect(source, new Vector2(velocity.X * i, velocity.Y * i), velocity, type, damage, knockback, Main.myPlayer);
+			var projectile = Projectile.NewProjectileDirect(source, position ,new Vector2(velocity.X * i, velocity.Y), type, damage, knockback, Main.myPlayer);
 			projectile.originalDamage = Item.damage;
             }
 

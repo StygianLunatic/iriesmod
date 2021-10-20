@@ -12,12 +12,12 @@ using Terraria.DataStructures;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-    public class flameHornetStaff : ModItem
+    public class ImpHornetStaff : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Flame Hornet Staff");
-			Tooltip.SetDefault("Summons a flame hornet to fight for you");
+			DisplayName.SetDefault("Imp Hornet Staff");
+			Tooltip.SetDefault("Summons a Imp hornet to fight for you");
 
 			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
 			ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -39,8 +39,8 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 			Item.noMelee = true;
 			Item.DamageType = DamageClass.Summon;
-			Item.buffType = ModContent.BuffType <Buffs.Minions.flameHornet> ();
-			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.flameHornet>();
+			Item.buffType = ModContent.BuffType <Buffs.Minions.ImpHornet> ();
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.ImpHornet>();
 		}
 
 		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)

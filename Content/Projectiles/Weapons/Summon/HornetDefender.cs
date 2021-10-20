@@ -11,7 +11,6 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Hornet Defender");
-			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
 		}
 
@@ -67,8 +66,8 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 				{
 					if (Projectile.ai[1] > 0f && Projectile.ai[0] % 150 == 0f)
                     {
-						var projectile = Projectile.NewProjectileDirect(Projectile.GetProjectileSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
-						projectile.originalDamage = Projectile.originalDamage;
+						var projectile = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), Projectile.originalDamage, Projectile.knockBack, Projectile.owner);
+						Main.projectile[projectile].originalDamage = Projectile.originalDamage;
                     }
 				}
 
