@@ -8,7 +8,7 @@ namespace iriesmod.Content.Buffs.Minions
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Bone Hornet");
-			Description.SetDefault("Royal to you");
+			Description.SetDefault("It's beezing and clattering");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 		}

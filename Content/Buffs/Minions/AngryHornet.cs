@@ -7,8 +7,8 @@ namespace iriesmod.Content.Buffs.Minions
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Angry Hornets");
-			Description.SetDefault("Hornets seems angry");
+			DisplayName.SetDefault("Angry Hornet");
+			Description.SetDefault("Hornet seems angry");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 		}
