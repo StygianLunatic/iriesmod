@@ -16,7 +16,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			Item.damage = 5;
+			Item.damage = 8;
 			Item.mana = 3;
 			Item.DamageType = DamageClass.Summon;
 			Item.width = 52;
@@ -30,7 +30,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.UseSound = SoundID.Item11;
 			Item.autoReuse = true;
 			Item.shoot = ProjectileID.Bee;
-			Item.shootSpeed = 8f;
+			Item.shootSpeed = 32f;
 		}
 
 		public override void AddRecipes()

@@ -22,6 +22,10 @@ namespace iriesmod.Common.GlobalItems
             {
                 item.defense = 5;
             }
+            else if (item.type == ItemID.HornetStaff)
+            {
+                item.damage = 16;
+            }
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
@@ -42,7 +46,11 @@ namespace iriesmod.Common.GlobalItems
                         line.text = "Increases bee damage by 8%";
                     }
                 }
-                tooltips.Add(new TooltipLine(Mod, "Toolip2", "Releases bees when damaged"));
+                tooltips.Add(new TooltipLine(Mod, "Tooltip2", "Releases bees when damaged"));
+            }
+            else if (item.type == ItemID.BeeWings)
+            {
+                tooltips.Add(new TooltipLine(Mod, "Tooltip2", "Increases bee damage by 15%"));
             }
         }
 
@@ -70,6 +78,10 @@ namespace iriesmod.Common.GlobalItems
             else if (item.type == ItemID.BalloonHorseshoeHoney)
             {
                 player.hasJumpOption_Sandstorm = true;
+            }
+            else if (item.type == ItemID.BeeWings)
+            {
+                player.Getiriesplayer().beeDamage += 0.15f;
             }
         }
 

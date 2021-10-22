@@ -22,7 +22,7 @@ namespace iriesmod.Common.RecipeHelper
 
 				if (recipe.HasResult(ItemID.HornetStaff))
 				{
-					EditHornetStaffRecipe(recipe, mod);
+					// EditHornetStaffRecipe(recipe, mod);
 				}
 				else if (recipe.HasResult(ItemID.HoneyBalloon))
 				{
@@ -49,6 +49,7 @@ namespace iriesmod.Common.RecipeHelper
 
 
         #region EditRecipes
+		/*
         private static void EditHornetStaffRecipe(Recipe recipe, Mod mod)
         {
 			recipe.RemoveRecipe();
@@ -56,8 +57,10 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.AddIngredient(ItemID.Stinger, 8);
 			recipe.AddIngredient(ItemID.Hive, 15);
 			recipe.AddIngredient(ItemID.HoneyBlock, 8);
+			recipe.AddTile(TileID.HoneyDispenser);
 			recipe.Register();
 		}
+		*/
 		private static void EditHoneyBalloonRecipe(Recipe recipe, Mod mod)
         {
 			recipe.RemoveRecipe();
@@ -65,6 +68,7 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.AddIngredient(ItemID.CloudinaBalloon);
 			recipe.AddIngredient(ItemID.HoneyBlock, 25);
 			recipe.AddIngredient(ItemID.BottledHoney, 12);
+			recipe.AddTile(TileID.TinkerersWorkbench);
 			recipe.Register();
 		}
 		private static void EditBeeCloakRecipe(Recipe recipe, Mod mod)
@@ -73,6 +77,7 @@ namespace iriesmod.Common.RecipeHelper
 			recipe = mod.CreateRecipe(ItemID.BeeCloak);
 			recipe.AddIngredient(ModContent.ItemType<HoneyCloak>());
 			recipe.AddIngredient(ItemID.BeeWax, 9);
+			recipe.AddTile(TileID.HoneyDispenser);
 			recipe.Register();
         }
         #endregion
@@ -122,6 +127,7 @@ namespace iriesmod.Common.RecipeHelper
 			recipe.AddIngredient(ItemID.Hive, 25);
 			recipe.AddIngredient(ItemID.HoneyBlock, 25);
 			recipe.AddIngredient(ItemID.BeeWax, 4);
+			recipe.AddTile(TileID.Anvils);
 
 			recipe.Register();
         }
@@ -131,6 +137,7 @@ namespace iriesmod.Common.RecipeHelper
 
 			recipe.AddIngredient(ItemID.BeeWax, 8);
 			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 4);
+			recipe.AddTile(TileID.HoneyDispenser);
 
 			recipe.Register();
         }

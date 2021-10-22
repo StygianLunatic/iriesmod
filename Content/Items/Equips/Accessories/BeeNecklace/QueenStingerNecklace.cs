@@ -35,8 +35,8 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.SharkToothNecklace);
-			recipe.AddIngredient(ItemID.HoneyComb, 2);
+			recipe.AddIngredient(ItemID.StingerNecklace);
+			recipe.AddIngredient(ItemID.HoneyComb);
 			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 12);
 			recipe.AddTile(TileID.HoneyDispenser);
 			recipe.Register();

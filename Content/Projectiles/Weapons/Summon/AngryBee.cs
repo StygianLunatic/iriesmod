@@ -4,11 +4,12 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
-	public class AngryHornet : ModProjectile
+	public class AngryBee : ModProjectile
 	{
-		public override void SetStaticDefaults()
+        public override string Texture => "Terraria/Images/Projectile_" + 373;
+        public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Angry Hornet");
+			DisplayName.SetDefault("Angry Bee");
 
 			Main.projFrames[Projectile.type] = 3;
 			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
@@ -43,9 +44,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			Player player = Main.player[Projectile.owner];
 			if (player.dead || !(player.active))
 			{
-				player.ClearBuff(ModContent.BuffType<Buffs.Minions.AngryHornet>());
+				player.ClearBuff(ModContent.BuffType<Buffs.Minions.AngryBee>());
 			}
-			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.AngryHornet>()))
+			if (player.HasBuff(ModContent.BuffType<Buffs.Minions.AngryBee>()))
 			{
 				Projectile.timeLeft = 2;
 			}
