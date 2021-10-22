@@ -12,12 +12,12 @@ using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 {
-	public class QueenBeeNecklace : ModItem
+	public class RoyalBeeNecklace : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Queen Bee Necklace");
-			Tooltip.SetDefault("Increases bee damage by 12%\nIncreases your max number of minions and sentries by 1");
+			DisplayName.SetDefault("Royal Bee Necklace");
+			Tooltip.SetDefault("Increases bee damage by 10%\nIncreases your max number of minions and sentries by 1");
 		}
 
 		public override void SetDefaults()
@@ -32,7 +32,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			iriesplayer modplayer = player.Getiriesplayer();
-			modplayer.beeDamage += 0.12f;
+			modplayer.beeDamage += 0.1f;
 			player.maxMinions++;
 			player.maxTurrets++;
 		}
@@ -41,9 +41,10 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 		{
 			Recipe recipe = CreateRecipe();
 
-			recipe.AddIngredient(ModContent.ItemType<HornetNecklace>());
+			recipe.AddIngredient(ModContent.ItemType<BeeNecklace>());
 			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 12);
 			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 8);
+			recipe.AddIngredient(ItemID.BeeWax, 8);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
