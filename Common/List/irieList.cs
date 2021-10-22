@@ -26,7 +26,6 @@ namespace iriesmod.Common.List
                 ProjectileID.GiantBee,
                 ModContent.ProjectileType<beeBeetle>(),
                 ModContent.ProjectileType<beeStardust>(),
-                ModContent.ProjectileType<WaspSwarm>(),
                 ModContent.ProjectileType<beeObsidian>()
             };
 
