@@ -16,7 +16,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("Sweetheart Knuckles");
-            Tooltip.SetDefault("Releases bees, douses the user in honey and increases movement speed when damaged");
+            Tooltip.SetDefault("Releases bees, douses the user in honey and increases movement speed when damaged\nOne of the abandoned items");
         }
 
         public override void SetDefaults()

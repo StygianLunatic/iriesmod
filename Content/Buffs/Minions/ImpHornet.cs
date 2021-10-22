@@ -8,7 +8,7 @@ namespace iriesmod.Content.Buffs.Minions
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Imp Hornet");
-			Description.SetDefault("It burns");
+			Description.SetDefault("Hot and crispy");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 		}

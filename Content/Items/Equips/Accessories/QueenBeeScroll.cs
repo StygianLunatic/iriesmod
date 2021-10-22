@@ -20,7 +20,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 			Item.width = 36;
 			Item.height = 36;
 			Item.accessory = true;
-			Item.value = Item.sellPrice(silver: 30);
+			Item.value = Item.sellPrice(gold: 50);
 			Item.rare = ItemRarityID.Blue;
 		}
 
