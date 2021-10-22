@@ -20,7 +20,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 			Item.width = 34;
 			Item.height = 30;
 			Item.accessory = true;
-			Item.value = Item.sellPrice(gold: 3);
+			Item.value = Item.sellPrice(gold: 6);
 			Item.rare = ItemRarityID.Orange;
 			Item.defense = 9;
 		}

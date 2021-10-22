@@ -30,7 +30,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.useTime = 36;
 			Item.useAnimation = 36;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.value = Item.sellPrice(gold: 4);
+			Item.value = Item.sellPrice(gold: 2);
 			Item.rare = ItemRarityID.Orange;
 			Item.UseSound = SoundID.Item44;
 

@@ -24,7 +24,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 			Item.width = 24;
 			Item.height = 30;
 			Item.accessory = true;
-			Item.value = Item.sellPrice(gold: 4);
+			Item.value = Item.sellPrice(gold: 6);
 			Item.rare = ItemRarityID.Orange;
 			Item.defense = 8;
 		}

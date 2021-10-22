@@ -21,7 +21,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 			Item.width = 30;
 			Item.height = 30;
 			Item.maxStack = 1;
-			Item.value = Item.sellPrice(gold: 2);
+			Item.value = Item.sellPrice(gold: 20);
 			Item.rare = ItemRarityID.LightRed;
 			Item.accessory = true;
 			Item.expert = true;

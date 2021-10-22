@@ -20,7 +20,7 @@ namespace iriesmod.Common.Worlds
 				    WorldGen.TileRunner(x, y, WorldGen.genRand.Next(4, 7), WorldGen.genRand.Next(2, 6), ModContent.TileType<RoyalJelly>());
 				}
 			}
-			Main.NewText("Royal Jelly Generated.");
+			Main.NewText("The Royal Jelly started to flow...");
 		}
 
     }
