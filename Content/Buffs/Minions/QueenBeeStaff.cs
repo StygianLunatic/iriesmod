@@ -5,7 +5,7 @@ namespace iriesmod.Content.Buffs.Minions
 {
 	internal class QueenBeeStaff : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Queen Bee");
 			Description.SetDefault("Your own Queen Bee");

@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
@@ -17,25 +17,25 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void SetDefaults()
 		{
-			item.width = 36;
-			item.height = 36;
-			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Blue;
+			Item.width = 36;
+			Item.height = 36;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 50);
+			Item.rare = ItemRarityID.Blue;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.15f;
-			modPlayer.QueenBeeScroll = true;
+			iriesplayer modplayer = player.Getiriesplayer();
+			modplayer.beeDamage += 0.15f;
+			modplayer.QueenBeeScroll = Item;
 
 			player.maxMinions += 2;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.PapyrusScarab);
 			recipe.AddIngredient(ItemID.HoneyComb);
@@ -43,8 +43,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 			recipe.AddIngredient(ItemID.Stinger, 12);
 			recipe.AddTile(TileID.MythrilAnvil);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

@@ -7,11 +7,11 @@ namespace iriesmod.Content.Tiles.Ores
 {
 	public class RoyalJelly : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			TileID.Sets.Ore[Type] = true;
 			Main.tileSpelunker[Type] = true;
-			Main.tileValue[Type] = 420;
+			Main.tileOreFinderPriority[Type] = 420;
 			Main.tileSolid[Type] = true;
 			Main.tileBlockLight[Type] = true;
 
@@ -19,9 +19,9 @@ namespace iriesmod.Content.Tiles.Ores
 			name.SetDefault("Royal Jelly");
 			AddMapEntry(new Color(152, 171, 198), name);
 
-			dustType = DustID.Platinum;
-			drop = ModContent.ItemType<Items.Materials.RoyalJelly>();
-			soundType = SoundID.Splash;
+			DustType = DustID.Platinum;
+			ItemDrop = ModContent.ItemType<Items.Materials.RoyalJelly>();
+			SoundType = SoundID.Splash;
 		}
 
         public override void FloorVisuals(Player player)

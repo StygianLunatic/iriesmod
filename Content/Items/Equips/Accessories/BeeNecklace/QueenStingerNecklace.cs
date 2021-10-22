@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
@@ -17,30 +17,29 @@ namespace iriesmod.Content.Items.Equips.Accessories.BeeNecklace
 
 		public override void SetDefaults()
 		{
-			item.width = 21;
-			item.height = 27;
-			item.accessory = true;
-			item.value = Item.sellPrice(gold: 5);
-			item.rare = ItemRarityID.Orange;
+			Item.width = 21;
+			Item.height = 27;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 5);
+			Item.rare = ItemRarityID.Orange;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
-			modPlayer.beeDamage += 0.08f;
-			modPlayer.QueenStingerNecklace = true;
+			iriesplayer modplayer = player.Getiriesplayer();
+			modplayer.beeDamage += 0.08f;
+			modplayer.QueenStingerNecklace = Item;
 			player.armorPenetration += 8;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.SharkToothNecklace);
-			recipe.AddIngredient(ItemID.HoneyComb, 2);
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ItemID.StingerNecklace);
+			recipe.AddIngredient(ItemID.HoneyComb);
 			recipe.AddIngredient(ModContent.ItemType<QueenBeeStinger>(), 12);
 			recipe.AddTile(TileID.HoneyDispenser);
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

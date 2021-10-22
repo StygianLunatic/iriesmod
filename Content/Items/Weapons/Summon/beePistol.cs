@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -15,52 +16,52 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 		public override void SetDefaults()
 		{
-			item.damage = 5;
-			item.mana = 3;
-			item.summon = true;
-			item.width = 52;
-			item.height = 26;
-			item.useTime = 20;
-			item.useAnimation = 20;
-			item.useStyle = ItemUseStyleID.HoldingOut;
-			item.noMelee = true;
-			item.value = 10000;
-			item.rare = ItemRarityID.Blue;
-			item.UseSound = SoundID.Item11;
-			item.autoReuse = true;
-			item.shoot = ProjectileID.Bee;
-			item.shootSpeed = 8f;
+			Item.damage = 8;
+			Item.mana = 3;
+			Item.DamageType = DamageClass.Summon;
+			Item.width = 52;
+			Item.height = 26;
+			Item.useTime = 20;
+			Item.useAnimation = 20;
+			Item.useStyle = ItemUseStyleID.Shoot;
+			Item.noMelee = true;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Blue;
+			Item.UseSound = SoundID.Item11;
+			Item.autoReuse = true;
+			Item.shoot = ProjectileID.Bee;
+			Item.shootSpeed = 32f;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 			recipe.AddIngredient(ItemID.FlintlockPistol);
 			recipe.AddIngredient(ItemID.Stinger, 6);
 			recipe.AddIngredient(ItemID.Hive, 8);
 			recipe.AddIngredient(ItemID.HoneyBlock, 8);
 			recipe.AddTile(TileID.Anvils);
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 
 
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			int numberProjectiles = 1 + Main.rand.Next(2);
 			for (int i = 0; i < numberProjectiles; i++)
 			{
-				Vector2 muzzleOffset = Vector2.Normalize(new Vector2(speedX, speedY - 1f)) * 51f;
+				Vector2 muzzleOffset = Vector2.Normalize(new Vector2(velocity.X, velocity.Y - 1f)) * 51f;
 				if (Collision.CanHit(position, 0, 0, position + muzzleOffset, 0, 0))
 				{
 					position += muzzleOffset;
 				}
-				Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(10));
+				Vector2 perturbedSpeed = new Vector2(velocity.X, velocity.Y).RotatedByRandom(MathHelper.ToRadians(10));
 				float scale = 1f - (Main.rand.NextFloat() * .3f);
 				perturbedSpeed = perturbedSpeed * scale;
 				type = player.beeType();
-				int proj = Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockBack, player.whoAmI);
+				int proj = Projectile.NewProjectile(source, position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage, knockback, player.whoAmI);
 
+				Main.projectile[proj].DamageType = DamageClass.Summon;
 				Main.projectile[proj].usesLocalNPCImmunity = true;
 			}
 			return false;

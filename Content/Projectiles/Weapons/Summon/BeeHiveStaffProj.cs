@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
@@ -11,18 +12,18 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("BeeHive");
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
+			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.netImportant = true;
-			projectile.width = 40;
-			projectile.height = 58;
-			projectile.tileCollide = true;
-			projectile.sentry = true;
-			projectile.timeLeft = Projectile.SentryLifeTime;
-			projectile.penetrate = -1;
+			Projectile.netImportant = true;
+			Projectile.width = 40;
+			Projectile.height = 58;
+			Projectile.tileCollide = true;
+			Projectile.sentry = true;
+			Projectile.timeLeft = Projectile.SentryLifeTime;
+			Projectile.penetrate = -1;
 		}
 
 		public override void AI()
@@ -30,7 +31,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			NPC target = null;
 
 			float distance = 800f;
-			Vector2 ProjCenter = projectile.Center;
+			Vector2 ProjCenter = Projectile.Center;
 
 			for (int index = 0; index < Main.npc.Length; index++)
 			{
@@ -46,10 +47,10 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 			if (target != null)
 			{
-				projectile.ai[0] += 1f;
+				Projectile.ai[0] += 1f;
 
 
-				if (Main.netMode != NetmodeID.Server && Main.myPlayer == projectile.owner && projectile.ai[0] % 160f == 0f)
+				if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner && Projectile.ai[0] % 160f == 0f)
 				{
 
 					int numberOfBees = Main.rand.Next(2, 7);
@@ -57,18 +58,20 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					{
 						float speedX = Main.rand.Next(-35, 36) * 0.02f;
 						float speedY = Main.rand.Next(-35, 36) * 0.02f;
-						Projectile.NewProjectile(new Vector2(projectile.position.X, projectile.position.Y), new Vector2(speedX, speedY), Main.player[projectile.owner].beeType(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), projectile.owner);
+						Projectile proj = Projectile.NewProjectileDirect(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.position.X, Projectile.position.Y), new Vector2(speedX, speedY), Main.player[Projectile.owner].beeType(), Main.player[Projectile.owner].beeDamage(Projectile.originalDamage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
+						proj.DamageType = DamageClass.Summon;
 					}
 				}
 			}
-			if (projectile.velocity.Y < 10f)
+			if (Projectile.velocity.Y < 10f)
             {
-				projectile.velocity.Y += 0.4f;
+				Projectile.velocity.Y += 0.4f;
 			}
 
+			Projectile.ProjectileStickToPlatform();
 		}
 
-		public override bool CanDamage()
+		public override bool? CanDamage()
 		{
 			return false;
 		}

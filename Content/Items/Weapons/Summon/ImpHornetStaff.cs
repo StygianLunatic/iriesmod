@@ -8,51 +8,57 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Content.Items.Materials;
+using Terraria.DataStructures;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-    public class flameHornetStaff : ModItem
+    public class ImpHornetStaff : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Imp Hornet Staff");
-			Tooltip.SetDefault("Summons a imp hornet to fight for you");
+			Tooltip.SetDefault("Summons an Imp hornet to fight for you");
 
-			ItemID.Sets.GamepadWholeScreenUseRange[item.type] = true;
-			ItemID.Sets.LockOnIgnoresCollision[item.type] = true;
+			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
+			ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			item.damage = 30;
-			item.knockBack = 5f;
-			item.mana = 10;
-			item.width = 34;
-			item.height = 34;
-			item.useTime = 36;
-			item.useAnimation = 36;
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.value = Item.sellPrice(gold: 1, silver: 30);
-			item.rare = ItemRarityID.Orange;
-			item.UseSound = SoundID.Item44;
+			Item.damage = 30;
+			Item.knockBack = 5f;
+			Item.mana = 10;
+			Item.width = 34;
+			Item.height = 34;
+			Item.useTime = 36;
+			Item.useAnimation = 36;
+			Item.useStyle = ItemUseStyleID.Swing;
+			Item.value = Item.sellPrice(gold: 5);
+			Item.rare = ItemRarityID.Orange;
+			Item.UseSound = SoundID.Item44;
 
-			item.noMelee = true;
-			item.summon = true;
-			item.buffType = ModContent.BuffType <Buffs.Minions.flameHornet> ();
-			item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.flameHornet>();
+			Item.noMelee = true;
+			Item.DamageType = DamageClass.Summon;
+			Item.buffType = ModContent.BuffType <Buffs.Minions.ImpHornet> ();
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.ImpHornet>();
 		}
 
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
 		{
-			player.AddBuff(item.buffType, 2);
-
 			position = Main.MouseWorld;
-			return true;
 		}
 
+		public override bool Shoot(Player player, ProjectileSource_Item_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+		{
+			player.AddBuff(Item.buffType, 2);
+			var projectile = Projectile.NewProjectileDirect(source, position, velocity, type, damage, knockback, Main.myPlayer);
+			projectile.originalDamage = Item.damage;
+
+			return false;
+		}
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ItemID.HellstoneBar, 18);
 			recipe.AddIngredient(ItemID.BeeWax, 10);
@@ -60,8 +66,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

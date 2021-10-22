@@ -9,7 +9,7 @@ using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using Terraria.ModLoader;
 using iriesmod.Common.ID;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Content.Projectiles.Weapons.Bees;
 
 namespace iriesmod.Common.ILchanges
@@ -18,16 +18,16 @@ namespace iriesmod.Common.ILchanges
     {
         public static void Load()
         {
-			// IL.Terraria.Player.beeType += HookBeeType;
+			// IL.Terraria.player.beeType += HookBeeType;
 			On.Terraria.Player.beeType += HookBeeType; // Bee alt type insert
 			
-			IL.Terraria.Player.VanillaUpdateAccessory += HookVanillaUpdateAccessory; // Bee Cloak Star falling, bee releasing remove.
+			IL.Terraria.Player.ApplyEquipFunctional += HookApplyEquipFunctional; // Bee Cloak Star falling, bee releasing remove.
         }
 		public static void Unload()
         {
-			// IL.Terraria.Player.beeType -= HookBeeType;
+			// IL.Terraria.player.beeType -= HookBeeType;
 			On.Terraria.Player.beeType -= HookBeeType;
-			IL.Terraria.Player.VanillaUpdateAccessory -= HookVanillaUpdateAccessory;
+			IL.Terraria.Player.ApplyEquipFunctional -= HookApplyEquipFunctional;
 
 		}
 
@@ -40,7 +40,7 @@ namespace iriesmod.Common.ILchanges
 			if (!c.TryGotoNext(i => i.MatchLdcI4(566)))
 			c.Index++;
 			c.Emit(OpCodes.Ldarg_0);
-			c.EmitDelegate<Func<int, Terraria.Player, int>>((returnValue, player) =>
+			c.EmitDelegate<Func<int, Terraria.player, int>>((returnValue, player) =>
 			{
 				//if (Terraria.Main.ProjectileUpdateLoopIndex == -1)
                 //{
@@ -86,7 +86,7 @@ namespace iriesmod.Common.ILchanges
 			return ret;
 		}
 
-		private static void HookVanillaUpdateAccessory(ILContext il)
+		private static void HookApplyEquipFunctional(ILContext il)
         {
 			var c = new ILCursor(il);
 
@@ -94,13 +94,15 @@ namespace iriesmod.Common.ILchanges
             {
 				return;
             }
-			c.Index += 2;
-			c.RemoveRange(6);
+			c.Index += 6;
+			c.RemoveRange(9);
 			c.Emit(OpCodes.Ldarg_0);
+			c.Emit(OpCodes.Ldarg_1);
 			// https://stackoverflow.com/questions/917551/func-delegate-with-no-return-type
-			c.EmitDelegate<Action<Terraria.Player>>((player) =>
+			c.EmitDelegate<Action<Terraria.Player, Terraria.Item >> ((player, item) =>
 			{
-				player.GetModPlayer<iriesplayer>().beeCloak = true;
+				player.GetModPlayer<iriesplayer>().beeCloak = item;
+				player.GetModPlayer<iriesplayer>().beeDamage += 0.08f;
 			});
 		} 
 

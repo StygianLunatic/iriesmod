@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
@@ -12,18 +13,17 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Hornet Hive");
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.netImportant = true;
-			projectile.width = 68;
-			projectile.height = 34;
-			projectile.tileCollide = true;
-			projectile.sentry = true;
-			projectile.timeLeft = Projectile.SentryLifeTime;
-			projectile.penetrate = -1;
+			Projectile.netImportant = true;
+			Projectile.width = 68;
+			Projectile.height = 34;
+			Projectile.tileCollide = true;
+			Projectile.sentry = true;
+			Projectile.timeLeft = Projectile.SentryLifeTime;
+			Projectile.penetrate = -1;
 		}
 
 		public override void AI()
@@ -31,7 +31,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			NPC target = null;
 
 			float distance = 1000f;
-			Vector2 ProjCenter = projectile.Center;
+			Vector2 ProjCenter = Projectile.Center;
 
 			for (int index = 0; index < Main.npc.Length; index++)
 			{
@@ -47,10 +47,10 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 			if (target != null)
 			{
-				projectile.ai[0] += 1f;
+				Projectile.ai[0] += 1f;
+				Projectile.netUpdate = true;
 
-
-				if (Main.netMode != NetmodeID.Server && Main.myPlayer == projectile.owner && projectile.ai[0] % 160f == 0f)
+				if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner && Projectile.ai[0] % 160f == 0f)
 				{
 
 					int numberOfHornets = Main.rand.Next(1, 4);
@@ -58,18 +58,19 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 					{
 						float speedX = Main.rand.Next(-12, 13) * 0.02f;
 						float speedY = Main.rand.Next(-35, -12) * 0.02f;
-						Projectile.NewProjectile(new Vector2(projectile.Center.X, projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[projectile.owner].beeDamage(projectile.damage), Main.player[projectile.owner].beeKB(0f), projectile.owner);
+						int childProjectile = Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), new Vector2(Projectile.Center.X, Projectile.position.Y + 10f), new Vector2(speedX, speedY), ModContent.ProjectileType<HiveHornet>(), Main.player[Projectile.owner].beeDamage(Projectile.damage), Main.player[Projectile.owner].beeKB(0f), Projectile.owner);
+						Main.projectile[childProjectile].originalDamage = Projectile.originalDamage;
 					}
 				}
 			}
-			if (projectile.velocity.Y < 10f)
+			if (Projectile.velocity.Y < 10f)
             {
-				projectile.velocity.Y += 0.4f;
+				Projectile.velocity.Y += 0.4f;
 			}
-
+			Projectile.ProjectileStickToPlatform();
 		}
 
-		public override bool CanDamage()
+		public override bool? CanDamage()
 		{
 			return false;
 		}

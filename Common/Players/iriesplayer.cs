@@ -12,7 +12,7 @@ using iriesmod.Common.List;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Projectiles.Weapons.Bees;
 
-namespace iriesmod.Common.Players
+namespace iriesmod.Common.players
 {
     public class iriesplayer : ModPlayer
     {
@@ -20,28 +20,28 @@ namespace iriesmod.Common.Players
         // Bee backpack
         public short BeeBackpack;
         public float beeDamage;
-        public bool HiveSetHurtBonus;
-        public bool QueenBeeScroll;
-        public bool WaspNecklace;
-        public bool SweetheartKnuckles;
-        public bool beeCloak;
-        public bool QueenStingerNecklace;
-        public bool RoyalCloak;
-        public bool BurningRoyalCloak;
+        public Item HiveSetHurtBonus;
+        public Item QueenBeeScroll;
+        public Item WaspNecklace;
+        public Item SweetheartKnuckles;
+        public Item beeCloak;
+        public Item QueenStingerNecklace;
+        public Item RoyalCloak;
+        public Item BurningRoyalCloak;
 
         public override void ResetEffects()
         {
             // Bee backpack updrades
             BeeBackpack = 0;
             beeDamage = 0f;
-            HiveSetHurtBonus = false;
-            QueenBeeScroll = false;
-            WaspNecklace = false;
-            SweetheartKnuckles = false;
-            beeCloak = false;
-            QueenStingerNecklace = false;
-            RoyalCloak = false;
-            BurningRoyalCloak = false;
+            HiveSetHurtBonus = null;
+            QueenBeeScroll = null;
+            WaspNecklace = null;
+            SweetheartKnuckles = null;
+            beeCloak = null;
+            QueenStingerNecklace = null;
+            RoyalCloak = null;
+            BurningRoyalCloak = null;
         }
 
         public override void UpdateLifeRegen()
@@ -52,7 +52,7 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int[] debuffs = irieUtils.BeeDebuff(player);
+                int[] debuffs = irieUtils.BeeDebuff(Player);
 
                 if (debuffs[0] > 0)
                 {
@@ -68,7 +68,7 @@ namespace iriesmod.Common.Players
         {
             if (irieList.friendlyBees.Contains(proj.type) || irieList.friendlyBeesProj.Contains(proj.type))
             {
-                int[] debuffs = irieUtils.BeeDebuff(player);
+                int[] debuffs = irieUtils.BeeDebuff(Player);
 
                 if (debuffs[0] > 0)
                 {
@@ -81,44 +81,44 @@ namespace iriesmod.Common.Players
         }
         public override void PostHurt(bool pvp, bool quiet, double damage, int hitDirection, bool crit)
         {
-            if (player.whoAmI == Main.myPlayer)
+            if (Player.whoAmI == Main.myPlayer)
             {
-                if (HiveSetHurtBonus)
+                if (HiveSetHurtBonus != null)
                 {
-                    irieUtils.BeeSpawn(player, 6, 8);
+                    irieUtils.BeeSpawn(Player, 6, 8, HiveSetHurtBonus);
                 }
-                if (QueenBeeScroll)
+                if (QueenBeeScroll != null)
                 {
-                    irieUtils.BeeSpawn(player, 42, 52);
-                    player.AddBuff(BuffID.Honey, 720);
+                    irieUtils.BeeSpawn(Player, 42, 52, QueenBeeScroll);
+                    Player.AddBuff(BuffID.Honey, 720);
                 }
-                if (WaspNecklace)
+                if (WaspNecklace != null)
                 {
-                    irieUtils.BeeSpawn(player, 6, 8);
-                    player.AddBuff(BuffID.Honey, 300);
+                    irieUtils.BeeSpawn(Player, 6, 8, WaspNecklace);
+                    Player.AddBuff(BuffID.Honey, 300);
                 }
-                if (SweetheartKnuckles)
+                if (SweetheartKnuckles != null)
                 {
-                    irieUtils.BeeSpawn(player, 26, 38);
-                    player.AddBuff(BuffID.Honey, 720);
+                    irieUtils.BeeSpawn(Player, 26, 38, SweetheartKnuckles);
+                    Player.AddBuff(BuffID.Honey, 720);
                 }
-                if (beeCloak)
+                if (beeCloak != null)
                 {
-                    irieUtils.BeeSpawn(player, 10, 12);
+                    irieUtils.BeeSpawn(Player, 10, 12, beeCloak);
                 }
-                if (QueenStingerNecklace)
+                if (QueenStingerNecklace != null)
                 {
-                    irieUtils.BeeSpawn(player, 8, 14);
-                    player.AddBuff(BuffID.Honey, 240);
+                    irieUtils.BeeSpawn(Player, 8, 14, QueenStingerNecklace);
+                    Player.AddBuff(BuffID.Honey, 240);
                 }
-                if (RoyalCloak)
+                if (RoyalCloak != null)
                 {
-                    irieUtils.BeeSpawn(player, 14, 18);
-                    player.AddBuff(BuffID.Honey, 360);
+                    irieUtils.BeeSpawn(Player, 14, 18, RoyalCloak);
+                    Player.AddBuff(BuffID.Honey, 360);
                 }
-                if (BurningRoyalCloak)
+                if (BurningRoyalCloak != null)
                 {
-                    irieUtils.BeeSpawn(player, 32, 32, ModContent.ProjectileType<beeLava>());
+                    irieUtils.BeeSpawn(Player, 32, 32, BurningRoyalCloak, ModContent.ProjectileType<beeLava>());
                 }
             }
         }

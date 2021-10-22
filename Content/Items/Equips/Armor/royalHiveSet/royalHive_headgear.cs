@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Equips.Armor.HiveSet;
 
@@ -22,18 +22,18 @@ namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
         }
         public override void SetDefaults()
         {
-            item.width = 30;
-            item.height = 26;
-            item.value = Item.sellPrice(gold: 5);
-            item.rare = ItemRarityID.LightRed;
-            item.defense = 5;
+            Item.width = 30;
+            Item.height = 26;
+            Item.value = Item.sellPrice(gold: 5);
+            Item.rare = ItemRarityID.LightRed;
+            Item.defense = 5;
         }
 
         public override void UpdateEquip(Player player)
         {
-            iriesplayer modPlayer = player.Getiriesplayer();
+            iriesplayer modplayer = player.Getiriesplayer();
 
-            modPlayer.beeDamage += 0.05f;
+            modplayer.beeDamage += 0.05f;
             player.maxMinions++;
         }
 
@@ -44,16 +44,16 @@ namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
 
         public override void UpdateArmorSet(Player player)
         {
-            iriesplayer modPlayer = player.Getiriesplayer();
+            iriesplayer modplayer = player.Getiriesplayer();
 
             player.setBonus = "Increases bee damage by 10%\nIncreases your max number of minions by 1";
-            modPlayer.beeDamage += 0.1f;
+            modplayer.beeDamage += 0.1f;
             player.maxMinions++;
         }
 
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe();
 
             recipe.AddIngredient(ModContent.ItemType<HiveHeadgear>());
             recipe.AddIngredient(ModContent.ItemType<Materials.QueenBeeStinger>(), 4);
@@ -61,8 +61,7 @@ namespace iriesmod.Content.Items.Equips.Armor.royalHiveSet
             recipe.AddIngredient(ModContent.ItemType<Materials.RoyalJelly>(), 6);
 
             recipe.AddTile(TileID.HoneyDispenser);
-            recipe.SetResult(this);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

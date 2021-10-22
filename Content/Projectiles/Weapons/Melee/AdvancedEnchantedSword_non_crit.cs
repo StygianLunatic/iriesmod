@@ -13,13 +13,13 @@ namespace iriesmod.Content.Projectiles.Weapons.Melee
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.EnchantedBeam);
-			projectile.width = 28;
-			projectile.height = 28;
-			projectile.melee = true;
-			projectile.penetrate = 2;
-			projectile.timeLeft = 600;
-			aiType = ProjectileID.EnchantedBeam;
+			Projectile.CloneDefaults(ProjectileID.EnchantedBeam);
+			Projectile.width = 28;
+			Projectile.height = 28;
+			Projectile.DamageType = DamageClass.Melee;
+			Projectile.penetrate = 2;
+			Projectile.timeLeft = 600;
+			AIType = ProjectileID.EnchantedBeam;
 		}
 
 		public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)

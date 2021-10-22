@@ -3,19 +3,19 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Buffs.Minions
 {
-	internal class flameHornet : ModBuff
+	internal class AngryBee : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("flame Hornet");
-			Description.SetDefault("It burns");
+			DisplayName.SetDefault("Angry Bee");
+			Description.SetDefault("This bee seems angry");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 		}
 
 		public override void Update(Player player, ref int buffIndex)
 		{
-			if (player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Weapons.Summon.flameHornet>()] > 0)
+			if (player.ownedProjectileCounts[ModContent.ProjectileType<Projectiles.Weapons.Summon.AngryBee>()] > 0)
 			{
 				player.buffTime[buffIndex] = 18000;
 				return;

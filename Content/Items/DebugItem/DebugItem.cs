@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.DebugItem
@@ -16,8 +16,8 @@ namespace iriesmod.Content.Items.DebugItem
 
 		public override void SetDefaults()
 		{
-			item.width = 52;
-			item.height = 26;
+			Item.width = 52;
+			Item.height = 26;
 		}
 
         public override bool CanRightClick()
@@ -26,8 +26,8 @@ namespace iriesmod.Content.Items.DebugItem
         }
         public override void RightClick(Player player)
         {
-			iriesplayer modPlayer = player.Getiriesplayer();
-			Main.NewText(modPlayer.beeDamage.ToString());
+			iriesplayer modplayer = player.Getiriesplayer();
+			Main.NewText(modplayer.beeDamage.ToString());
 		}
     }
 }

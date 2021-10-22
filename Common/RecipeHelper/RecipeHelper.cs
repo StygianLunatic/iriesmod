@@ -16,9 +16,24 @@ namespace iriesmod.Common.RecipeHelper
     {
         public static void EditRecipe(Mod mod)
         {
-			EditHornetStaffRecipe();
-			EditHoneyBalloonRecipe();
-			EditBeeCloakRecipe();
+			for (int i = 0; i < Recipe.numRecipes; i++)
+			{
+				Recipe recipe = Main.recipe[i];
+
+				if (recipe.HasResult(ItemID.HornetStaff))
+				{
+					// EditHornetStaffRecipe(recipe, mod);
+				}
+				else if (recipe.HasResult(ItemID.HoneyBalloon))
+				{
+					EditHoneyBalloonRecipe(recipe, mod);
+				}
+				else if (recipe.HasResult(ItemID.BeeCloak))
+                {
+					EditBeeCloakRecipe(recipe, mod);
+				}
+			}
+
 
 		}
 		public static void AddRecipe(Mod mod)
@@ -34,69 +49,42 @@ namespace iriesmod.Common.RecipeHelper
 
 
         #region EditRecipes
-        private static void EditHornetStaffRecipe()
+		/*
+        private static void EditHornetStaffRecipe(Recipe recipe, Mod mod)
         {
-			RecipeFinder hornetstaffFinder = new RecipeFinder();
-
-			hornetstaffFinder.AddIngredient(ItemID.BeeWax, 14);
-			hornetstaffFinder.AddTile(TileID.Anvils);
-			hornetstaffFinder.SetResult(ItemID.HornetStaff);
-			Recipe hornetstaffRecipe = hornetstaffFinder.FindExactRecipe();
-
-			if (hornetstaffRecipe != null)
-			{
-				RecipeEditor editor = new RecipeEditor(hornetstaffRecipe);
-				editor.DeleteIngredient(ItemID.BeeWax);
-				editor.AddIngredient(ItemID.Stinger, 8);
-				editor.AddIngredient(ItemID.Hive, 15);
-				editor.AddIngredient(ItemID.HoneyBlock, 8);
-			}
+			recipe.RemoveRecipe();
+			recipe = mod.CreateRecipe(ItemID.HornetStaff);
+			recipe.AddIngredient(ItemID.Stinger, 8);
+			recipe.AddIngredient(ItemID.Hive, 15);
+			recipe.AddIngredient(ItemID.HoneyBlock, 8);
+			recipe.AddTile(TileID.HoneyDispenser);
+			recipe.Register();
 		}
-		private static void EditHoneyBalloonRecipe()
+		*/
+		private static void EditHoneyBalloonRecipe(Recipe recipe, Mod mod)
         {
-			RecipeFinder recipeFinder = new RecipeFinder();
-
-			recipeFinder.AddIngredient(ItemID.ShinyRedBalloon);
-			recipeFinder.AddIngredient(ItemID.HoneyComb);
-			recipeFinder.AddTile(TileID.TinkerersWorkbench);
-			recipeFinder.SetResult(ItemID.HoneyBalloon);
-			Recipe exactRecipe = recipeFinder.FindExactRecipe();
-
-			if (exactRecipe != null)
-            {
-				RecipeEditor editor = new RecipeEditor(exactRecipe);
-				editor.DeleteIngredient(ItemID.ShinyRedBalloon);
-				editor.DeleteIngredient(ItemID.HoneyComb);
-				editor.AddIngredient(ItemID.CloudinaBalloon);
-				editor.AddIngredient(ItemID.HoneyBlock, 25);
-				editor.AddIngredient(ItemID.BottledHoney, 12);
-            }
+			recipe.RemoveRecipe();
+			recipe = mod.CreateRecipe(ItemID.HoneyBalloon);
+			recipe.AddIngredient(ItemID.CloudinaBalloon);
+			recipe.AddIngredient(ItemID.HoneyBlock, 25);
+			recipe.AddIngredient(ItemID.BottledHoney, 12);
+			recipe.AddTile(TileID.TinkerersWorkbench);
+			recipe.Register();
 		}
-		private static void EditBeeCloakRecipe()
+		private static void EditBeeCloakRecipe(Recipe recipe, Mod mod)
         {
-			RecipeFinder recipeFinder = new RecipeFinder();
-
-			recipeFinder.AddIngredient(ItemID.HoneyComb);
-			recipeFinder.AddIngredient(ItemID.StarCloak);
-			recipeFinder.AddTile(TileID.TinkerersWorkbench);
-			recipeFinder.SetResult(ItemID.BeeCloak);
-
-			Recipe exactRecipe = recipeFinder.FindExactRecipe();
-
-			if (exactRecipe != null)
-            {
-				RecipeEditor editor = new RecipeEditor(exactRecipe);
-				editor.DeleteIngredient(ItemID.HoneyComb);
-				editor.DeleteIngredient(ItemID.StarCloak);
-				editor.AddIngredient(ModContent.ItemType<HoneyCloak>());
-				editor.AddIngredient(ItemID.BeeWax, 9);
-            }
+			recipe.RemoveRecipe();
+			recipe = mod.CreateRecipe(ItemID.BeeCloak);
+			recipe.AddIngredient(ModContent.ItemType<HoneyCloak>());
+			recipe.AddIngredient(ItemID.BeeWax, 9);
+			recipe.AddTile(TileID.HoneyDispenser);
+			recipe.Register();
         }
         #endregion
         #region AddRecipes
         private static void AddBeeKeeperRecipe(Mod mod)
         {
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = mod.CreateRecipe(ItemID.BeeKeeper);
 
 			recipe.AddRecipeGroup("AnyGoldBroadSword");
 			recipe.AddIngredient(ItemID.BeeWax, 10);
@@ -105,12 +93,11 @@ namespace iriesmod.Common.RecipeHelper
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(ItemID.BeeKeeper);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 		private static void AddBeesKneesRecipe(Mod mod)
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = mod.CreateRecipe(ItemID.BeesKnees);
 
 			recipe.AddRecipeGroup("AnyGoldBow");
 			recipe.AddIngredient(ItemID.BeeWax, 10);
@@ -119,12 +106,11 @@ namespace iriesmod.Common.RecipeHelper
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(ItemID.BeesKnees);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 		private static void AddBeeGunRecipe(Mod mod)
         {
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = mod.CreateRecipe(ItemID.BeeGun);
 			recipe.AddIngredient(ModContent.ItemType<beePistol>());
 			recipe.AddIngredient(ItemID.BeeWax, 10);
 			recipe.AddIngredient(ItemID.Hive, 5);
@@ -132,29 +118,28 @@ namespace iriesmod.Common.RecipeHelper
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(ItemID.BeeGun);
-			recipe.AddRecipe();
+			recipe.Register();
         }
 		private static void AddHoneyDispenserRecipe(Mod mod)
         {
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = mod.CreateRecipe(ItemID.HoneyDispenser);
 
 			recipe.AddIngredient(ItemID.Hive, 25);
 			recipe.AddIngredient(ItemID.HoneyBlock, 25);
 			recipe.AddIngredient(ItemID.BeeWax, 4);
+			recipe.AddTile(TileID.Anvils);
 
-			recipe.SetResult(ItemID.HoneyDispenser);
-			recipe.AddRecipe();
+			recipe.Register();
         }
 		private static void AddHoneyCombRecipe(Mod mod)
         {
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = mod.CreateRecipe(ItemID.HoneyComb);
 
 			recipe.AddIngredient(ItemID.BeeWax, 8);
 			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 4);
+			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(ItemID.HoneyComb);
-			recipe.AddRecipe();
+			recipe.Register();
         }
         #endregion
 

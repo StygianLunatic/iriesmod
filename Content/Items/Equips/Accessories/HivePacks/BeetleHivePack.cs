@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 
@@ -21,26 +21,26 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 
 		public override void SetDefaults()
 		{
-			item.width = 30;
-			item.height = 30;
-			item.maxStack = 1;
-			item.value = Item.sellPrice(gold: 2);
-			item.rare = ItemRarityID.LightRed;
-			item.accessory = true;
-			item.expert = true;
+			Item.width = 30;
+			Item.height = 30;
+			Item.maxStack = 1;
+			Item.value = Item.sellPrice(gold: 50);
+			Item.rare = ItemRarityID.LightRed;
+			Item.accessory = true;
+			Item.expert = true;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
+			iriesplayer modplayer = player.Getiriesplayer();
 
 			player.strongBees = true;
-			modPlayer.BeeBackpack = irieItemID.BeetleHivePack;
+			modplayer.BeeBackpack = irieItemID.BeetleHivePack;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ModContent.ItemType<VenomHivePack>());
 			recipe.AddIngredient(ItemID.LunarTabletFragment, 12);
@@ -48,8 +48,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HivePacks
 
 			recipe.AddTile(TileID.TinkerersWorkbench);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

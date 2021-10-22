@@ -1,6 +1,5 @@
 ﻿using Terraria;
 using Terraria.ModLoader;
-using Terraria.World.Generation;
 using iriesmod.Content.Tiles.Ores;
 using Terraria.ID;
 
@@ -16,12 +15,12 @@ namespace iriesmod.Common.Worlds
 				int y = WorldGen.genRand.Next((int)WorldGen.worldSurfaceLow, Main.maxTilesY);
 
 				Tile tile = Framing.GetTileSafely(x, y);
-				if (tile.active() && tile.type == TileID.Hive)
+				if (tile.IsActive && tile.type == TileID.Hive)
 				{
 				    WorldGen.TileRunner(x, y, WorldGen.genRand.Next(4, 7), WorldGen.genRand.Next(2, 6), ModContent.TileType<RoyalJelly>());
 				}
 			}
-			Main.NewText("Royal Jelly Generated.");
+			Main.NewText("The Royal Jelly started to flow...");
 		}
 
     }

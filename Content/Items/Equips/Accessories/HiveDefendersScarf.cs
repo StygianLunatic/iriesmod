@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories
@@ -21,33 +21,32 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void SetDefaults()
 		{
-			item.width = 24;
-			item.height = 26;
-			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Orange;
+			Item.width = 18;
+			Item.height = 26;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 4);
+			Item.rare = ItemRarityID.Orange;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
+			iriesplayer modplayer = player.Getiriesplayer();
 
-			modPlayer.beeDamage += 0.1f;
+			modplayer.beeDamage += 0.1f;
 			player.maxTurrets++;
 			player.endurance += 0.15f;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 			recipe.AddIngredient(ItemID.WormScarf);
 			recipe.AddIngredient(ItemID.BeeWax, 18);
 			recipe.AddIngredient(ModContent.ItemType<Items.Materials.RoyalJelly>(), 10);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

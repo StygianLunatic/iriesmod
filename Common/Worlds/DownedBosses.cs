@@ -10,19 +10,23 @@ using Terraria.ModLoader.IO;
 
 namespace iriesmod.Common.Worlds
 {
-    public class DownedBosses : ModWorld
+    public class DownedBosses : ModSystem
     {
-        public static bool downedQueenBee;
-        public static int QueenBeeKills;
+        public static bool downedQueenBee = false;
+        public static int QueenBeeKills = 0;
 
-        public override void Initialize()
+        public override void OnWorldLoad()
         {
             downedQueenBee = false;
             QueenBeeKills = 0;
         }
-        public override TagCompound Save()
+        public override void OnWorldUnload()
         {
-            TagCompound tag = new TagCompound();
+            downedQueenBee = false;
+            QueenBeeKills = 0;
+        }
+        public override void SaveWorldData(TagCompound tag)
+        {
             var downed = new List<string>();
 
             if (downedQueenBee)
@@ -33,14 +37,13 @@ namespace iriesmod.Common.Worlds
 
             tag["downed"] = downed;
             tag["QueenBeeKills"] = QueenBeeKills;
-
-            return tag;
         }
-        public override void Load(TagCompound tag)
+
+        public override void LoadWorldData(TagCompound tag)
         {
             var downed = tag.GetList<string>("downed");
-            QueenBeeKills = tag.GetInt("QueenBeeKills");
 
+            QueenBeeKills = tag.GetInt("QueenBeeKills");
             downedQueenBee = downed.Contains("QueenBee");
 
         }

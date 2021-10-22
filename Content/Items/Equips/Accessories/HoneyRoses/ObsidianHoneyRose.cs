@@ -1,7 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Items.Materials;
 
@@ -17,12 +17,12 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 
 		public override void SetDefaults()
 		{
-			item.width = 34;
-			item.height = 30;
-			item.accessory = true;
-			item.value = Item.sellPrice(gold: 3);
-			item.rare = ItemRarityID.Orange;
-			item.defense = 9;
+			Item.width = 34;
+			Item.height = 30;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 6);
+			Item.rare = ItemRarityID.Orange;
+			Item.defense = 9;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
@@ -36,17 +36,17 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
+			Recipe recipe = CreateRecipe();
 
 			recipe.AddIngredient(ModContent.ItemType<RoyalHoneyRose>());
 			recipe.AddIngredient(ItemID.ObsidianRose);
 			recipe.AddIngredient(ItemID.Obsidian, 25);
 			recipe.AddIngredient(ItemID.HellstoneBar, 10);
+			recipe.AddIngredient(ItemID.Bone, 25);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.Register();
 		}
 	}
 }

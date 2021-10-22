@@ -5,10 +5,10 @@ namespace iriesmod.Content.Buffs.Minions
 {
 	internal class BoneHornet : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Bone Hornet");
-			Description.SetDefault("Royal to you");
+			Description.SetDefault("It's beezing and clattering");
 			Main.buffNoSave[Type] = true;
 			Main.buffNoTimeDisplay[Type] = true;
 		}

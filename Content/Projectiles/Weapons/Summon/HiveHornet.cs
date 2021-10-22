@@ -9,63 +9,69 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 {
 	public class HiveHornet : ModProjectile
 	{
-        public override string Texture => "Terraria/Projectile_" + 198;
+        public override string Texture => "Terraria/Images/Projectile_" + 198;
         public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Hive Hornet");
 
-			Main.projFrames[projectile.type] = 4;
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-			ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
-			ProjectileID.Sets.Homing[projectile.type] = true;
+			Main.projFrames[Projectile.type] = 4;
+			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
+			ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.CloneDefaults(ProjectileID.Bee);
-			aiType = ProjectileID.Bee;
-			projectile.friendly = true;
-			projectile.minion = true;
-			projectile.minionSlots = 0f;
-			projectile.penetrate = 3;
-			projectile.netImportant = true;
-			projectile.tileCollide = true;
-			projectile.ignoreWater = true;
-			projectile.scale = 1f;
-			projectile.timeLeft = 360;
+			Projectile.CloneDefaults(ProjectileID.Bee);
+			AIType = ProjectileID.Bee;
+			Projectile.friendly = true;
+			Projectile.minion = true;
+			Projectile.DamageType = DamageClass.Summon;
+			Projectile.minionSlots = 0f;
+			Projectile.penetrate = 3;
+			Projectile.netImportant = true;
+			Projectile.tileCollide = true;
+			Projectile.ignoreWater = true;
+			Projectile.scale = 1f;
+			Projectile.timeLeft = 360;
 		}
 		public override void AI()
 		{
 			int frameSpeed = 5;
-			projectile.frameCounter++;
-			if (projectile.frameCounter >= frameSpeed)
+			Projectile.frameCounter++;
+			if (Projectile.frameCounter >= frameSpeed)
 			{
-				projectile.frameCounter = 0;
-				projectile.frame++;
-				if (projectile.frame >= Main.projFrames[projectile.type])
+				Projectile.frameCounter = 0;
+				Projectile.frame++;
+				if (Projectile.frame >= Main.projFrames[Projectile.type])
 				{
-					projectile.frame = 0;
+					Projectile.frame = 0;
 				}
 			}
+
+			if (Projectile.velocity.X > 0f)
+				Projectile.spriteDirection = Projectile.direction = 1;
+			else if (Projectile.velocity.X < 0f)
+				Projectile.spriteDirection = Projectile.direction = -1;
 		}
 
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
 		{
 			SpriteEffects spriteEffects = SpriteEffects.None;
-			if (projectile.spriteDirection == -1)
+			if (Projectile.spriteDirection == -1)
 			{
 				spriteEffects = SpriteEffects.FlipHorizontally;
 			}
-			Texture2D texture = Main.projectileTexture[projectile.type];
-			int frameHeight = Main.projectileTexture[projectile.type].Height / Main.projFrames[projectile.type];
-			int startY = frameHeight * projectile.frame;
+			Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
+			int frameHeight = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value.Height / Main.projFrames[Projectile.type];
+			int startY = frameHeight * Projectile.frame;
 			Rectangle sourceRectangle = new Rectangle(0, startY, texture.Width, frameHeight);
 			Vector2 origin = sourceRectangle.Size() / 2f;
 
-			Color drawColor = projectile.GetAlpha(lightColor);
+			Color drawColor = Projectile.GetAlpha(lightColor);
 			Main.spriteBatch.Draw(texture,
-			 	projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY),
-			 	sourceRectangle, drawColor, projectile.rotation, origin, projectile.scale, spriteEffects, 0f);
+			 	Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY),
+			 	sourceRectangle, drawColor, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0f);
 
 			return false;
 		}
@@ -74,6 +80,12 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		{
 			return false;
 		}
+
+		public override bool MinionContactDamage()
+		{
+			return true;
+		}
+
 		public override bool OnTileCollide(Vector2 oldVelocity)
 		{
 			return false;

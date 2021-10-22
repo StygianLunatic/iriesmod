@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.DebugItem
@@ -20,18 +20,18 @@ namespace iriesmod.Content.Items.DebugItem
 
 		public override void SetDefaults()
 		{
-			item.width = 24;
-			item.height = 30;
-			item.accessory = true;
-			item.value = Item.sellPrice(silver: 30);
-			item.rare = ItemRarityID.Blue;
+			Item.width = 24;
+			Item.height = 30;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(silver: 30);
+			Item.rare = ItemRarityID.Blue;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
+			iriesplayer modplayer = player.Getiriesplayer();
 
-			modPlayer.beeDamage += 8f;
+			modplayer.beeDamage += 8f;
 		}
 	}
 }

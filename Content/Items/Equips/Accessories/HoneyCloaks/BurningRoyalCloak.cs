@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using iriesmod.Common.Players;
+using iriesmod.Common.players;
 using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
@@ -21,31 +21,31 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 
 		public override void SetDefaults()
 		{
-			item.width = 24;
-			item.height = 30;
-			item.accessory = true;
-			item.value = Item.sellPrice(gold: 4);
-			item.rare = ItemRarityID.Orange;
-			item.defense = 8;
+			Item.width = 24;
+			Item.height = 30;
+			Item.accessory = true;
+			Item.value = Item.sellPrice(gold: 6);
+			Item.rare = ItemRarityID.Orange;
+			Item.defense = 8;
 		}
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			iriesplayer modPlayer = player.Getiriesplayer();
+			iriesplayer modplayer = player.Getiriesplayer();
 
-			modPlayer.beeDamage += 0.15f;
-			modPlayer.BurningRoyalCloak = true;
+			modplayer.beeDamage += 0.15f;
+			modplayer.BurningRoyalCloak = Item;
 		}
 
 		public override void AddRecipes()
 		{
-			ModRecipe recipe = new ModRecipe(mod);
-			recipe.AddIngredient(ItemID.Stinger, 4);
-			recipe.AddIngredient(ItemID.HoneyBlock, 18);
-			recipe.AddIngredient(ItemID.Silk, 20);
-			recipe.AddTile(TileID.Anvils);
-			recipe.SetResult(this);
-			recipe.AddRecipe();
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ModContent.ItemType<RoyalCloak>());
+			recipe.AddIngredient(ItemID.Obsidian, 25);
+			recipe.AddIngredient(ItemID.Bone, 25);
+			recipe.AddIngredient(ItemID.HellstoneBar, 12);
+			recipe.AddTile(TileID.HoneyDispenser);
+			recipe.Register();
 		}
 	}
 }

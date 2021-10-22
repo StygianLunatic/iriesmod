@@ -12,21 +12,21 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 		{
 			DisplayName.SetDefault("Royal Hornet Defender");
 
-			Main.projFrames[projectile.type] = 4;
+			Main.projFrames[Projectile.type] = 3;
 
-			ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-			ProjectileID.Sets.Homing[projectile.type] = true;
+			ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
+			ProjectileID.Sets.CountsAsHoming[Projectile.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			projectile.netImportant = true;
-			projectile.width = 52;
-			projectile.height = 156;
-			projectile.tileCollide = true;
-			projectile.sentry = true;
-			projectile.timeLeft = Projectile.SentryLifeTime;
-			projectile.penetrate = -1;
+			Projectile.netImportant = true;
+			Projectile.width = 52;
+			Projectile.height = 156;
+			Projectile.tileCollide = true;
+			Projectile.sentry = true;
+			Projectile.timeLeft = Projectile.SentryLifeTime;
+			Projectile.penetrate = -1;
 		}
 
 		public override void AI()
@@ -34,7 +34,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			NPC target = null;
 
 			float distance = 600f;
-			Vector2 ProjCenter = projectile.Center;
+			Vector2 ProjCenter = Projectile.Center;
 
 			for (int index = 0; index < Main.npc.Length; index++)
 			{
@@ -50,43 +50,49 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 
 			if (target != null)
 			{
-				projectile.ai[1] = 0f;
-				if (projectile.ai[0] % 3 == 0 && distance > 150f)
+				Projectile.ai[1] = 0f;
+				if (Projectile.ai[0] % 3 == 0 && distance > 150f)
 				{
-					projectile.velocity.X = (target.Center.X - ProjCenter.X) * 0.01f;
-					projectile.velocity.Y = (target.Center.Y - ProjCenter.Y) * 0.01f;
+					Projectile.velocity.X = (target.Center.X - ProjCenter.X) * 0.01f;
+					Projectile.velocity.Y = (target.Center.Y - ProjCenter.Y) * 0.01f;
 				}
                 if (distance < 147f)
                 {
-					projectile.velocity = new Vector2(0, 0);
-					projectile.ai[1]++;
+					Projectile.velocity = new Vector2(0, 0);
+					Projectile.ai[1]++;
                 }
 
-				if (Main.netMode != NetmodeID.Server && Main.myPlayer == projectile.owner)
+				if (Main.netMode != NetmodeID.Server && Main.myPlayer == Projectile.owner)
 				{
-					if (projectile.ai[1] > 0f && projectile.ai[0] % 150 == 0f)
+					if (Projectile.ai[1] > 0f && Projectile.ai[0] % 150 == 0f)
                     {
-						Projectile.NewProjectile(projectile.Center, (target.Center - projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), projectile.damage, projectile.knockBack, projectile.owner);
+						var projectile = Projectile.NewProjectileDirect(Projectile.GetProjectileSource_FromThis(), Projectile.Center, (target.Center - Projectile.Center) * new Vector2(0.1f, 0.1f) , ModContent.ProjectileType<BeeHive>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+						projectile.originalDamage = Projectile.originalDamage;
                     }
 				}
 
-				projectile.ai[0]++;
+				Projectile.ai[0]++;
 			}
 
 			int frameSpeed = 5;
-			projectile.frameCounter++;
-			if (projectile.frameCounter >= frameSpeed)
+			Projectile.frameCounter++;
+			if (Projectile.frameCounter >= frameSpeed)
 			{
-				projectile.frameCounter = 0;
-				projectile.frame++;
-				if (projectile.frame >= Main.projFrames[projectile.type])
+				Projectile.frameCounter = 0;
+				Projectile.frame++;
+				if (Projectile.frame >= Main.projFrames[Projectile.type])
 				{
-					projectile.frame = 0;
+					Projectile.frame = 0;
 				}
 			}
+			// 미니언의 진행 방향에 따라 스프라이트를 좌우반전 시킨다.
+			if (Projectile.velocity.X > 0f)
+				Projectile.spriteDirection = Projectile.direction = -1;
+			else if (Projectile.velocity.X < 0f)
+				Projectile.spriteDirection = Projectile.direction = 1;
 		}
 
-		public override bool CanDamage()
+		public override bool? CanDamage()
 		{
 			return false;
 		}
