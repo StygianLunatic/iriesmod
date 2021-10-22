@@ -18,7 +18,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 		{
 			Item.width = 32;
 			Item.height = 32;
-			Item.value = Item.sellPrice(gold: 2);
+			Item.value = Item.sellPrice(gold: 4);
 			Item.mana = 6;
 			Item.damage = 26;
 			Item.knockBack = 3;

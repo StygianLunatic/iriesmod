@@ -17,7 +17,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault("Imp Hornet Staff");
-			Tooltip.SetDefault("Summons a Imp hornet to fight for you");
+			Tooltip.SetDefault("Summons an Imp hornet to fight for you");
 
 			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
 			ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
@@ -33,7 +33,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.useTime = 36;
 			Item.useAnimation = 36;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.value = Item.sellPrice(gold: 1, silver: 30);
+			Item.value = Item.sellPrice(gold: 5);
 			Item.rare = ItemRarityID.Orange;
 			Item.UseSound = SoundID.Item44;
 
