@@ -28,7 +28,18 @@ namespace iriesmod.Content.Items.Consumables.Potions
 			Item.buffType = ModContent.BuffType<Buffs.SweetAttack>();
 			Item.buffTime = 36000;
 		}
-	}
+
+        public override void AddRecipes()
+        {
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ItemID.BottledHoney);
+			recipe.AddIngredient(ItemID.HoneyBlock);
+			recipe.AddIngredient(ItemID.CrispyHoneyBlock);
+			recipe.AddIngredient(ItemID.Daybloom);
+			recipe.AddTile(TileID.Bottles);
+			recipe.Register();
+        }
+    }
 }
 
 

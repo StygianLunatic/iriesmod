@@ -17,8 +17,8 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 
 		public override void SetDefaults()
 		{
-			Item.width = 34;
-			Item.height = 30;
+			Item.width = 20;
+			Item.height = 44;
 			Item.accessory = true;
 			Item.value = Item.sellPrice(gold: 2);
 			Item.rare = ItemRarityID.Orange;

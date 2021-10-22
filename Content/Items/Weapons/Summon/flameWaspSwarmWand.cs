@@ -20,7 +20,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.height = 32;
 			Item.value = Item.sellPrice(gold: 2);
 			Item.mana = 6;
-			Item.damage = 22;
+			Item.damage = 26;
 			Item.knockBack = 3;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.useTime = 30;
@@ -49,7 +49,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
         public override void AddRecipes()
         {
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ModContent.ItemType<WaspSwarmStaff>());
+			recipe.AddIngredient(ModContent.ItemType<WaspSwarmWand>());
 			recipe.AddIngredient(ItemID.HellstoneBar, 12);
 			recipe.AddIngredient(ItemID.Bone, 25);
 

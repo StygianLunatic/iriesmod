@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using iriesmod.Common.players;
 using iriesmod.Common.Utils;
+using iriesmod.Content.Items.Materials;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 {
@@ -40,10 +41,11 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.Stinger, 4);
-			recipe.AddIngredient(ItemID.HoneyBlock, 18);
-			recipe.AddIngredient(ItemID.Silk, 20);
-			recipe.AddTile(TileID.Anvils);
+			recipe.AddIngredient(ItemID.BeeCloak);
+			recipe.AddIngredient(ItemID.HoneyComb);
+			recipe.AddIngredient(ModContent.ItemType<RoyalJelly>(), 12);
+			recipe.AddIngredient(ItemID.HoneyBlock, 25);
+			recipe.AddTile(TileID.HoneyDispenser);
 			recipe.Register();
 		}
 	}

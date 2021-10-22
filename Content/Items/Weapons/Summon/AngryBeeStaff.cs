@@ -11,34 +11,34 @@ using Terraria.ModLoader;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-    public class AngryHornetStaff : ModItem
+    public class AngryBeeStaff : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Angry Hornet Staff");
-			Tooltip.SetDefault("Summons an angry hornet to fight for you");
+			DisplayName.SetDefault("Angry Bee Staff");
+			Tooltip.SetDefault("Summons an angry bee to fight for you");
 			ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
 			ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
-			Item.damage = 16;
-			Item.knockBack = 3f;
+			Item.damage = 12;
+			Item.knockBack = 2f;
 			Item.mana = 10;
 			Item.width = 34;
 			Item.height = 34;
-			Item.useTime = 36;
-			Item.useAnimation = 36;
+			Item.useTime = 22;
+			Item.useAnimation = 22;
 			Item.useStyle = ItemUseStyleID.Swing;
-			Item.value = Item.sellPrice(gold: 1, silver: 30);
-			Item.rare = ItemRarityID.Orange;
+			Item.value = Item.sellPrice(silver: 20);
+			Item.rare = ItemRarityID.Green;
 			Item.UseSound = SoundID.Item44;
 
 			Item.noMelee = true;
 			Item.DamageType = DamageClass.Summon;
-			Item.buffType = ModContent.BuffType<Buffs.Minions.AngryHornet>();
-			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.AngryHornet>();
+			Item.buffType = ModContent.BuffType<Buffs.Minions.AngryBee>();
+			Item.shoot = ModContent.ProjectileType<Projectiles.Weapons.Summon.AngryBee>();
 		}
 
 		public override void ModifyShootStats(Player player, ref Vector2 position, ref Vector2 velocity, ref int type, ref int damage, ref float knockback)
@@ -58,12 +58,11 @@ namespace iriesmod.Content.Items.Weapons.Summon
 		{
 			Recipe recipe = CreateRecipe();
 
-			recipe.AddIngredient(ItemID.HornetStaff);
-			recipe.AddIngredient(ItemID.BeeWax, 16);
-			recipe.AddIngredient(ItemID.Hive, 5);
-			recipe.AddIngredient(ItemID.HoneyBlock, 5);
+			recipe.AddIngredient(ItemID.Stinger, 8);
+			recipe.AddIngredient(ItemID.Hive, 15);
+			recipe.AddIngredient(ItemID.HoneyBlock, 8);
 
-			recipe.AddTile(TileID.HoneyDispenser);
+			recipe.AddTile(TileID.Anvils);
 
 			recipe.Register();
 		}

@@ -21,7 +21,7 @@ namespace iriesmod.Content.Items.Equips.Accessories
 
 		public override void SetDefaults()
 		{
-			Item.width = 24;
+			Item.width = 18;
 			Item.height = 26;
 			Item.accessory = true;
 			Item.value = Item.sellPrice(silver: 30);

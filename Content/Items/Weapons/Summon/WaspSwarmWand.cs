@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 
 namespace iriesmod.Content.Items.Weapons.Summon
 {
-	public class WaspSwarmStaff : ModItem
+	public class WaspSwarmWand : ModItem
 	{
 		public override void SetStaticDefaults()
 		{
@@ -22,7 +22,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 			Item.height = 32;
 			Item.value = Item.sellPrice(gold: 2);
 			Item.mana = 6;
-			Item.damage = 18;
+			Item.damage = 22;
 			Item.knockBack = 3;
 			Item.useStyle = ItemUseStyleID.Swing;
 			Item.useTime = 30;

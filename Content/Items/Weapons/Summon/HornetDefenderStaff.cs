@@ -15,7 +15,7 @@ namespace iriesmod.Content.Items.Weapons.Summon
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Horent Defender Staff");
+			DisplayName.SetDefault("Hornet Defender Staff");
 			Tooltip.SetDefault("Place a Hornet Defender that throws bee hive into the enemy");
 		}
 

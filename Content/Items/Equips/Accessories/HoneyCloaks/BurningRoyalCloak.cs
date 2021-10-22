@@ -40,10 +40,11 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 		public override void AddRecipes()
 		{
 			Recipe recipe = CreateRecipe();
-			recipe.AddIngredient(ItemID.Stinger, 4);
-			recipe.AddIngredient(ItemID.HoneyBlock, 18);
-			recipe.AddIngredient(ItemID.Silk, 20);
-			recipe.AddTile(TileID.Anvils);
+			recipe.AddIngredient(ModContent.ItemType<RoyalCloak>());
+			recipe.AddIngredient(ItemID.Obsidian, 25);
+			recipe.AddIngredient(ItemID.Bone, 25);
+			recipe.AddIngredient(ItemID.HellstoneBar, 12);
+			recipe.AddTile(TileID.HoneyDispenser);
 			recipe.Register();
 		}
 	}

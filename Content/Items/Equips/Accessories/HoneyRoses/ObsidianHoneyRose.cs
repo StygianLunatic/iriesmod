@@ -42,6 +42,7 @@ namespace iriesmod.Content.Items.Equips.Accessories.HoneyRoses
 			recipe.AddIngredient(ItemID.ObsidianRose);
 			recipe.AddIngredient(ItemID.Obsidian, 25);
 			recipe.AddIngredient(ItemID.HellstoneBar, 10);
+			recipe.AddIngredient(ItemID.Bone, 25);
 
 			recipe.AddTile(TileID.HoneyDispenser);
 

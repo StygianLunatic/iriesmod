@@ -6,6 +6,7 @@ using iriesmod.Common.players;
 using iriesmod.Common.ID;
 using iriesmod.Common.Utils;
 using iriesmod.Content.Projectiles;
+using iriesmod.Content.Buffs.Debuffs;
 
 namespace iriesmod.Common.GlobalProjectiles
 {
@@ -36,6 +37,10 @@ namespace iriesmod.Common.GlobalProjectiles
             if (irieList.friendlyBees.Contains(projectile.type) || irieList.friendlyBeesProj.Contains(projectile.type))
             {
                 damage = irieUtils.BeeDamage(player, damage);
+            }
+            if (projectile.type == ProjectileID.BoneGloveProj)
+            {
+                target.AddBuff(ModContent.BuffType<BoneSplinter>(), 180);
             }
         }
     }
