@@ -11,7 +11,7 @@ using iriesmod.Common.Utils;
 
 namespace iriesmod.Content.Items.Equips.Accessories.HoneyCloaks
 {
-	public class BurningRoyalCloak : HoneyCloakTemplate
+	public class MoltenRoyalCloak : HoneyCloakTemplate
 	{
 		public override void SetStaticDefaults()
 		{
