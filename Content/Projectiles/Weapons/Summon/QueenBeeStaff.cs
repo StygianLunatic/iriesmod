@@ -65,11 +65,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			}
 
 
-			Vector2 vector = Projectile.position;
 			float distance;
 
 			distance = 1000f;
-			bool is_target = false;
 			Projectile.tileCollide = true;
 
 			float velocityPower = (float)Math.Sqrt(Projectile.velocity.X * Projectile.velocity.X + Projectile.velocity.Y * Projectile.velocity.Y);
@@ -79,7 +77,7 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
             }
 
             #region 타겟 결정부분
-			irieUtils.GetTarget(Projectile, distance, out distance, out vector, out is_target);
+			Projectile.GetTarget(distance, out distance, out Vector2 vector, out bool is_target);
 
             #endregion
 

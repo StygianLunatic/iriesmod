@@ -50,9 +50,9 @@ namespace iriesmod.Content.Projectiles.Weapons.Summon
 			}
 
 			if (Projectile.velocity.X > 0f)
-				Projectile.spriteDirection = Projectile.direction = -1;
-			else if (Projectile.velocity.X < 0f)
 				Projectile.spriteDirection = Projectile.direction = 1;
+			else if (Projectile.velocity.X < 0f)
+				Projectile.spriteDirection = Projectile.direction = -1;
 		}
 
 		public override bool PreDraw(ref Color lightColor)
